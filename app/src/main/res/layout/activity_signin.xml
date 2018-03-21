@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.widget.RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/background_gradient"
+tools:context="my.unimas.a50200siswa.studentattendancemonitoringsystem.SignIn_Activity">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:weightSum="1"
+    android:layout_centerVertical="true"
+    android:layout_alignParentStart="true">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/logo" />
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.180" />
+
+    <EditText
+        android:id="@+id/Email"
+        android:gravity="center"
+        android:layout_width="282dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/colorLightblue"
+        android:hint="Email ID"
+        android:textColorHint="#43edff"
+        android:textColor="#02b6d1"
+        android:inputType="textEmailAddress"
+        android:selectAllOnFocus="false" />
+
+
+    <EditText
+        android:id="@+id/Password"
+        android:gravity="center"
+        android:layout_height="50dp"
+        android:layout_width="282dp"
+        android:hint="Password"
+        android:textColorHint="#43edff"
+        android:textColor="#02b6d1"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="false"
+        android:backgroundTint="@color/colorLightblue" />
+
+
+    <Button
+        android:id="@+id/btn_Sign_In"
+        style="@style/button_style"
+        android:layout_width="276dp"
+        android:layout_height="40dp"
+        android:elevation="0dp"
+        android:text="Sign In "
+        android:textAllCaps="false"/>
+
+    <LinearLayout
+        android:layout_width="282dp"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_Forgot_Password"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:text="Forgot Password ?"
+            android:textAllCaps="false"
+            android:textSize="14dp"
+            android:textColor="#2defaa"/>
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="   |    "
+            android:textColor="#02b6d1"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/btn_Sign_Up"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:text="Sign Up"
+            android:textAllCaps="false"
+            android:textSize="14dp"
+            android:textColor="#2defaa" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:layout_margin="5dp"
+            android:background="#868c8d" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:gravity="center"
+            android:layout_width="33dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="or"
+            android:textAllCaps="false"
+            android:textColor="#868c8d" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="200dp"
+            android:layout_height="1dp"
+            android:layout_margin="5dp"
+            android:background="#868c8d" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_G_Sign_In"
+        style="@style/button_style"
+        android:layout_width="276dp"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:drawableLeft="@drawable/google_logo"
+        android:padding="3dp"
+        android:text="Sign In with Google"
+        android:textAllCaps="false"/>
+
+
+</LinearLayout>
+</android.widget.RelativeLayout>

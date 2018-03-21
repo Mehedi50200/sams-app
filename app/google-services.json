@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "559654007147",
+    "firebase_url": "https://student-attendance-monitoring.firebaseio.com",
+    "project_id": "student-attendance-monitoring",
+    "storage_bucket": "student-attendance-monitoring.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559654007147:android:90539e3425bccc9d",
+        "android_client_info": {
+          "package_name": "my.unimas.a50200siswa.studentattendancemonitoringsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559654007147-i0gguv8b8qflbapjer415pcmnc5rqgc7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "my.unimas.a50200siswa.studentattendancemonitoringsystem",
+            "certificate_hash": "c5b4e2b05cd52ef4622c818f12c43b1a6ab18cc7"
+          }
+        },
+        {
+          "client_id": "559654007147-e0qssv1uke6uooagnkd6vrb5ccm2clld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyVrVl1azzUEcL-L5rJ_jlXD7FD6H8tZk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559654007147-e0qssv1uke6uooagnkd6vrb5ccm2clld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

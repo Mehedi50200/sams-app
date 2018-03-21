@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="my.unimas.a50200siswa.studentattendancemonitoringsystem.Home_Activity"
+    android:orientation="vertical">
+
+
+
+
+        <LinearLayout
+            style="@style/button_style"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:background="#20000000"
+                android:gravity="center"
+                android:textColor="#ccf2f2"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/sign_out"
+                android:layout_width="90dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="Sign Out"
+                android:textAllCaps="false"
+                android:textColor="#ccf2f2"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_take_attendance"
+        style="@style/button_style"
+        android:layout_width="276dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:elevation="0dp"
+        android:text="Take Attendance"
+        android:textAllCaps="false" />
+
+
+</android.widget.LinearLayout>
