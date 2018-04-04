@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Home_Activity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     TextView btnSignOut;
     FirebaseAuth mAuth;
@@ -46,7 +46,7 @@ public class Home_Activity extends AppCompatActivity {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() == null){
-                    startActivity(new Intent(Home_Activity.this, SignIn_Activity.class));
+                    startActivity(new Intent(HomeActivity.this, SignInActivity.class));
                 }
             }
         };

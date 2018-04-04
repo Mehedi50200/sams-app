@@ -6,17 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="my.unimas.a50200siswa.studentattendancemonitoringsystem.Home_Activity"
+    tools:context="my.unimas.a50200siswa.studentattendancemonitoringsystem.HomeActivity"
     android:orientation="vertical">
-
-
-
 
         <LinearLayout
             style="@style/button_style"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-
             android:orientation="horizontal">
 
             <TextView
@@ -40,9 +36,8 @@
                 android:textColor="#ccf2f2"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-
-
         </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_take_attendance"
@@ -53,6 +48,34 @@
         android:elevation="0dp"
         android:text="Take Attendance"
         android:textAllCaps="false" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Male"/>
+    <CheckBox
+        android:id="@+id/female"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FeMale" />
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RadioButton" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 
 </android.widget.LinearLayout>
