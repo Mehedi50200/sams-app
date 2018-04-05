@@ -23,7 +23,7 @@ private LinearLayout LOSplash;
         IVPink = (ImageView) findViewById(R.id.pinkball) ;
         IVOrange = (ImageView) findViewById(R.id.orangeball) ;
 
-        Animation rotation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.splash);
+        Animation rotation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade);
         Animation bounce = AnimationUtils.loadAnimation(getBaseContext(), R.anim.bounce);
 
         LogoBackground.startAnimation(rotation);

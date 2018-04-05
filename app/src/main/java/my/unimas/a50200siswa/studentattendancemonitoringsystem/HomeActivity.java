@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btnSignOut =(TextView) findViewById(R.id.sign_out);
+        btnSignOut =(TextView) findViewById(R.id.btnsignout_home);
         mAuth =FirebaseAuth.getInstance();
 
         user=FirebaseAuth.getInstance().getCurrentUser();

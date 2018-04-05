@@ -10,4 +10,10 @@
     <color name="colorLightText">#cfbfd1</color>
     <color name="colorOrangeText">#f68a5a</color>
     <color name="colorMistakeRed">#7a3232</color>
+
+    <color name="colorViolet">#663754</color>
+    <color name="colorOrange">#f58758</color>
+    <color name="colorPink">#c61e4a</color>
+
+
 </resources>
