@@ -56,7 +56,6 @@ public class SignInActivity extends AppCompatActivity {
     /*-----------------------------------------*/
 
 
-
     @Override
     protected void onStart() {
         super.onStart();
