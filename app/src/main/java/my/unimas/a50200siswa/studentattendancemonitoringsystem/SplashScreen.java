@@ -36,7 +36,7 @@ private LinearLayout LOSplash;
         Thread timer =new Thread() {
             public void run (){
                 try {
-                    sleep (8000);
+                    sleep (5000);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();

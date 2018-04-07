@@ -4,70 +4,151 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
-    TextView btnSignOut;
-    FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthListner;
-    
-    TextView UserName;
+    String userID;
+    List<CourseModel> listCourse;
+    TextView btnSignOut, UserName;
+    RecyclerView courseRecycler;
 
+    String CourseCode, CourseName;
+
+    /*---- Firebase Database stuff ----*/
+    FirebaseDatabase mFirebaseDatabase;
+    FirebaseAuth mAuth;
     FirebaseUser user;
-    
-    
-    
+    FirebaseAuth.AuthStateListener mAuthListener;
+    DatabaseReference myRef;
+
+
+
+
     @Override
-    protected void onStart(){
+    protected void onStart() {
 
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListner);
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btnSignOut =(TextView) findViewById(R.id.btnsignout_home);
-        mAuth =FirebaseAuth.getInstance();
+        /*-------Finding View---------*/
+        btnSignOut = (TextView) findViewById(R.id.btnsignout_home);
+        UserName = findViewById(R.id.username);
+        courseRecycler = findViewById(R.id.recyclerviewcourse);
 
-        user=FirebaseAuth.getInstance().getCurrentUser();
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+            }
+
+        });
 
 
-        mAuthListner = new FirebaseAuth.AuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
 
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null){
+                if (firebaseAuth.getCurrentUser() == null) {
                     startActivity(new Intent(HomeActivity.this, SignInActivity.class));
                 }
             }
         };
 
-        btnSignOut.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                mAuth.signOut();
-            }
+
+        /* ----------------- Firebase Elements -----------------*/
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        userID = user.getUid();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getInstance().getReference();
 
 
-        });
-
-        UserName = findViewById(R.id.username);
         UserName.setText(user.getDisplayName());
 
+        /*------------------------------------------------------------------*/
 
 
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
 
+
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.child("Users").child(userID).child("Course").getChildren()) {
+
+                    listCourse = new ArrayList<CourseModel>();
+
+                    CourseModel value = dataSnapshot1.getValue(CourseModel.class);
+                    CourseModel course = new CourseModel();
+                    String userID = value.getUserId();
+                    course.setUserId(userID);
+                    String courseCode = value.getCourseCode();
+                    course.setCourseCode(courseCode);
+
+                    for (DataSnapshot dataSnapshot2 : dataSnapshot1.child("CourseName").getChildren()) {
+                        CourseModel value2 = dataSnapshot2.getValue(CourseModel.class);
+                        String courseName = value2.getCourseName();
+                        course.setCourseName(courseName);
+                        listCourse.add(course);
+                    }
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Hello", "Failed to read value.", error.toException());
+            }
+        });
+
+        /*
+        listCourse = new ArrayList<>();
+        listCourse.add(new CourseModel("122345","TMN1234","System Programming"));
+        listCourse.add(new CourseModel("122345","TMN1234","System Programming"));
+        listCourse.add(new CourseModel("122345","TMN1234","System Programming"));
+        listCourse.add(new CourseModel("122345","TMN1234","System Programming"));
+
+        */
+
+        RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerviewcourse);
+        RecyclerViewAdapterCourse myAdapter = new RecyclerViewAdapterCourse(this,listCourse);
+        myrv.setLayoutManager(new GridLayoutManager(this,3));
+        myrv.setAdapter(myAdapter);
 
     }
 }
-
-
