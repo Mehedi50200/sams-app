@@ -54,9 +54,9 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
                 Intent intent = new Intent(mContext, CourseActivity.class);
 
                 // passing data to the book activity
-                intent.putExtra("Title", mData.get(position).getUserId());
-                intent.putExtra("Description", mData.get(position).getCourseCode());
-                intent.putExtra("Thumbnail", mData.get(position).getCourseName());
+                intent.putExtra("UserId", mData.get(position).getUserId());
+                intent.putExtra("CourseCode", mData.get(position).getCourseCode());
+                intent.putExtra("CourseName", mData.get(position).getCourseName());
                 // start the activity
                 mContext.startActivity(intent);
 

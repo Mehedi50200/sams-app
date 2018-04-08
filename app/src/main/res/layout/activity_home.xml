@@ -12,56 +12,6 @@
         layout="@layout/action_bar">
     </include>
 
-    <TextView
-        android:id="@+id/courseName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CourseName"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/courseName2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CourseName"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/courseName3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CourseName"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/courseName4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CourseName"
-        android:textSize="20sp"/>
-
-    <TextView
-        android:id="@+id/courseCode"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CourseName"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/courseCode2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CourseName"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/courseCode3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CourseName"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/courseCode4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CourseName"
-        android:textSize="20sp"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerviewcourse"
         android:layout_width="match_parent"
