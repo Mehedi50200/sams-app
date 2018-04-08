@@ -27,15 +27,15 @@ public class CourseModel {
 
 
     public void setUserId(String userId) {
-        this.UserId = userId;
+        UserId = userId;
     }
 
     public void setCourseCode(String courseCode) {
-        this.CourseCode = courseCode;
+        CourseCode = courseCode;
     }
 
     public void setCourseName(String courseName) {
-        this.CourseName = courseName;
+        CourseName = courseName;
     }
 
 }

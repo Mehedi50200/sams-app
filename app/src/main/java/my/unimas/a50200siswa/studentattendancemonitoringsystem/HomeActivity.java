@@ -25,13 +25,9 @@ public class HomeActivity extends AppCompatActivity {
 
     String userID;
     List<CourseModel> listCourse;
-    TextView btnSignOut, UserName;
-    RecyclerView courseRecycler;
-
-    String CourseCode, CourseName;
+    TextView btnSignOut, UserName, CourseName, CourseName2, CourseName3, CourseName4, CourseCode,CourseCode2,CourseCode3,CourseCode4;
 
     /*---- Firebase Database stuff ----*/
-    FirebaseDatabase mFirebaseDatabase;
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -64,7 +60,8 @@ public class HomeActivity extends AppCompatActivity {
         /*-------Finding View---------*/
         btnSignOut = (TextView) findViewById(R.id.btnsignout_home);
         UserName = findViewById(R.id.username);
-        courseRecycler = findViewById(R.id.recyclerviewcourse);
+
+      //  CourseCode();
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,41 +83,62 @@ public class HomeActivity extends AppCompatActivity {
         };
 
 
+        CourseName = findViewById(R.id.courseName);
+        CourseName2 = findViewById(R.id.courseName2);
+        CourseName3 = findViewById(R.id.courseName3);
+        CourseName4 = findViewById(R.id.courseName4);
+        CourseCode= findViewById(R.id.courseCode);
+        CourseCode2= findViewById(R.id.courseCode2);
+        CourseCode3= findViewById(R.id.courseCode3);
+        CourseCode4= findViewById(R.id.courseCode4);
         /* ----------------- Firebase Elements -----------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userID = user.getUid();
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference().child("Users");
 
-
-
-
-
-        /*------------------------------------------------------------------*/
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        myRef = rootRef.child("Users");
+    /*------------------------------------------------------------------*/
 
 
         listCourse = new ArrayList<>();
 
         myRef.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+
                 String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 UserName.setText(userName);
+                String coursecode[] = new String[10];
+                String coursename[] = new String[10];
 
-                for (DataSnapshot dataSnapshot1 : dataSnapshot.child(userID).child("Course").getChildren()) {
-                    String coursecode = dataSnapshot1.getChildren().toString();
-                    String userid = userID;
 
-                    for (DataSnapshot dataSnapshot2 : dataSnapshot1.child("CourseName").getChildren()) {
-                        String coursename = dataSnapshot2.getValue(String.class);
-                        listCourse.add(new CourseModel(userid,coursecode,coursename));
+                if (dataSnapshot.exists()) {
+
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.child(userID).child("Course").getChildren()) {
+                        int i = 1;
+                        coursecode[i]= dataSnapshot1.getKey();
+                        coursename[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("CourseName").getValue(String.class);
+                        listCourse.add(new CourseModel(userID,coursecode[i],coursename[i]));
+
+
+                        /*
+                        CourseCode.setText(coursecode[1]);
+                        CourseCode2.setText(coursecode[2]);
+                        CourseCode3.setText(coursecode[3]);
+                        CourseCode4.setText(coursecode[4]);
+
+                        CourseName.setText(coursename[1]);
+                        CourseName2.setText(coursename[2]);
+                        CourseName3.setText(coursename[3]);
+                        CourseName4.setText(coursename[4]); */
+                        i++;
+
+                        }
+
                     }
-
-                }
 
             }
 
@@ -131,19 +149,13 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-/*
-        listCourse = new ArrayList<>();
-        listCourse.add(new CourseModel("122345","TMN1234","System Programming"));
-        listCourse.add(new CourseModel("122345","TMN1234","System Programming"));
-        listCourse.add(new CourseModel("122345","TMN1234","System Programming"));
-        listCourse.add(new CourseModel("122345","TMN1234","System Programming"));
-
-        */
-
-        RecyclerView myrv = (RecyclerView) findViewById(R.id.recyclerviewcourse);
+        RecyclerView myrv = findViewById(R.id.recyclerviewcourse);
         RecyclerViewAdapterCourse myAdapter = new RecyclerViewAdapterCourse(this,listCourse);
         myrv.setLayoutManager(new GridLayoutManager(this,2));
         myrv.setAdapter(myAdapter);
 
+
     }
+
+
 }
