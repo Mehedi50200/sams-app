@@ -7,13 +7,20 @@
     <color name="colorDarkViolet">#39243a</color>
     <color name="colorLightViolet">#663754</color>
     <color name="colorDarkText">#624963</color>
-    <color name="colorLightText">#cfbfd1</color>
+    <color name="colorLightText">#ce9bbf</color>
     <color name="colorOrangeText">#f68a5a</color>
     <color name="colorMistakeRed">#7a3232</color>
 
     <color name="colorViolet">#663754</color>
     <color name="colorOrange">#f58758</color>
     <color name="colorPink">#c61e4a</color>
+    <color name="colorYellow">#fcaa1a</color>
+
+    <color name="colorGrey">#282735</color>
+    <color name="colorDarkGrey">#1d1c2a</color>
+    <color name="colorTransparentOrange">#30f58758</color>
+    <color name="colorTransparentYellow">#30fcaa1a</color>
+    <color name="colorTransparentPink">#30c61e4a</color>
 
 
 </resources>

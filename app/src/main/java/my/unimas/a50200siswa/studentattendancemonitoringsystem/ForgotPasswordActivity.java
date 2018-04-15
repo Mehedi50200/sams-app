@@ -239,7 +239,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             Map newPost = new HashMap();
                             newPost.put("userName", userName);
                             newPost.put("userEmail", userEmail);
-                            current_user_db.setValue(newPost);
+                            current_user_db.updateChildren(newPost);
                             // updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

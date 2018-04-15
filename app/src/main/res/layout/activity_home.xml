@@ -4,19 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/background_gradient">
 
-    <include
-        android:id="@+id/actionbar"
-        layout="@layout/action_bar">
-    </include>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerviewcourse"
+
+    <LinearLayout
+        android:layout_height="320dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:orientation="vertical">
 
-    </android.support.v7.widget.RecyclerView>
+        <include
+            android:id="@+id/actionbar"
+            layout="@layout/action_bar">
+        </include>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Notes"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:textSize="20sp"
+            android:background="@color/colorOrange"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="5dp"
+            android:focusable="true"
+            android:gravity="center"
+            android:focusableInTouchMode="true">
+
+
+            <EditText
+                android:id="@+id/etnote"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:hint="type your note here"
+                android:textStyle="italic"
+                android:backgroundTint="@color/colorTransparentOrange"/>
+
+            <Button
+                style="@style/button_style"
+                android:id="@+id/btnsavenote"
+                android:layout_width="60dp"
+                android:layout_height="20dp"
+                android:gravity="center"
+                android:text="Save"
+                android:textSize="13dp"
+                android:backgroundTint="@color/colorTransparentOrange"/>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvnote"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+            </android.support.v7.widget.RecyclerView>
+
+            <TextView
+                android:id="@+id/empty_view_note"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="No Data Available" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerviewcourse"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/empty_view_course"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="No note added. Type your note and add" />
+
+    </LinearLayout>
+
 
 </android.widget.LinearLayout>

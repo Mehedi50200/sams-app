@@ -253,12 +253,10 @@ public class SignInActivity extends AppCompatActivity {
                             String userID = mAuth.getCurrentUser().getUid();
                             String userName = mAuth.getCurrentUser().getDisplayName();
                             String userEmail = mAuth.getCurrentUser().getEmail();
-                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
-
-                            Map newPost = new HashMap();
+                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);                            Map newPost = new HashMap();
                             newPost.put("userName", userName);
                             newPost.put("userEmail", userEmail);
-                            current_user_db.setValue(newPost);
+                            current_user_db.updateChildren(newPost);
                             // updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.

@@ -221,17 +221,14 @@ public class SignUpActivity extends AppCompatActivity
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("TAG", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             String userID = mAuth.getCurrentUser().getUid();
                             String userName = mAuth.getCurrentUser().getDisplayName();
                             String userEmail = mAuth.getCurrentUser().getEmail();
-                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
-
+                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users");
                             Map newPost = new HashMap();
                             newPost.put("userName", userName);
                             newPost.put("userEmail", userEmail);
-                            current_user_db.setValue(newPost);
-                            // updateUI(user);
+                            current_user_db.updateChildren(newPost);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
