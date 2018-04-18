@@ -6,67 +6,73 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/background_gradient">
-
-
+    android:background="@color/colorTransparentPink">
 
     <LinearLayout
-        android:layout_height="320dp"
+        android:id="@+id/hometop"
+        android:layout_height="300dp"
         android:layout_width="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/homebground">
 
         <include
             android:id="@+id/actionbar"
             layout="@layout/action_bar">
         </include>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Notes"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:textSize="20sp"
-            android:background="@color/colorOrange"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_margin="5dp"
-            android:focusable="true"
-            android:gravity="center"
-            android:focusableInTouchMode="true">
+            android:gravity="center">
 
 
             <EditText
                 android:id="@+id/etnote"
-                android:layout_width="230dp"
+                android:layout_width="260dp"
                 android:layout_height="wrap_content"
                 android:hint="type your note here"
                 android:textStyle="italic"
-                android:backgroundTint="@color/colorTransparentOrange"/>
+                android:textColor="@color/colorPink"
+                android:textColorHint="@color/colorTransparentPink"
+                android:backgroundTint="@color/colorTransparentPink"
+                android:visibility="gone"/>
 
             <Button
                 style="@style/button_style"
                 android:id="@+id/btnsavenote"
                 android:layout_width="60dp"
                 android:layout_height="20dp"
+                android:transitionName="tbenote"
                 android:gravity="center"
                 android:text="Save"
+                android:textColor="@color/colorPink"
                 android:textSize="13dp"
-                android:backgroundTint="@color/colorTransparentOrange"/>
+                android:backgroundTint="@color/colorTransparentPink"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/btnaddnote"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:transitionName="tbenote"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:background="@drawable/btnadd"/>
+
         </LinearLayout>
         
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="150dp"
             android:layout_margin="5dp"
             android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvnote"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center">
             </android.support.v7.widget.RecyclerView>
@@ -77,13 +83,16 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:visibility="gone"
-                android:text="No Data Available" />
+                android:text="No note added. Type your note and add"
+                android:textColor="@color/colorTransparentPink"/>
 
         </LinearLayout>
 
     </LinearLayout>
 
+
     <LinearLayout
+        android:id="@+id/homebottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -101,7 +110,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:visibility="gone"
-            android:text="No note added. Type your note and add" />
+            android:text="You are not assigned with any course yet"
+            android:textColor="#ffffff"/>
 
     </LinearLayout>
 

@@ -21,7 +21,7 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
 
     private Context mContext;
     private List<CourseModel> mData;
-    View divider;
+    View divider ;
     private LinearLayout llCourse;
 
 
@@ -52,15 +52,16 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
 
         holder.day.setText(mData.get(position).getDay());
         if(mData.get(position).getDay().trim().equals(getCurrentDay().trim())){
-            llCourse.setBackgroundColor(Color.parseColor("#af1444"));
-            divider.setBackgroundColor(Color.parseColor("#f68a5a"));
-            holder.courseCode.setTextColor(Color.parseColor("#b58594"));
-            holder.courseName.setTextColor(Color.parseColor("#fcc3d4"));
+            llCourse.setBackgroundColor(Color.parseColor("#c61e4a"));
+            divider.setBackgroundColor(Color.WHITE);
+            holder.courseName.setTextColor(Color.parseColor("#f7b5d0"));
+            holder.courseCode.setTextColor(Color.parseColor("#242b3b"));
+            holder.day.setTextColor(Color.parseColor("#242b3b"));
+            holder.time.setTextColor(Color.parseColor("#242b3b"));
 
         }else{
 
-            llCourse.setBackgroundResource(R.drawable.cardview_bg);
-
+            llCourse.setBackgroundResource(R.drawable.cardbg);
         }
 
       //  holder.userID.setText(mData.get(position).getUserId());

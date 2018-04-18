@@ -4,55 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fcfcfc">
+    android:orientation="vertical"
+    android:background="@color/colorTransparentPink">
 
-    <android.support.v4.widget.NestedScrollView
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:padding="10dp">
+        android:layout_height="130dp"
+        android:background="@drawable/coursebground"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/userid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="User ID"
-                android:textColor="#000"
-                android:textSize="18sp"/>
+        <include
+            android:id="@+id/actionbar"
+            layout="@layout/action_bar">
+        </include>
 
             <TextView
                 android:id="@+id/coursecode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
                 android:text="Course Code"
-                android:textColor="#000"
-                android:textSize="18sp"/>
+                android:textColor="@color/colorPink"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/coursename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Course Code"
-                android:textColor="#000"
-                android:textSize="18sp"/>
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:text="Course Name"
+                android:textColor="@color/colorCardText"
+                android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvstudent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/empty_view_student"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="No student enrolled for this course"
+            android:visibility="gone"
+            android:textColor="@color/colorPink"/>
+
+    </LinearLayout>
 
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/pinkbgst"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btntakeattendance"
+                style="@style/button_style"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:text="Take Attendance"
+                android:textAllCaps="false"
+                android:textColor="@color/colorPink"
+                android:backgroundTint="@color/colorTransparentPink"/>
 
         </LinearLayout>
 
+    </android.support.v7.widget.CardView>
 
 
-    </android.support.v4.widget.NestedScrollView>
+
+
+
 
 
 </LinearLayout>
+

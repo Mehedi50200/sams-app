@@ -19,9 +19,9 @@ private LinearLayout LOSplash;
         setContentView(R.layout.activity_splash_screen);
         LOSplash=findViewById(R.id.parentlayout_splash);
         LogoBackground =findViewById(R.id.logobackground);
-        IVViolet = (ImageView) findViewById(R.id.violetball) ;
-        IVPink = (ImageView) findViewById(R.id.pinkball) ;
-        IVOrange = (ImageView) findViewById(R.id.orangeball) ;
+        IVViolet = findViewById(R.id.violetball) ;
+        IVPink = findViewById(R.id.pinkball) ;
+        IVOrange = findViewById(R.id.orangeball) ;
 
         Animation rotation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade);
         Animation bounce = AnimationUtils.loadAnimation(getBaseContext(), R.anim.bounce);

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +21,6 @@ class RecyclerViewAdapterNote extends RecyclerView.Adapter<RecyclerViewAdapterNo
     private List<NoteModel> mData;
     FirebaseAuth mAuth;
     String userID;
-    LinearLayout LLNote;
 
 
 
@@ -47,14 +45,13 @@ class RecyclerViewAdapterNote extends RecyclerView.Adapter<RecyclerViewAdapterNo
 
 
     @Override
-    public void onBindViewHolder(NoteViewHolder holder, final int position) {
+    public void onBindViewHolder(final NoteViewHolder holder, final int position) {
 
         holder.Note.setText(mData.get(position).getNote());
         holder.Date.setText(mData.get(position).getDate());
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 mAuth = FirebaseAuth.getInstance();
                 FirebaseUser user = mAuth.getCurrentUser();
                 userID = user.getUid();
@@ -83,7 +80,6 @@ class RecyclerViewAdapterNote extends RecyclerView.Adapter<RecyclerViewAdapterNo
             Note = itemView.findViewById(R.id.tvnote);
             Date = itemView.findViewById(R.id.tvdate);
             btnRemove =itemView.findViewById(R.id.btnremove);
-            LLNote =itemView.findViewById(R.id.llnote);
 
 
         }

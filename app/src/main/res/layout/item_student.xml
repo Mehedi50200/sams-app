@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/studentcardview"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_margin="1dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/colorTransparentYellow"
+    app:cardElevation="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tvstudentserial"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="No"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:src="@drawable/propic"/>
+
+        <TextView
+            android:id="@+id/tvstudentmatric"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Matric No"/>
+
+        <TextView
+            android:id="@+id/tvstudentname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Student Name"/>
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

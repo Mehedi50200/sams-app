@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coursecardview"
     android:clickable="true"
     android:layout_width="150dp"
@@ -9,14 +10,15 @@
     android:layout_gravity="center"
     android:padding="3dp"
     cardview:cardCornerRadius="7dp"
-    cardview:cardElevation="5dp">
+    cardview:cardElevation="15dp">
+
 
     <LinearLayout
         android:id="@+id/llcourse"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/cardview_bg">
+        android:layout_height="match_parent">
+
 
         <TextView
             android:id="@+id/coursecode"
@@ -26,7 +28,7 @@
             android:textSize="17sp"
             android:gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/colorViolet"
+            android:textColor="@color/colorPink"
             android:text="Course Code"/>
 
         <TextView
@@ -44,16 +46,27 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_margin="5dp"
-            android:background="@color/colorYellow" />
+            android:background="@color/colorPink"/>
 
-        <TextView
-            android:id="@+id/tvday"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Day"
-            android:textStyle="bold"
-            android:textColor="@color/colorViolet"/>
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <TextView
+                android:id="@+id/tvday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Day"
+                android:textStyle="bold"
+                android:textColor="@color/colorPink"/>
+
+
+        </LinearLayout>
+
+
 
         <TextView
             android:id="@+id/tvtime"
@@ -61,13 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Time"
-            android:textColor="@color/colorViolet"/>
-
-
-
-
-
-
+            android:textColor="@color/colorPink"/>
     </LinearLayout>
+
 
 </android.support.v7.widget.CardView>

@@ -9,8 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +38,9 @@ public class HomeActivity extends AppCompatActivity {
     List<NoteModel> listNote;
     TextView btnSignOut, UserName,EmptyViewCourse, EmptyViewNote;
     EditText ETNote;
-    Button btnSaveNote;
+    Button btnSaveNote, btnAddNote;
+    Animation UpDown,DownUp,  RightToLeft;
+    LinearLayout HomeUp, HomeDown;
 
     /*---- Firebase Database stuff ----*/
     FirebaseAuth mAuth;
@@ -44,6 +49,8 @@ public class HomeActivity extends AppCompatActivity {
     DatabaseReference userRef, notesRef;
     RecyclerViewAdapterCourse courseAdapter;
     RecyclerViewAdapterNote noteAdapter;
+
+
 
 
     @Override
@@ -68,17 +75,36 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         /*-------Finding View---------*/
+
         btnSignOut = findViewById(R.id.btnsignout_home);
         ETNote = findViewById(R.id.etnote);
+        btnAddNote =findViewById(R.id.btnaddnote);
         btnSaveNote =findViewById(R.id.btnsavenote);
         UserName = findViewById(R.id.username);
-        final RecyclerView rvcourse = findViewById(R.id.recyclerviewcourse);
+
+
+
+
+
+        final RecyclerView RVCourse = findViewById(R.id.recyclerviewcourse);
         final RecyclerView rvnote = findViewById(R.id.rvnote);
-        rvcourse.setLayoutManager(new GridLayoutManager(this,2));
+        RVCourse.setLayoutManager(new GridLayoutManager(this,2));
         rvnote.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
         EmptyViewNote = findViewById(R.id.empty_view_note);
         EmptyViewCourse = findViewById(R.id.empty_view_course);
+
+
+        /*--------------- Animation ----------------- */
+
+        HomeUp =findViewById(R.id.hometop);
+        HomeDown=findViewById(R.id.homebottom);
+        RightToLeft = AnimationUtils.loadAnimation(this,R.anim.rightleft);
+        UpDown =AnimationUtils.loadAnimation(this,R.anim.uptodown);
+        DownUp =AnimationUtils.loadAnimation(this,R.anim.downtoup);
+        HomeUp.setAnimation(UpDown);
+        HomeDown.setAnimation(DownUp);
+
 
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
@@ -103,12 +129,9 @@ public class HomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userID = user.getUid();
-
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
         notesRef = rootRef.child("Users").child(userID).child("Notes");
-
-
         /*------------------------------------------------------------------*/
 
 
@@ -130,7 +153,7 @@ public class HomeActivity extends AppCompatActivity {
                 listCourse.clear();
                 if (dataSnapshot.exists()) {
 
-                    rvcourse.setVisibility(View.VISIBLE);
+                    RVCourse.setVisibility(View.VISIBLE);
                     EmptyViewCourse.setVisibility(View.GONE);
 
 
@@ -146,7 +169,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
 
                 }else{
-                    rvcourse.setVisibility(View.GONE);
+                    RVCourse.setVisibility(View.GONE);
                     EmptyViewCourse.setVisibility(View.VISIBLE);
                 }
 
@@ -164,12 +187,24 @@ public class HomeActivity extends AppCompatActivity {
 
 
         courseAdapter = new RecyclerViewAdapterCourse(this,listCourse);
-        rvcourse.setAdapter(courseAdapter);
+        RVCourse.setAdapter(courseAdapter);
 
 
         /*-------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
         /*---------------------- Notes---------------------------------*/
+
+        btnAddNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                btnSaveNote.setAnimation(RightToLeft);
+                ETNote.setAnimation(RightToLeft);
+                btnSaveNote.setVisibility(View.VISIBLE);
+                ETNote.setVisibility(View.VISIBLE);
+                btnAddNote.setVisibility(View.GONE);
+            }
+        });
 
         btnSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,13 +215,22 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (ETNote.getText().toString().length() >= 100) {
                     ETNote.setError("Note should be less than 100 characters");
                 } else {
+
+                    btnAddNote.setAnimation(RightToLeft);
+                    btnAddNote.setVisibility(View.VISIBLE);
+                    btnSaveNote.setVisibility(View.GONE);
+                    ETNote.setVisibility(View.GONE);
+
+
                     String note = ETNote.getText().toString().trim();
                     DatabaseReference noteRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userID).child("Notes").push();
                     noteRef.child("Note").setValue(note);
                     noteRef.child("Date").setValue(getCurrentDate());
                     Toast.makeText(HomeActivity.this, "Note Saved", Toast.LENGTH_LONG).show();
                     ETNote.setText("");
-                    finish();
+
+
+
                 }
 
             }
