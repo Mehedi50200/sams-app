@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorTransparentPink">
+    android:orientation="vertical">
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:background="@drawable/coursebground"
+        android:layout_height="100dp"
+        android:background="@drawable/homebground"
         android:orientation="vertical">
 
         <include
@@ -20,6 +19,11 @@
             layout="@layout/action_bar">
         </include>
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
             <TextView
                 android:id="@+id/coursecode"
                 android:layout_width="wrap_content"
@@ -29,7 +33,7 @@
                 android:text="Course Code"
                 android:textColor="@color/colorPink"
                 android:textStyle="bold"
-                android:textSize="20sp"/>
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/coursename"
@@ -37,15 +41,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
+                android:textColor="@color/colorPink"
                 android:text="Course Name"
-                android:textColor="@color/colorCardText"
                 android:textSize="16sp"/>
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="430dp"
         android:layout_gravity="center"
         android:orientation="vertical">
 
@@ -71,12 +78,12 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="10dp">
+        android:elevation="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/pinkbgst"
+            android:background="@drawable/cardbg"
             android:gravity="center">
 
             <Button

@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapterStudent.StudentViewHolder> {
 
@@ -68,6 +70,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
     class StudentViewHolder extends RecyclerView.ViewHolder {
         TextView studentId, studentName, studentSerial;
         CardView studentCardView;
+        CircleImageView studentImage;
 
         private StudentViewHolder(View itemView) {
             super(itemView);
@@ -75,6 +78,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
             studentName = itemView.findViewById(R.id.tvstudentname);
             studentSerial =itemView.findViewById(R.id.tvstudentserial);
             studentCardView = itemView.findViewById(R.id.studentcardview);
+
         }
     }
 

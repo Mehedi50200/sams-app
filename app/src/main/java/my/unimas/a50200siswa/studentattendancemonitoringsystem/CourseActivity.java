@@ -34,6 +34,8 @@ public class CourseActivity extends AppCompatActivity {
     List<StudentModel> listStudent;
     TextView btnSignOut, UserName,EmptyViewStudent;
     Button btnTakeAttendance;
+    private TextView coursecode,coursename;
+
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
 
@@ -41,14 +43,9 @@ public class CourseActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference userRef, courseRef;
+    DatabaseReference userRef, studentpicdatabaseref;
     RecyclerViewAdapterStudent studentAdapter;
 
-
-
-
-
-    private TextView coursecode,coursename;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +100,13 @@ public class CourseActivity extends AppCompatActivity {
         userID = user.getUid();
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
+
+
+
+
+
+
+
       //  courseRef = rootRef.child("Users").child(userID).child("Course").child(CourseCode);
         /*------------------------------------------------------------------*/
 
@@ -133,6 +137,7 @@ public class CourseActivity extends AppCompatActivity {
                         studentId[i]= dataSnapshot1.getKey();
                         studentName[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentName").getValue(String.class);
                         studentserial[i]= String.valueOf(i);
+
 
                         listStudent.add(new StudentModel(studentId[i],studentName[i], studentserial[i]));
                         i++;

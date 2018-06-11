@@ -49,6 +49,50 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559654007147:android:b4adce16bbffb6c0",
+        "android_client_info": {
+          "package_name": "my.unimas.siswa.a50200.studentattandencemonitoringsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559654007147-vbi50gu4h02lnv61hugchk46salo55k3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "my.unimas.siswa.a50200.studentattandencemonitoringsystem",
+            "certificate_hash": "f5cb0b557cb9e44970c6ed23cc5b4e912bfe6d45"
+          }
+        },
+        {
+          "client_id": "559654007147-e0qssv1uke6uooagnkd6vrb5ccm2clld.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyVrVl1azzUEcL-L5rJ_jlXD7FD6H8tZk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559654007147-e0qssv1uke6uooagnkd6vrb5ccm2clld.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"

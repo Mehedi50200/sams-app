@@ -5,9 +5,11 @@
     <color name="colorAccent">#aa0071</color>
 
     <color name="colorDarkViolet">#39243a</color>
-    <color name="colorLightViolet">#663754</color>
+    <color name="colorLightViolet">#822345</color>
     <color name="colorDarkText">#624963</color>
-    <color name="colorLightText">#696c70</color>
+
+    <color name="colorLightText">#818182</color>
+    <color name="colorText">#624963</color>
     <color name="colorOrangeText">#f68a5a</color>
     <color name="colorMistakeRed">#7a3232</color>
     <color name="colorCardText">#f7b5d0</color>

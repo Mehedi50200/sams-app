@@ -128,7 +128,7 @@
                 android:text="Already has account?"
                 android:textAllCaps="false"
                 android:textSize="12sp"
-                android:textColor="@color/colorDarkText"/>
+                android:textColor="@color/colorLightViolet"/>
 
             <Button
                 android:id="@+id/btnsignin_signup"
@@ -142,7 +142,7 @@
                 android:textSize="12sp"
                 android:textAllCaps="false"
                 android:backgroundTint="@color/colorDarkViolet"
-                android:textColor="@color/colorLightViolet" />
+                android:textColor="@color/colorDarkText" />
 
         </LinearLayout>
 
@@ -171,7 +171,7 @@
             android:layout_width="50dp"
             android:layout_height="30dp"
             android:text="G+"
-            android:textColor="@color/colorLightViolet"
+            android:textColor="@color/colorDarkText"
             android:textAllCaps="false"/>
 
         <Button
@@ -181,7 +181,7 @@
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:text="Sign Up "
-            android:textColor="@color/colorLightViolet"
+            android:textColor="@color/colorDarkText"
             android:textAllCaps="false"/>
 
 

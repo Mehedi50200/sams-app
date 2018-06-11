@@ -19,12 +19,9 @@ public class StudentModel {
     public String getStudentName() {
         return StudentName;
     }
-
     public String getStudentSerial(){
         return StudentSerial;
     }
-
-
 
     public void setStudentId(String studentId) {
         StudentId = studentId;

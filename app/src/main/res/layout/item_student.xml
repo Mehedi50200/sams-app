@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_margin="1dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardBackgroundColor="@color/colorTransparentYellow"
-    app:cardElevation="2dp">
+    app:cardCornerRadius="5dp"
+    app:cardElevation="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,12 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="No"/>
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:src="@drawable/propic"/>
 
         <TextView
             android:id="@+id/tvstudentmatric"
