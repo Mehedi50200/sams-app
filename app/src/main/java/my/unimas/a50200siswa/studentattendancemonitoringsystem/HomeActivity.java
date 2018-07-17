@@ -211,7 +211,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (ETNote.getText().toString().length() == 0) {
-                    ETNote.setError("Type Some Thing");
+                    ETNote.setError("Type Something");
                 } else if (ETNote.getText().toString().length() >= 100) {
                     ETNote.setError("Note should be less than 100 characters");
                 } else {

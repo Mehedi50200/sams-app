@@ -1,6 +1,7 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
-        import android.content.Intent;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -24,9 +25,11 @@ public class StudentProfileActivity extends AppCompatActivity {
     String CourseCode;
     String CourseName;
     String StudentName;
-    String StudentMatric;
-    String UserId;
-    TextView btnSignOut, UserName,EmptyViewStudent;
+    String StudentId;
+    String NumberOfPresence;
+    String NumberOfAbsence;
+    String Percentage;
+    TextView btnSignOut, UserName,NoAbsence,NoPresence, NoPercentage;
     Button btnNotifyStudent;
     private TextView studentName,studentId;
 
@@ -36,7 +39,25 @@ public class StudentProfileActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference userRef;
+    DatabaseReference rootRef,userRef;
+
+
+
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
 
     @Override
@@ -49,22 +70,23 @@ public class StudentProfileActivity extends AppCompatActivity {
         UserName = findViewById(R.id.username);
         studentName =  findViewById(R.id.studentname);
         studentId =  findViewById(R.id.studentmatric);
-
+        NoPresence= findViewById(R.id.noP);
+        NoAbsence= findViewById(R.id.noA);
+        NoPercentage = findViewById(R.id.noPer);
 
 
 
         // Recieve data
         Intent intent = getIntent();
-        UserId = intent.getExtras().getString("UserId");
         CourseCode = intent.getExtras().getString("CourseCode");
         CourseName = intent.getExtras().getString("CourseName");
         StudentName = intent.getExtras().getString("StudentName");
-        StudentMatric = intent.getExtras().getString("StudentId");
+        StudentId = intent.getExtras().getString("StudentId");
 
         // Setting values
 
         studentName.setText(StudentName);
-        studentId.setText(StudentMatric);
+        studentId.setText(StudentId);
 
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
@@ -90,26 +112,62 @@ public class StudentProfileActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userID = user.getUid();
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
-
-
-
-
-
-
-
-        //  courseRef = rootRef.child("Users").child(userID).child("Course").child(CourseCode);
         /*------------------------------------------------------------------*/
 
 
-        /*---------------------- Course List Fetch---------------------------------*/
 
+        /*---------------------- Attendance Fetch---------------------------------*/
 
         userRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
+                UserName.setText(userName);
+
+                String attendanceId[] = new String[25];
+                String date[] = new String[25];
+                String status[] = new String[25];
+
+                if (dataSnapshot.exists()) {
+
+                    int i = 0;
+                    int nop = 0;
+                    int noa = 0;
+                    for (DataSnapshot dataSnapshot1 :dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").getChildren()) {
+
+                        attendanceId[i]= dataSnapshot1.getKey();
+                        date[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Date").getValue(String.class);
+                        status[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Status").getValue(String.class);
+
+                        if(status[i].equals("Present")){
+                            nop++;
+                        }else {
+                            noa++;
+                        }
+                        i++;
+                    }
+
+                    NumberOfAbsence = String.valueOf(noa);
+                    NoAbsence.setText(NumberOfAbsence);
+
+                    NumberOfPresence = String.valueOf(nop);
+                    NoPresence.setText(NumberOfPresence);
+
+
+                    Percentage = String.valueOf(AttendancePercentage(i,nop) + "%");
+                    if (AttendancePercentage(i,nop)<=60)
+                    {
+                        NoPercentage.setTextColor(Color.RED);
+                    }
+                    NoPercentage.setText(Percentage);
+                    
+                }else{
+
+                }
 
 
             }
@@ -122,4 +180,13 @@ public class StudentProfileActivity extends AppCompatActivity {
         });
 
     }
+
+    public int AttendancePercentage(int classTaken, int classPresence){
+
+        int Percentage;
+        Percentage = classPresence * 100 / classTaken;
+        return Percentage;
+    }
+
+
 }

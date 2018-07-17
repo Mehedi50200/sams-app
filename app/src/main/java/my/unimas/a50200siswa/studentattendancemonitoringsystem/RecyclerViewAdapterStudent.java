@@ -53,6 +53,8 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
                 Intent intent = new Intent(mContext, StudentProfileActivity.class);
                 intent.putExtra("StudentId", mData.get(position).getStudentId());
                 intent.putExtra("StudentName", mData.get(position).getStudentName());
+                intent.putExtra("CourseCode", mData.get(position).getCourseCode());
+                intent.putExtra("CourseName", mData.get(position).getCourseName());
                 mContext.startActivity(intent);
             }
         });

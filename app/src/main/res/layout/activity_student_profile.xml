@@ -10,29 +10,43 @@
         android:id="@+id/actionbar"
         layout="@layout/action_bar"></include>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_margin="10dp"
-        android:elevation="20dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/profilepic"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:background="@drawable/proimagebg"
+        android:layout_marginBottom="10dp">
 
-    <TextView
-        android:id="@+id/studentname"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="Student Name"
-        android:layout_gravity="center_horizontal"
-        android:textSize="20sp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="10dp"
+            android:elevation="20dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/profilepic"/>
 
-    <TextView
-        android:id="@+id/studentmatric"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:text="Matric No"
-        android:layout_gravity="center_horizontal"
-        android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/studentname"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textStyle="bold"
+            android:text="Student Name"
+            android:layout_gravity="center_horizontal"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/studentmatric"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:textColor="@color/colorLightViolet"
+            android:text="Matric No"
+            android:layout_gravity="center_horizontal"
+            android:textSize="18sp"/>
+
+
+    </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -62,6 +76,7 @@
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView
+                    android:id="@+id/noP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -95,6 +110,7 @@
                     android:layout_gravity="center_horizontal"/>
 
                 <TextView
+                    android:id="@+id/noA"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -132,6 +148,7 @@
                 android:layout_gravity="center"/>
 
             <TextView
+                android:id="@+id/noPer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

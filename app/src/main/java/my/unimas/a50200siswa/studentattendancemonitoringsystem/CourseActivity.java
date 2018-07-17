@@ -139,7 +139,7 @@ public class CourseActivity extends AppCompatActivity {
                         studentserial[i]= String.valueOf(i);
 
 
-                        listStudent.add(new StudentModel(studentId[i],studentName[i], studentserial[i]));
+                        listStudent.add(new StudentModel(studentId[i],studentName[i], studentserial[i],CourseCode,CourseName));
                         i++;
                     }
 
