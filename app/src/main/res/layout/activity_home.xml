@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorBackground">
 
     <LinearLayout
         android:id="@+id/hometop"
@@ -35,8 +34,8 @@
                 android:hint="type your note here"
                 android:textStyle="italic"
                 android:textColor="@color/colorPink"
-                android:textColorHint="@color/colorTransparentPink"
-                android:backgroundTint="@color/colorTransparentPink"
+                android:textColorHint="@color/colorDarkPink"
+                android:backgroundTint="@color/colorDarkPink"
                 android:visibility="gone"/>
 
             <Button
@@ -49,7 +48,7 @@
                 android:text="Save"
                 android:textColor="@color/colorPink"
                 android:textSize="13dp"
-                android:backgroundTint="@color/colorTransparentPink"
+                android:backgroundTint="@color/colorDarkPink"
                 android:visibility="gone"/>
 
             <Button
@@ -69,13 +68,6 @@
             android:layout_margin="5dp"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvnote"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center">
-            </android.support.v7.widget.RecyclerView>
-
             <TextView
                 android:id="@+id/empty_view_note"
                 android:layout_width="match_parent"
@@ -83,7 +75,14 @@
                 android:gravity="center"
                 android:visibility="gone"
                 android:text="No note added. Type your note and add"
-                android:textColor="@color/colorTransparentPink"/>
+                android:textColor="@color/colorDarkPink"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvnote"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+            </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 

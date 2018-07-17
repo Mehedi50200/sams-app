@@ -50,7 +50,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(mContext, CourseActivity.class);
+                Intent intent = new Intent(mContext, StudentProfileActivity.class);
                 intent.putExtra("StudentId", mData.get(position).getStudentId());
                 intent.putExtra("StudentName", mData.get(position).getStudentName());
                 mContext.startActivity(intent);

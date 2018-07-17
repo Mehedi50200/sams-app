@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         android:layout_gravity="fill_horizontal"
         android:background="@drawable/button_background"
-        android:backgroundTint="@color/colorTransparentPink">
+        android:backgroundTint="@color/colorDarkPink">
 
         <TextView
             android:id="@+id/tvdate"

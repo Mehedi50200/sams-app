@@ -24,7 +24,8 @@
     <color name="colorDarkGrey">#1d1c2a</color>
     <color name="colorTransparentOrange">#30f58758</color>
     <color name="colorTransparentYellow">#30fcaa1a</color>
-    <color name="colorTransparentPink">#50c61e4a</color>
+    <color name="colorDarkPink">#562235</color>
+    <color name="colorBackground">#332e30</color>
 
 
 </resources>
