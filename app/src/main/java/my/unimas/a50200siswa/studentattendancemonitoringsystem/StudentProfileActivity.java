@@ -164,12 +164,10 @@ public class StudentProfileActivity extends AppCompatActivity {
                         NoPercentage.setTextColor(Color.RED);
                     }
                     NoPercentage.setText(Percentage);
-                    
+
                 }else{
 
                 }
-
-
             }
 
             @Override
@@ -180,6 +178,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         });
 
     }
+
 
     public int AttendancePercentage(int classTaken, int classPresence){
 

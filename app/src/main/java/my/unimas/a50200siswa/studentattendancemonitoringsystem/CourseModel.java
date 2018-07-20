@@ -5,7 +5,7 @@ public class CourseModel {
 
     public String UserId, CourseCode, CourseName, Day, Time;
 
-    public CourseModel(){}
+    public CourseModel(){}  //Constructor
 
     public CourseModel(String userId, String courseCode, String courseName, String day, String time) {
         UserId = userId;

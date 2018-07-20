@@ -25,8 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseActivity extends AppCompatActivity {
-
-
     String userID;
     String CourseCode;
     String CourseName;
@@ -39,13 +37,13 @@ public class CourseActivity extends AppCompatActivity {
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
 
-    /*---- Firebase Database stuff ----*/
+    /*------------------------- Firebase Database Element Declaration ----------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference userRef, studentpicdatabaseref;
-    RecyclerViewAdapterStudent studentAdapter;
 
+    RecyclerViewAdapterStudent studentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,33 +56,27 @@ public class CourseActivity extends AppCompatActivity {
         coursecode =  findViewById(R.id.coursecode);
         coursename =  findViewById(R.id.coursename);
 
-
         final RecyclerView RVStudent = findViewById(R.id.rvstudent);
         RVStudent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         EmptyViewStudent = findViewById(R.id.empty_view_student);
 
-        // Recieve data
+        /*--------------------------------- Recieve data -----------------------------------------*/
         Intent intent = getIntent();
         UserId = intent.getExtras().getString("UserId");
         CourseCode = intent.getExtras().getString("CourseCode");
         CourseName = intent.getExtras().getString("CourseName");
 
-        // Setting values
-
         coursecode.setText(CourseCode);
         coursename.setText(CourseName);
-
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
             }
-
         });
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
-
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() == null) {
@@ -93,32 +85,21 @@ public class CourseActivity extends AppCompatActivity {
             }
         };
 
-
-        /* ----------------- Firebase Elements -----------------*/
+        /*---------------------------------- Database Reference Elements -----------------------------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userID = user.getUid();
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
+        /*----------------------------------------------------------------------------------------*/
 
 
-
-
-
-
-
-      //  courseRef = rootRef.child("Users").child(userID).child("Course").child(CourseCode);
-        /*------------------------------------------------------------------*/
-
-
-        /*---------------------- Course List Fetch---------------------------------*/
+        /*------------------------------ Course List Fetch ---------------------------------------*/
         listStudent = new ArrayList<>();
 
         userRef.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 UserName.setText(userName);
                 String studentId[] = new String[20];
@@ -127,29 +108,23 @@ public class CourseActivity extends AppCompatActivity {
 
                 listStudent.clear();
                 if (dataSnapshot.exists()) {
-
                     RVStudent.setVisibility(View.VISIBLE);
                     EmptyViewStudent.setVisibility(View.GONE);
 
                     int i = 1;
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").getChildren()) {
-
                         studentId[i]= dataSnapshot1.getKey();
                         studentName[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentName").getValue(String.class);
                         studentserial[i]= String.valueOf(i);
 
-
                         listStudent.add(new StudentModel(studentId[i],studentName[i], studentserial[i],CourseCode,CourseName));
                         i++;
                     }
-
                 }else{
                     RVStudent.setVisibility(View.GONE);
                     EmptyViewStudent.setVisibility(View.VISIBLE);
                 }
-
                 studentAdapter.notifyDataSetChanged();
-
             }
 
             @Override
@@ -159,9 +134,7 @@ public class CourseActivity extends AppCompatActivity {
             }
         });
 
-
         studentAdapter = new RecyclerViewAdapterStudent(this,listStudent);
         RVStudent.setAdapter(studentAdapter);
-
     }
 }
