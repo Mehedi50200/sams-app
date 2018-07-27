@@ -17,11 +17,14 @@ private LinearLayout LOSplash;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        /*------------------------------ Declaration of UI elements ------------------------------*/
         LOSplash=findViewById(R.id.parentlayout_splash);
         LogoBackground =findViewById(R.id.logobackground);
         IVViolet = findViewById(R.id.violetball) ;
         IVPink = findViewById(R.id.pinkball) ;
         IVOrange = findViewById(R.id.orangeball) ;
+        /*----------------------------------------------------------------------------------------*/
 
         Animation rotation = AnimationUtils.loadAnimation(getBaseContext(), R.anim.fade);
         Animation bounce = AnimationUtils.loadAnimation(getBaseContext(), R.anim.bounce);

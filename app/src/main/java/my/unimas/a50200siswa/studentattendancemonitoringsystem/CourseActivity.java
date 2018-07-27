@@ -42,7 +42,6 @@ public class CourseActivity extends AppCompatActivity {
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference userRef, studentpicdatabaseref;
-
     RecyclerViewAdapterStudent studentAdapter;
 
     @Override
@@ -85,7 +84,7 @@ public class CourseActivity extends AppCompatActivity {
             }
         };
 
-        /*---------------------------------- Database Reference Elements -----------------------------------*/
+        /*----------------------------- Database Reference Elements ------------------------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userID = user.getUid();

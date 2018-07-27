@@ -24,18 +24,13 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
     View divider ;
     private LinearLayout llCourse;
 
-
-
-    public RecyclerViewAdapterCourse() {
-
-    }
+    public RecyclerViewAdapterCourse() {}   //Constructor
 
 
     public RecyclerViewAdapterCourse(Context mContext, List<CourseModel> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
-
 
 
     @Override
@@ -45,7 +40,6 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
         courseview = mInflater.inflate(R.layout.item_course, parent, false);
         return new CourseViewHolder(courseview);
     }
-
 
     @Override
     public void onBindViewHolder(CourseViewHolder holder, final int position) {
@@ -75,9 +69,7 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
         holder.courseCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(mContext, CourseActivity.class);
-
                 // passing data to the book activity
                 intent.putExtra("UserId", mData.get(position).getUserId());
                 intent.putExtra("CourseCode", mData.get(position).getCourseCode());
@@ -86,8 +78,6 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
                 mContext.startActivity(intent);
             }
         });
-
-
     }
 
 
@@ -97,13 +87,9 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
         return mData.size();
     }
 
-
-
     class CourseViewHolder extends RecyclerView.ViewHolder {
         TextView userID, courseCode,courseName, day, time;
         CardView courseCardView;
-
-
 
         private CourseViewHolder(View itemView) {
             super(itemView);
@@ -115,21 +101,16 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
             courseCardView = itemView.findViewById(R.id.coursecardview);
             divider=itemView.findViewById(R.id.divider);
             llCourse =itemView.findViewById(R.id.llcourse);
-
-
         }
     }
 
 
     private String getCurrentDay(){
-
         String today;
         Date now = new Date();
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE", Locale.getDefault());
         today= dayFormat.format(now);
         return today;
-
-
     }
 
 }

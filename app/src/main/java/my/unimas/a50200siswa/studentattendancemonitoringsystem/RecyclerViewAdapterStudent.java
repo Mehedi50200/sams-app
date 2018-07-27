@@ -20,15 +20,12 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<StudentModel> mData;
     View divider ;
 
-    public RecyclerViewAdapterStudent() {
-
-    }
+    public RecyclerViewAdapterStudent() {}  //Constructor
 
     public RecyclerViewAdapterStudent(Context mContext, List<StudentModel> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
-
 
     @Override
     public StudentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,7 +34,6 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
         studentview = mInflater.inflate(R.layout.item_student, parent, false);
         return new StudentViewHolder(studentview);
     }
-
 
     @Override
     public void onBindViewHolder(StudentViewHolder holder, final int position) {
@@ -49,7 +45,6 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.studentCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(mContext, StudentProfileActivity.class);
                 intent.putExtra("StudentId", mData.get(position).getStudentId());
                 intent.putExtra("StudentName", mData.get(position).getStudentName());
@@ -58,7 +53,6 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
                 mContext.startActivity(intent);
             }
         });
-
 
     }
 

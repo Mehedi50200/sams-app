@@ -33,15 +33,11 @@ public class StudentProfileActivity extends AppCompatActivity {
     Button btnNotifyStudent;
     private TextView studentName,studentId;
 
-
-
-    /*---- Firebase Database stuff ----*/
+    /*-------------------------------- Firebase Database stuff -----------------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference rootRef,userRef;
-
-
 
     @Override
     protected void onStart() {
@@ -59,7 +55,6 @@ public class StudentProfileActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,19 +70,16 @@ public class StudentProfileActivity extends AppCompatActivity {
         NoPercentage = findViewById(R.id.noPer);
 
 
-
-        // Recieve data
+        /*----------------------------------- Receiving data ------------------------------------ */
         Intent intent = getIntent();
         CourseCode = intent.getExtras().getString("CourseCode");
         CourseName = intent.getExtras().getString("CourseName");
         StudentName = intent.getExtras().getString("StudentName");
         StudentId = intent.getExtras().getString("StudentId");
 
-        // Setting values
-
+        /*---------------------------------- Setting values --------------------------------------*/
         studentName.setText(StudentName);
         studentId.setText(StudentId);
-
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,20 +100,18 @@ public class StudentProfileActivity extends AppCompatActivity {
         };
 
 
-        /* ----------------- Firebase Elements -----------------*/
+        /* ------------------------------- Firebase Elements -------------------------------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         userID = user.getUid();
         rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
-        /*------------------------------------------------------------------*/
+        /*----------------------------------------------------------------------------------------*/
 
 
-
-        /*---------------------- Attendance Fetch---------------------------------*/
+        /*------------------------------- Attendance Fetching ------------------------------------*/
 
         userRef.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -181,7 +171,6 @@ public class StudentProfileActivity extends AppCompatActivity {
 
 
     public int AttendancePercentage(int classTaken, int classPresence){
-
         int Percentage;
         Percentage = classPresence * 100 / classTaken;
         return Percentage;

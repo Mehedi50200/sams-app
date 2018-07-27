@@ -47,12 +47,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     ProgressBar Progress;
     Animation LeftRight;
 
-    /*---- Firebase Database ----*/
+    /*---------------------------------- Firebase Database ---------------------------------------*/
     FirebaseAuth mAuth;
     private final static int RC_SIGN_IN = 50200;
     GoogleApiClient mGoogleApiClient;
     FirebaseAuth.AuthStateListener mAuthListener;
-    /*-----------------------------------------*/
+    /*--------------------------------------------------------------------------------------------*/
 
 
     @Override
@@ -82,11 +82,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         TVResetPasswordMassage=findViewById(R.id.tvresetpasswordmassage);
         TVPageTitle=findViewById(R.id.pagetitle_forgotpassword);
 
-        /* ------------- Transition animation of layout ---------------------*/
+        /* ----------------------------- Transition animation of layout --------------------------*/
 
         LeftRight = AnimationUtils.loadAnimation(this,R.anim.leftright);
         Progress = findViewById(R.id.progress_forgotpassword);
-        /*------------------------------------------------------------------*/
+        /*----------------------------------------------------------------------------------------*/
 
 
         mAuth = FirebaseAuth.getInstance();

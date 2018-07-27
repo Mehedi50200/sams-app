@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity
 {
-    /*---- Declaration of UI elements -----*/
+    /*----------------------------- Declaration of UI elements -----------------------------------*/
     LinearLayout GetStartedUp, GetStartedDown;
     Animation UpDown, DownUp;
     Button btnSignUp, btnSignIn,btnGSignIn;
@@ -48,13 +48,12 @@ public class SignUpActivity extends AppCompatActivity
     TextView AlreadyHasAccount, TVPageTitle;
     ProgressBar Progress;
 
-    /*---- Firebase Database ----*/
+    /*----------------------------------- Firebase Database --------------------------------------*/
     FirebaseAuth mAuth;
     private final static int RC_SIGN_IN = 50200;
     GoogleApiClient mGoogleApiClient;
     FirebaseAuth.AuthStateListener mAuthListener;
-    /*-----------------------------------------*/
-
+    /*--------------------------------------------------------------------------------------------*/
 
     @Override
     protected void onStart() {
@@ -71,7 +70,7 @@ public class SignUpActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
-        /* ------------- Transition animation of layout ---------------------
+        /*------------------------- Transition animation of layout ---------------------------------
         GetStartedUp = (LinearLayout) findViewById(R.id.getstartedup);
         GetStartedDown = (LinearLayout) findViewById(R.id.getstarteddown);
         UpDown = AnimationUtils.loadAnimation(this, R.anim.uptodown);
@@ -80,9 +79,9 @@ public class SignUpActivity extends AppCompatActivity
         GetStartedDown.setAnimation(DownUp);
 
         final ProgressBar simpleProgressBar =findViewById(R.id.simpleProgressBar);
-        /*------------------------------------------------------------------*/
+        /*----------------------------------------------------------------------------------------*/
 
-        /*---------------------- Finding View--------------------------*/
+        /*----------------------------------- Finding View ---------------------------------------*/
         btnSignUp = findViewById(R.id.btnsignup_signup);
         btnSignIn = findViewById(R.id.btnsignin_signup);
         btnGSignIn =findViewById(R.id.btngsignin_signup);
@@ -93,11 +92,10 @@ public class SignUpActivity extends AppCompatActivity
         Password = findViewById(R.id.etpassword_signup);
         PasswordConfirm = findViewById(R.id.etconfirmpassword_signup);
 
-
         ImageViolet=findViewById(R.id.imageviolet_signup);
         ImagePink=findViewById(R.id.imagepink_signup);
         ImageOrange=findViewById(R.id.imageorange_signup);
-        /*------------------------------------------------------------------*/
+        /*----------------------------------------------------------------------------------------*/
 
         Progress = findViewById(R.id.progress_signup);
 
@@ -116,7 +114,6 @@ public class SignUpActivity extends AppCompatActivity
                 } else {
                     signUpUser(Name.getText().toString(), Email.getText().toString(),Password.getText().toString());
                 }
-
             }
 
         });
@@ -137,18 +134,14 @@ public class SignUpActivity extends AppCompatActivity
                 pairs[8]= new Pair<View, String>(ImageOrange, "imageorange");
                 pairs[9]= new Pair<View, String>(TVPageTitle, "pagetitle");
 
-
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SignUpActivity.this, pairs);
                 startActivity(intent, options.toBundle() );
 
             }
         });
 
-
-
         btnGSignIn.setOnClickListener(new View.OnClickListener(){
             @Override
-
             public void onClick(View view){
                 Progress.setVisibility(View.VISIBLE);
                 signIn();
@@ -184,7 +177,6 @@ public class SignUpActivity extends AppCompatActivity
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-
     }
 
     private void signIn() {

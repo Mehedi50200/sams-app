@@ -5,7 +5,7 @@ public class NoteModel {
 
     public String NoteId, Note, Date;
 
-    public NoteModel(){}
+    public NoteModel(){}    //Constructor
 
     public NoteModel(String noteid, String note, String date) {
         NoteId = noteid;
@@ -22,8 +22,6 @@ public class NoteModel {
     public String getDate() {
         return Date;
     }
-
-
 
     public void setNoteId(String noteid) {
         NoteId = noteid;

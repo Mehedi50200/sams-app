@@ -22,12 +22,7 @@ class RecyclerViewAdapterNote extends RecyclerView.Adapter<RecyclerViewAdapterNo
     FirebaseAuth mAuth;
     String userID;
 
-
-
-    public RecyclerViewAdapterNote() {
-
-    }
-
+    public RecyclerViewAdapterNote() {} //Constructor
 
     public RecyclerViewAdapterNote(Context mContext, List<NoteModel> mData) {
         this.mContext = mContext;
@@ -57,11 +52,8 @@ class RecyclerViewAdapterNote extends RecyclerView.Adapter<RecyclerViewAdapterNo
                 userID = user.getUid();
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
                 ref.child("Users").child(userID).child("Notes").child(mData.get(position).getNoteId()).removeValue();
-
-
             }
         });
-
     }
 
 
@@ -73,7 +65,6 @@ class RecyclerViewAdapterNote extends RecyclerView.Adapter<RecyclerViewAdapterNo
     class NoteViewHolder extends RecyclerView.ViewHolder {
         TextView NoteId, Note,Date;
         Button btnRemove;
-
 
         private NoteViewHolder(View itemView) {
             super(itemView);

@@ -42,7 +42,7 @@ public class HomeActivity extends AppCompatActivity {
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
 
-    /*------------------- Firebase Database stuff --------------------*/
+    /*------------------------------- Firebase Database stuff ------------------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -100,11 +100,9 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 mAuth.signOut();
             }
-
         });
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
-
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() == null) {
@@ -245,7 +243,6 @@ public class HomeActivity extends AppCompatActivity {
         noteAdapter = new RecyclerViewAdapterNote(this,listNote);
         rvnote.setAdapter(noteAdapter);
     }
-
 
     public String getCurrentDate(){
         String dateToday;

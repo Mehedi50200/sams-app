@@ -38,7 +38,7 @@ import java.util.Map;
 
 public class SignInActivity extends AppCompatActivity {
 
-    /*---- Declaration of UI elements -----*/
+    /*------------------------------- Declaration of UI elements ---------------------------------*/
     LinearLayout LoginUp, LoginDown;
     Animation UpDown, DownUp;
     Button btnSignIn, btnSignUp, btnGSignIn;
@@ -46,14 +46,14 @@ public class SignInActivity extends AppCompatActivity {
     TextView TVForgotPassword, TVPageTitle;
     ImageView ImagePink, ImageOrange, ImageViolet;
     ProgressBar simpleProgressBar;
-    /*-----------------------------------------*/
+    /*--------------------------------------------------------------------------------------------*/
 
-    /*---- Firebase Database ----*/
+    /*---------------------------------- Firebase Database ---------------------------------------*/
     FirebaseAuth mAuth;
     private final static int RC_SIGN_IN = 50200;
     GoogleApiClient mGoogleApiClient;
     FirebaseAuth.AuthStateListener mAuthListener;
-    /*-----------------------------------------*/
+    /*--------------------------------------------------------------------------------------------*/
 
 
     @Override
@@ -67,22 +67,20 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        /* ---------------- Transition animation of layout ---------------------
+        /* --------------------------- Transition animation of layout ------------------------------
         LoginUp = (LinearLayout) findViewById(R.id.loginup);
         LoginDown = (LinearLayout) findViewById(R.id.logindown);
         UpDown = AnimationUtils.loadAnimation(this,R.anim.uptodown);
         DownUp = AnimationUtils.loadAnimation(this,R.anim.downtoup);
         LoginUp.setAnimation(UpDown);
         LoginDown.setAnimation(DownUp);
-        /*------------------------------------------------------------------*/
-
+        /*----------------------------------------------------------------------------------------*/
 
         ImageViolet=findViewById(R.id.imageviolet_signin);
         ImagePink=findViewById(R.id.imagepink_signin);
         ImageOrange=findViewById(R.id.imageorange_signin);
 
-
-        /* ----------------------- Finding View ----------------------------*/
+        /* ------------------------------- Finding View ------------------------------------------*/
         btnSignIn = findViewById(R.id.btnsignin_signin);
         btnGSignIn = findViewById(R.id.btngsignin_signin);
         btnSignUp = findViewById(R.id.btnsignup_signin);
@@ -91,7 +89,7 @@ public class SignInActivity extends AppCompatActivity {
         Email = findViewById(R.id.etemail_signin);
         Password =findViewById(R.id.etpassword_signin);
         simpleProgressBar =findViewById(R.id.progress_signin);
-        /*------------------------------------------------------------------*/
+        /*----------------------------------------------------------------------------------------*/
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -114,7 +112,6 @@ public class SignInActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent (SignInActivity.this, SignUpActivity.class);
                 Pair[] pairs = new Pair[10];
                 pairs[0]= new Pair<View, String>(btnSignIn, "signin");
@@ -253,7 +250,8 @@ public class SignInActivity extends AppCompatActivity {
                             String userID = mAuth.getCurrentUser().getUid();
                             String userName = mAuth.getCurrentUser().getDisplayName();
                             String userEmail = mAuth.getCurrentUser().getEmail();
-                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);                            Map newPost = new HashMap();
+                            DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
+                            Map newPost = new HashMap();
                             newPost.put("userName", userName);
                             newPost.put("userEmail", userEmail);
                             current_user_db.updateChildren(newPost);
