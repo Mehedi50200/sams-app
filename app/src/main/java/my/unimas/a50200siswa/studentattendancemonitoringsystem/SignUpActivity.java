@@ -70,17 +70,6 @@ public class SignUpActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
 
-        /*------------------------- Transition animation of layout ---------------------------------
-        GetStartedUp = (LinearLayout) findViewById(R.id.getstartedup);
-        GetStartedDown = (LinearLayout) findViewById(R.id.getstarteddown);
-        UpDown = AnimationUtils.loadAnimation(this, R.anim.uptodown);
-        DownUp = AnimationUtils.loadAnimation(this, R.anim.downtoup);
-        GetStartedUp.setAnimation(UpDown);
-        GetStartedDown.setAnimation(DownUp);
-
-        final ProgressBar simpleProgressBar =findViewById(R.id.simpleProgressBar);
-        /*----------------------------------------------------------------------------------------*/
-
         /*----------------------------------- Finding View ---------------------------------------*/
         btnSignUp = findViewById(R.id.btnsignup_signup);
         btnSignIn = findViewById(R.id.btnsignin_signup);
@@ -252,11 +241,9 @@ public class SignUpActivity extends AppCompatActivity
                     current_user_db.setValue(newPost);
                     Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
                 }
-
             }
 
         });
     }
 
 }
-

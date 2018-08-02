@@ -59,7 +59,7 @@ public class CourseActivity extends AppCompatActivity {
         RVStudent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         EmptyViewStudent = findViewById(R.id.empty_view_student);
 
-        /*--------------------------------- Recieve data -----------------------------------------*/
+        /*--------------------------------- Receive data -----------------------------------------*/
         Intent intent = getIntent();
         UserId = intent.getExtras().getString("UserId");
         CourseCode = intent.getExtras().getString("CourseCode");
@@ -129,7 +129,7 @@ public class CourseActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w("Hello", "Failed to read value.", error.toException());
+                Log.w("Hello", "Failed to read value", error.toException());
             }
         });
 

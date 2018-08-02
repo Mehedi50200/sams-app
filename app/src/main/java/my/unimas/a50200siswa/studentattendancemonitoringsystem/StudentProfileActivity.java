@@ -20,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 
 public class StudentProfileActivity extends AppCompatActivity {
 
-
     String userID;
     String CourseCode;
     String CourseName;
@@ -154,10 +153,7 @@ public class StudentProfileActivity extends AppCompatActivity {
                         NoPercentage.setTextColor(Color.RED);
                     }
                     NoPercentage.setText(Percentage);
-
-                }else{
-
-                }
+                }else{ }
             }
 
             @Override
@@ -169,12 +165,10 @@ public class StudentProfileActivity extends AppCompatActivity {
 
     }
 
-
     public int AttendancePercentage(int classTaken, int classPresence){
         int Percentage;
         Percentage = classPresence * 100 / classTaken;
         return Percentage;
     }
-
 
 }

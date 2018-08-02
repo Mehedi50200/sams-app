@@ -60,7 +60,7 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
             divider.setBackgroundColor(Color.parseColor("#c61e4a"));
         }
 
-      //  holder.userID.setText(mData.get(position).getUserId());
+      //holder.userID.setText(mData.get(position).getUserId());
         holder.courseCode.setText(mData.get(position).getCourseCode());
         holder.courseName.setText(mData.get(position).getCourseName());
         holder.day.setText(mData.get(position).getDay());

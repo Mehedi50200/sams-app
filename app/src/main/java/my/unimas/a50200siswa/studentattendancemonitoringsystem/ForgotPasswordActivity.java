@@ -39,7 +39,6 @@ import java.util.Map;
 
 
 public class ForgotPasswordActivity extends AppCompatActivity {
-
     EditText Email;
     Button btnResetPass, btnSignIn, btnGSignIn;
     TextView TVIRemembered, TVPageTitle, TVResetPasswordMassage;
@@ -54,26 +53,20 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListener;
     /*--------------------------------------------------------------------------------------------*/
 
-
     @Override
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-
-
         ImageViolet=findViewById(R.id.imageviolet_forgetpassword);
         ImagePink=findViewById(R.id.imagepink_forgetpassword);
         ImageOrange=findViewById(R.id.imageorange_forgetpassword);
-
-
         Email = findViewById(R.id.etemail_forgotpassword);
         btnResetPass =  findViewById(R.id.btnresetpassword_forgetpassword);
         btnSignIn = findViewById(R.id.btnsignin_forgotpassword);
@@ -88,15 +81,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         Progress = findViewById(R.id.progress_forgotpassword);
         /*----------------------------------------------------------------------------------------*/
 
-
         mAuth = FirebaseAuth.getInstance();
-
-
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent (ForgotPasswordActivity.this, SignInActivity.class);
                 Pair[] pairs = new Pair[9];
                 pairs[0]= new Pair<View, String>(btnSignIn, "signin");
@@ -112,14 +101,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ForgotPasswordActivity.this, pairs);
                 startActivity(intent, options.toBundle() );
             }
-
         });
-
 
         btnResetPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final String email = Email.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
@@ -145,9 +131,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                     TVResetPasswordMassage.setText("Failed to send reset instructions. Either "+email + " is not registered or there is a problem in establishing connection with server");
                                     TVResetPasswordMassage.setAnimation(LeftRight);
                                     TVResetPasswordMassage.setVisibility(View.VISIBLE);
-
                                 }
-
                                 Progress.setVisibility(View.GONE);
                             }
                         });
@@ -252,6 +236,5 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
 }

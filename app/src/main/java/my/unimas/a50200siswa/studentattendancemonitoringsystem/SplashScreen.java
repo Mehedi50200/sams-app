@@ -6,12 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 public class SplashScreen extends AppCompatActivity {
 private ImageView IVViolet,IVPink,IVOrange, LogoBackground ;
-private LinearLayout LOSplash;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +16,6 @@ private LinearLayout LOSplash;
         setContentView(R.layout.activity_splash_screen);
 
         /*------------------------------ Declaration of UI elements ------------------------------*/
-        LOSplash=findViewById(R.id.parentlayout_splash);
         LogoBackground =findViewById(R.id.logobackground);
         IVViolet = findViewById(R.id.violetball) ;
         IVPink = findViewById(R.id.pinkball) ;

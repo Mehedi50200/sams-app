@@ -21,6 +21,7 @@ public class CourseModel {
     public String getCourseCode() {
         return CourseCode;
     }
+
     public String getCourseName() {
         return CourseName;
     }
@@ -28,7 +29,6 @@ public class CourseModel {
     public String getTime() {
         return Time;
     }
-
 
     public void setUserId(String userId) {
         UserId = userId;
@@ -45,6 +45,5 @@ public class CourseModel {
     public void setTime(String time) {
         Time = time;
     }
-
 
 }

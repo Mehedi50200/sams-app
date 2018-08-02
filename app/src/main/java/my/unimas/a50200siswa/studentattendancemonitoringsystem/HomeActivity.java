@@ -203,7 +203,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
         listNote = new ArrayList<>();
 
         notesRef.addValueEventListener(new ValueEventListener() {

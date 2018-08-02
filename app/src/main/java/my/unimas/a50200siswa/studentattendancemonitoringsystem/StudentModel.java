@@ -46,6 +46,4 @@ public class StudentModel {
     public void setCourseName(String courseName){
         CourseName = courseName;
     }
-
-
 }

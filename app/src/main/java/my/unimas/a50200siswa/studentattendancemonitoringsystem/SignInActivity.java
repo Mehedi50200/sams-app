@@ -46,6 +46,8 @@ public class SignInActivity extends AppCompatActivity {
     TextView TVForgotPassword, TVPageTitle;
     ImageView ImagePink, ImageOrange, ImageViolet;
     ProgressBar simpleProgressBar;
+
+    Button Niloy;
     /*--------------------------------------------------------------------------------------------*/
 
     /*---------------------------------- Firebase Database ---------------------------------------*/
@@ -133,7 +135,6 @@ public class SignInActivity extends AppCompatActivity {
         TVForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent (SignInActivity.this, ForgotPasswordActivity.class);
                 Pair[] pairs = new Pair[9];
                 pairs[0]= new Pair<View, String>(btnSignIn, "signin");
@@ -191,6 +192,7 @@ public class SignInActivity extends AppCompatActivity {
                 .build();
     }
 
+
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
@@ -204,13 +206,11 @@ public class SignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful())
                         {
-
                             Toast.makeText(SignInActivity.this,"Sorry Wrong Email or Password!", Toast.LENGTH_LONG).show();
                         }
                         else{
                             startActivity(new Intent(SignInActivity.this,HomeActivity.class));
                         }
-
                         simpleProgressBar.setVisibility(View.GONE);
                     }
                 });
