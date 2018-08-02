@@ -46,8 +46,6 @@ public class SignInActivity extends AppCompatActivity {
     TextView TVForgotPassword, TVPageTitle;
     ImageView ImagePink, ImageOrange, ImageViolet;
     ProgressBar simpleProgressBar;
-
-    Button Niloy;
     /*--------------------------------------------------------------------------------------------*/
 
     /*---------------------------------- Firebase Database ---------------------------------------*/
