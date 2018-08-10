@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,8 +38,6 @@ import java.util.Map;
 public class SignUpActivity extends AppCompatActivity
 {
     /*----------------------------- Declaration of UI elements -----------------------------------*/
-    LinearLayout GetStartedUp, GetStartedDown;
-    Animation UpDown, DownUp;
     Button btnSignUp, btnSignIn,btnGSignIn;
     EditText Email,Name, Password, PasswordConfirm;
     ImageView ImagePink, ImageOrange, ImageViolet;
@@ -67,7 +63,6 @@ public class SignUpActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
         mAuth = FirebaseAuth.getInstance();
 
         /*----------------------------------- Finding View ---------------------------------------*/

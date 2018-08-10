@@ -25,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.opencv.android.OpenCVLoader;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +34,6 @@ import java.util.List;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
-
     String userID;
     List<CourseModel> listCourse;
     List<NoteModel> listNote;
@@ -42,6 +43,15 @@ public class HomeActivity extends AppCompatActivity {
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
 
+    private static final String TAG="HomeActivity";
+
+    static{
+        if(OpenCVLoader.initDebug()){
+            Log.d(TAG, "OpenCV loaded");
+        }else{
+            Log.d(TAG,"OpenCV cannot be loaded");
+        }
+    }
     /*------------------------------- Firebase Database stuff ------------------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;

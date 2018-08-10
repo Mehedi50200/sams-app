@@ -67,15 +67,6 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        /* --------------------------- Transition animation of layout ------------------------------
-        LoginUp = (LinearLayout) findViewById(R.id.loginup);
-        LoginDown = (LinearLayout) findViewById(R.id.logindown);
-        UpDown = AnimationUtils.loadAnimation(this,R.anim.uptodown);
-        DownUp = AnimationUtils.loadAnimation(this,R.anim.downtoup);
-        LoginUp.setAnimation(UpDown);
-        LoginDown.setAnimation(DownUp);
-        /*----------------------------------------------------------------------------------------*/
-
         ImageViolet=findViewById(R.id.imageviolet_signin);
         ImagePink=findViewById(R.id.imagepink_signin);
         ImageOrange=findViewById(R.id.imageorange_signin);

@@ -8,9 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,9 +31,6 @@ public class CourseActivity extends AppCompatActivity {
     TextView btnSignOut, UserName,EmptyViewStudent;
     Button btnTakeAttendance;
     private TextView coursecode,coursename;
-
-    Animation UpDown,DownUp,  RightToLeft;
-    LinearLayout HomeUp, HomeDown;
 
     /*------------------------- Firebase Database Element Declaration ----------------------------*/
     FirebaseAuth mAuth;
