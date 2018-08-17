@@ -1,3 +1,5 @@
 include ':app'
+include ':liveedgedetection'
+include ':openCVLibrary340'
 
-include ':openCVLibrary342'
+

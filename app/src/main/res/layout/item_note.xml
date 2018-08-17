@@ -25,7 +25,7 @@
             android:layout_marginLeft="10dp"
             android:textSize="13sp"
             android:textStyle="italic"
-            android:textColor="@color/colorMistakeRed"/>
+            android:textColor="#934444"/>
 
         <TextView
             android:id="@+id/tvnote"

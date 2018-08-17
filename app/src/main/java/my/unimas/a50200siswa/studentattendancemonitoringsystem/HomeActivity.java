@@ -25,8 +25,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.opencv.android.OpenCVLoader;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,19 +37,12 @@ public class HomeActivity extends AppCompatActivity {
     List<NoteModel> listNote;
     TextView btnSignOut, UserName,EmptyViewCourse, EmptyViewNote;
     EditText ETNote;
-    Button btnSaveNote, btnAddNote;
+    Button btnSaveNote, btnAddNote, btnp;
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
 
-    private static final String TAG="HomeActivity";
 
-    static{
-        if(OpenCVLoader.initDebug()){
-            Log.d(TAG, "OpenCV loaded");
-        }else{
-            Log.d(TAG,"OpenCV cannot be loaded");
-        }
-    }
+
     /*------------------------------- Firebase Database stuff ------------------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -86,6 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddNote =findViewById(R.id.btnaddnote);
         btnSaveNote =findViewById(R.id.btnsavenote);
         UserName = findViewById(R.id.username);
+
 
         final RecyclerView RVCourse = findViewById(R.id.recyclerviewcourse);
         final RecyclerView rvnote = findViewById(R.id.rvnote);

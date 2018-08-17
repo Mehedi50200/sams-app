@@ -32,6 +32,7 @@ public class CourseActivity extends AppCompatActivity {
     Button btnTakeAttendance;
     private TextView coursecode,coursename;
 
+
     /*------------------------- Firebase Database Element Declaration ----------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -130,5 +131,19 @@ public class CourseActivity extends AppCompatActivity {
 
         studentAdapter = new RecyclerViewAdapterStudent(this,listStudent);
         RVStudent.setAdapter(studentAdapter);
+
+        btnTakeAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CourseActivity.this, TakeAttendanceActivity.class));
+
+            }
+        });
+
     }
+
+
+
+
+
 }

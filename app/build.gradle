@@ -4,19 +4,23 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "my.unimas.a50200siswa.studentattendancemonitoringsystem"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
 
+        //   multiDexEnabled true
+
+
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '27.0.3'
 
 }
 
@@ -35,7 +39,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
-    implementation project(':openCVLibrary342')
+    implementation project(':liveedgedetection')
+    implementation 'com.google.android.gms:play-services-vision:15.0.0'
 }
 
 
