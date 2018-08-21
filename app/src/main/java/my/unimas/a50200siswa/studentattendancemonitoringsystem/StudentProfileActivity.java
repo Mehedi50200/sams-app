@@ -1,13 +1,17 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,9 +21,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class StudentProfileActivity extends AppCompatActivity {
 
+    private static final String TAG = "StudentProfile" ;
     String userID;
     String CourseCode;
     String CourseName;
@@ -28,15 +41,28 @@ public class StudentProfileActivity extends AppCompatActivity {
     String NumberOfPresence;
     String NumberOfAbsence;
     String Percentage;
-    TextView btnSignOut, UserName,NoAbsence,NoPresence, NoPercentage;
+    TextView btnSignOut, UserName,NoAbsence,NoPresence, NoPercentage, EmptyViewAteendance;
     Button btnNotifyStudent;
     private TextView studentName,studentId;
+    CircleImageView ProfileImage;
+    ProgressBar AttendanceProgress;
+    RecyclerViewAdapterAttendance attendanceAdapter;
+
+    List<AttendanceModel> listAttendance;
 
     /*-------------------------------- Firebase Database stuff -----------------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference rootRef,userRef;
+
+
+    StorageReference storageReference ;
+    StorageReference profileImageReference;
+
+
+
+
 
     @Override
     protected void onStart() {
@@ -54,6 +80,9 @@ public class StudentProfileActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +96,11 @@ public class StudentProfileActivity extends AppCompatActivity {
         NoPresence= findViewById(R.id.noP);
         NoAbsence= findViewById(R.id.noA);
         NoPercentage = findViewById(R.id.noPer);
+        AttendanceProgress =findViewById(R.id.attendanceprogressBar);
+        EmptyViewAteendance =findViewById(R.id.empty_view_attendance);
+
+        final RecyclerView RVAttendance = findViewById(R.id.rvattendancehistory);
+        RVAttendance.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
 
         /*----------------------------------- Receiving data ------------------------------------ */
@@ -105,32 +139,57 @@ public class StudentProfileActivity extends AppCompatActivity {
         userID = user.getUid();
         rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
+
+
+        storageReference = FirebaseStorage.getInstance().getReference();
+        profileImageReference =storageReference.child("StudentsPic/" +StudentId+".jpg");
+
+
+
+
+
+        ProfileImage = findViewById(R.id.civprofileimage);
+
+// Load the image using Glide
+
+
+        GlideApp.with(this /* context */)
+                .load(profileImageReference)
+                .into(ProfileImage);
+
         /*----------------------------------------------------------------------------------------*/
 
 
         /*------------------------------- Attendance Fetching ------------------------------------*/
 
+        listAttendance = new ArrayList<>();
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 UserName.setText(userName);
 
-                String attendanceId[] = new String[25];
-                String date[] = new String[25];
-                String status[] = new String[25];
+                String attendanceId[] = new String[35];
+                String attendacedate[] = new String[35];
+                String status[] = new String[35];
+                String week[] = new String[16];
 
+                listAttendance.clear();
                 if (dataSnapshot.exists()) {
 
+                    RVAttendance.setVisibility(View.VISIBLE);
+                    EmptyViewAteendance.setVisibility(View.GONE);
                     int i = 0;
                     int nop = 0;
                     int noa = 0;
                     for (DataSnapshot dataSnapshot1 :dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").getChildren()) {
 
                         attendanceId[i]= dataSnapshot1.getKey();
-                        date[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Date").getValue(String.class);
+                        attendacedate[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Date").getValue(String.class);
                         status[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Status").getValue(String.class);
+                        week[i] = "Week " + String.valueOf(i+1);
+
+                        listAttendance.add(new AttendanceModel(attendanceId[i],attendacedate[i],status[i], week[i]));
 
                         if(status[i].equals("Present")){
                             nop++;
@@ -147,13 +206,19 @@ public class StudentProfileActivity extends AppCompatActivity {
                     NoPresence.setText(NumberOfPresence);
 
 
-                    Percentage = String.valueOf(AttendancePercentage(i,nop) + "%");
+                    Percentage = String.valueOf(AttendancePercentage(i,nop)+ "%");
                     if (AttendancePercentage(i,nop)<=60)
                     {
                         NoPercentage.setTextColor(Color.RED);
                     }
                     NoPercentage.setText(Percentage);
-                }else{ }
+                    AttendanceProgress.setProgress(AttendancePercentage(i,nop));
+
+                }else{
+                    RVAttendance.setVisibility(View.GONE);
+                    EmptyViewAteendance.setVisibility(View.VISIBLE);
+                }
+                attendanceAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -162,6 +227,11 @@ public class StudentProfileActivity extends AppCompatActivity {
                 Log.w("Hello", "Failed to read value.", error.toException());
             }
         });
+
+        attendanceAdapter = new RecyclerViewAdapterAttendance(this,listAttendance);
+        RVAttendance.setAdapter(attendanceAdapter);
+
+
 
     }
 

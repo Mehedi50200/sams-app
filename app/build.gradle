@@ -20,7 +20,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions{
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE-FIREBASE.txt'
+        exclude 'META-INF/NOTICE'
+
+    }
+
     buildToolsVersion '27.0.3'
+
+
 
 }
 
@@ -33,6 +43,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.google.firebase:firebase-database:15.0.0'
     implementation 'com.google.firebase:firebase-storage:15.0.0'
+    implementation 'com.firebaseui:firebase-ui-storage:4.1.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.firebase:firebase-auth:15.0.0'
     implementation 'com.google.android.gms:play-services-auth:15.0.0'
@@ -41,6 +52,8 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation project(':liveedgedetection')
     implementation 'com.google.android.gms:play-services-vision:15.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 }
 
 

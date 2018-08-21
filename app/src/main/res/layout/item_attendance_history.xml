@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llattendance"
+    android:layout_width="110dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvadate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="Date"
+        android:textColor="@color/colorLightText"
+        android:textSize="12sp"
+        android:textStyle="italic"/>
+
+    <ImageView
+        android:id="@+id/ivastatus"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"/>
+
+
+    <TextView
+        android:id="@+id/tvaweek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="Week"
+        android:textColor="@color/colorDarkPink"/>
+
+    </LinearLayout>
+
+
+
+

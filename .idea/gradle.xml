@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/glideapp" />
             <option value="$PROJECT_DIR$/liveedgedetection" />
             <option value="$PROJECT_DIR$/openCVLibrary340" />
           </set>

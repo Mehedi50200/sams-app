@@ -22,6 +22,7 @@ public class ProcessesdResult extends AppCompatActivity {
     TextView tvProcessedText;
     Bitmap image;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +37,12 @@ public class ProcessesdResult extends AppCompatActivity {
         String photoPath = myDir+"/sams_images/"+ fname;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap image = BitmapFactory.decodeFile(photoPath, options);
+        image = BitmapFactory.decodeFile(photoPath, options);
         tvProcessedText = findViewById(R.id.tvprocessedtext);
         imageProcess(image);
 
     }
+
 
 
     public void imageProcess(Bitmap bitmap){
@@ -61,20 +63,15 @@ public class ProcessesdResult extends AppCompatActivity {
                         for (Text element : line.getComponents()) {
                             //extract scanned text words here
                             Log.v("element", element.getValue());
+
                         }
                     }
                 }
                 tvProcessedText.setText(strBuilder.toString().substring(0, strBuilder.toString().length()));
-
-            }
-
         }
     }
 
-
-
-
-
+}
 
 
 
