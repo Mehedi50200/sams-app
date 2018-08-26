@@ -134,7 +134,8 @@
             android:layout_height="30dp"
             android:text="G+"
             android:textColor="@color/colorDarkText"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:background="@drawable/button_background"/>
         <Button
             android:id="@+id/btnsignup_signin"
             android:transitionName="signup"
@@ -143,7 +144,8 @@
             android:layout_height="30dp"
             android:text="Sign Up "
             android:textColor="@color/colorDarkText"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:background="@drawable/button_background"/>
 
         <Button
             android:id="@+id/btnsignin_signin"
@@ -153,7 +155,8 @@
             android:layout_height="30dp"
             android:text="Sign In "
             android:textColor="@color/colorDarkText"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+           android:background="@drawable/button_background"/>
 
     </LinearLayout>
 

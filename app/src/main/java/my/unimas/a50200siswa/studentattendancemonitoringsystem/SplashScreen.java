@@ -35,7 +35,7 @@ private ImageView IVViolet,IVPink,IVOrange, LogoBackground ;
         Thread timer =new Thread() {
             public void run (){
                 try {
-                    sleep (3000);
+                    sleep (1000);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();

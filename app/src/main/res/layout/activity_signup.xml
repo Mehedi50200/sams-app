@@ -139,7 +139,7 @@
                 android:text="Sign in"
                 android:textSize="12sp"
                 android:textAllCaps="false"
-                android:backgroundTint="@color/colorDarkViolet"
+                android:background="@drawable/button_background"
                 android:textColor="@color/colorDarkText" />
 
         </LinearLayout>
@@ -170,7 +170,8 @@
             android:layout_height="30dp"
             android:text="G+"
             android:textColor="@color/colorDarkText"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:background="@drawable/button_background"/>
 
         <Button
             android:id="@+id/btnsignup_signup"
@@ -180,7 +181,8 @@
             android:layout_height="30dp"
             android:text="Sign Up "
             android:textColor="@color/colorDarkText"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:background="@drawable/button_background"/>
 
 
     </LinearLayout>
