@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -19,6 +22,10 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
     private Context mContext;
     private List<StudentModel> mData;
     View divider ;
+
+    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+
+
 
     public RecyclerViewAdapterStudent() {}  //Constructor
 
@@ -38,9 +45,15 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(StudentViewHolder holder, final int position) {
 
+        StorageReference profileImageReference =storageReference.child("StudentsPic/" +mData.get(position).getStudentId()+".jpg");
+
         holder.studentId.setText(mData.get(position).getStudentId());
         holder.studentName.setText(mData.get(position).getStudentName());
         holder.studentSerial.setText(mData.get(position).getStudentSerial());
+
+        GlideApp.with(mContext /* context */)
+                .load(profileImageReference)
+                .into(holder.studentImage);
 
         holder.studentCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +87,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
             studentName = itemView.findViewById(R.id.tvstudentname);
             studentSerial =itemView.findViewById(R.id.tvstudentserial);
             studentCardView = itemView.findViewById(R.id.studentcardview);
+            studentImage = itemView.findViewById(R.id.studentimage);
 
         }
     }

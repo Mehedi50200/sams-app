@@ -18,8 +18,6 @@
         android:layout_height="530dp"
         android:scaleType="center" />
 
-
-
         <Button
             android:id="@+id/btnprocess"
             style="@style/button_style"

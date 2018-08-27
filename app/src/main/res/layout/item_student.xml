@@ -17,17 +17,28 @@
 
         <TextView
             android:id="@+id/tvstudentserial"
-            android:layout_width="30dp"
+            android:layout_width="20dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="No"/>
+            android:text="00"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/studentimage"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/profilepic"/>
 
         <TextView
             android:id="@+id/tvstudentmatric"
-            android:layout_width="80dp"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Matric No"/>
+            android:layout_margin="5dp"
+            android:text="Matric"/>
+
+        <ImageView
+            android:id="@+id/anotific"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/tvstudentname"

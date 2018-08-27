@@ -2,8 +2,10 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
@@ -85,6 +87,7 @@ public class SignInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
                 if( Email.getText().toString().trim().length() == 0 || Password.getText().toString().trim().length() <= 5) {
@@ -101,6 +104,7 @@ public class SignInActivity extends AppCompatActivity {
         });
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent (SignInActivity.this, SignUpActivity.class);
@@ -122,6 +126,7 @@ public class SignInActivity extends AppCompatActivity {
         });
 
         TVForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent (SignInActivity.this, ForgotPasswordActivity.class);

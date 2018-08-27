@@ -56,12 +56,8 @@ public class StudentProfileActivity extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference rootRef,userRef;
 
-
     StorageReference storageReference ;
     StorageReference profileImageReference;
-
-
-
 
 
     @Override
@@ -71,7 +67,6 @@ public class StudentProfileActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
 
-
     @Override
     public void onStop() {
         super.onStop();
@@ -79,8 +74,6 @@ public class StudentProfileActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
-
 
 
     @Override
@@ -101,7 +94,6 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         final RecyclerView RVAttendance = findViewById(R.id.rvattendancehistory);
         RVAttendance.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
-
 
         /*----------------------------------- Receiving data ------------------------------------ */
         Intent intent = getIntent();
@@ -132,7 +124,6 @@ public class StudentProfileActivity extends AppCompatActivity {
             }
         };
 
-
         /* ------------------------------- Firebase Elements -------------------------------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -140,18 +131,13 @@ public class StudentProfileActivity extends AppCompatActivity {
         rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
 
-
         storageReference = FirebaseStorage.getInstance().getReference();
         profileImageReference =storageReference.child("StudentsPic/" +StudentId+".jpg");
-
-
-
 
 
         ProfileImage = findViewById(R.id.civprofileimage);
 
 // Load the image using Glide
-
 
         GlideApp.with(this /* context */)
                 .load(profileImageReference)
@@ -206,12 +192,14 @@ public class StudentProfileActivity extends AppCompatActivity {
                     NoPresence.setText(NumberOfPresence);
 
 
-                    Percentage = String.valueOf(AttendancePercentage(i,nop)+ "%");
+                    Percentage = String.valueOf(AttendancePercentage(i,nop));
                     if (AttendancePercentage(i,nop)<=60)
                     {
                         NoPercentage.setTextColor(Color.RED);
                     }
-                    NoPercentage.setText(Percentage);
+                    NoPercentage.setText(Percentage + " %");
+
+
                     AttendanceProgress.setProgress(AttendancePercentage(i,nop));
 
                 }else{
@@ -230,8 +218,6 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         attendanceAdapter = new RecyclerViewAdapterAttendance(this,listAttendance);
         RVAttendance.setAdapter(attendanceAdapter);
-
-
 
     }
 
