@@ -137,11 +137,12 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         ProfileImage = findViewById(R.id.civprofileimage);
 
-// Load the image using Glide
 
-        GlideApp.with(this /* context */)
-                .load(profileImageReference)
-                .into(ProfileImage);
+
+            GlideApp.with(this /* context */)
+                    .load(profileImageReference)
+                    .error(R.drawable.profilepic)
+                    .into(ProfileImage);
 
         /*----------------------------------------------------------------------------------------*/
 
@@ -168,39 +169,44 @@ public class StudentProfileActivity extends AppCompatActivity {
                     int i = 0;
                     int nop = 0;
                     int noa = 0;
+
                     for (DataSnapshot dataSnapshot1 :dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").getChildren()) {
 
-                        attendanceId[i]= dataSnapshot1.getKey();
-                        attendacedate[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Date").getValue(String.class);
-                        status[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Status").getValue(String.class);
-                        week[i] = "Week " + String.valueOf(i+1);
+                        attendanceId[i] = dataSnapshot1.getKey();
+                        attendacedate[i] = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Date").getValue(String.class);
+                        status[i] = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Status").getValue(String.class);
+                        week[i] = "Week " + String.valueOf(i + 1);
 
-                        listAttendance.add(new AttendanceModel(attendanceId[i],attendacedate[i],status[i], week[i]));
+                        listAttendance.add(new AttendanceModel(attendanceId[i], attendacedate[i], status[i], week[i]));
 
-                        if(status[i].equals("Present")){
+                        if (status[i].equals("Present")) {
                             nop++;
-                        }else {
+                        } else {
                             noa++;
                         }
                         i++;
                     }
+                    if(listAttendance.size()==0){
+                        RVAttendance.setVisibility(View.GONE);
+                        EmptyViewAteendance.setVisibility(View.VISIBLE);
+                    }else{
 
-                    NumberOfAbsence = String.valueOf(noa);
-                    NoAbsence.setText(NumberOfAbsence);
+                        NumberOfAbsence = String.valueOf(noa);
+                        NoAbsence.setText(NumberOfAbsence);
 
-                    NumberOfPresence = String.valueOf(nop);
-                    NoPresence.setText(NumberOfPresence);
+                        NumberOfPresence = String.valueOf(nop);
+                        NoPresence.setText(NumberOfPresence);
 
 
-                    Percentage = String.valueOf(AttendancePercentage(i,nop));
-                    if (AttendancePercentage(i,nop)<=60)
-                    {
-                        NoPercentage.setTextColor(Color.RED);
+                        Percentage = String.valueOf(AttendancePercentage(i,nop));
+                        if (AttendancePercentage(i,nop)<=60)
+                        {
+                            NoPercentage.setTextColor(Color.RED);
+                        }
+                        NoPercentage.setText(Percentage + " %");
+                        AttendanceProgress.setProgress(AttendancePercentage(i,nop));
+
                     }
-                    NoPercentage.setText(Percentage + " %");
-
-
-                    AttendanceProgress.setProgress(AttendancePercentage(i,nop));
 
                 }else{
                     RVAttendance.setVisibility(View.GONE);

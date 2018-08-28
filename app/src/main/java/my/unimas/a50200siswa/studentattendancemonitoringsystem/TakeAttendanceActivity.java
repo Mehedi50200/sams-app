@@ -3,8 +3,10 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import com.adityaarora.liveedgedetection.util.ScanUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -28,6 +31,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
     private ImageView scannedImageView;
     Button btnProcess;
     Bitmap capturedpic;
+    Uri furi;
     String fname, data;
 
     @Override
@@ -36,12 +40,27 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_take_attendance);
         scannedImageView = findViewById(R.id.scanned_image);
         btnProcess =findViewById(R.id.btnprocess);
-        startScan();
+
+
+        Intent fileintent = getIntent();
+
+        if(fileintent.getData() != null){
+           furi = fileintent.getData();
+            try {
+                capturedpic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), furi);
+                scannedImageView.setImageBitmap(capturedpic);
+                saveTempImage(capturedpic);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }else {
+            startScan();
+        }
 
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveTempImage(capturedpic);
                 Intent processedresultintent= new Intent(TakeAttendanceActivity.this, ProcessesdResult.class);
                 processedresultintent.putExtra("fname", fname);
                 startActivity(processedresultintent);
@@ -66,6 +85,7 @@ public class TakeAttendanceActivity extends AppCompatActivity {
                     capturedpic = ScanUtils.decodeBitmapFromFile(filePath, ScanConstants.IMAGE_NAME);
                     scannedImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                     scannedImageView.setImageBitmap(capturedpic);
+                    saveTempImage(capturedpic);
                 }
             } else if(resultCode == Activity.RESULT_CANCELED) {
                 finish();

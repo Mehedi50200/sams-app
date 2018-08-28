@@ -80,9 +80,9 @@ public class HomeActivity extends AppCompatActivity {
 
 
         final RecyclerView RVCourse = findViewById(R.id.recyclerviewcourse);
-        final RecyclerView rvnote = findViewById(R.id.rvnote);
+        final RecyclerView RVNote = findViewById(R.id.rvnote);
         RVCourse.setLayoutManager(new GridLayoutManager(this,2));
-        rvnote.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        RVNote.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
         EmptyViewNote = findViewById(R.id.empty_view_note);
         EmptyViewCourse = findViewById(R.id.empty_view_course);
@@ -216,7 +216,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 listNote.clear();
                 if (dataSnapshot.exists()) {
-                    rvnote.setVisibility(View.VISIBLE);
+                    RVNote.setVisibility(View.VISIBLE);
                     EmptyViewNote.setVisibility(View.GONE);
 
                     int i = 1;
@@ -228,7 +228,7 @@ public class HomeActivity extends AppCompatActivity {
                         i++;
                     }
                 }else{
-                    rvnote.setVisibility(View.GONE);
+                    RVNote.setVisibility(View.GONE);
                     EmptyViewNote.setVisibility(View.VISIBLE);
                 }
                 noteAdapter.notifyDataSetChanged();
@@ -242,7 +242,7 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         noteAdapter = new RecyclerViewAdapterNote(this,listNote);
-        rvnote.setAdapter(noteAdapter);
+        RVNote.setAdapter(noteAdapter);
     }
 
     public String getCurrentDate(){

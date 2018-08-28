@@ -53,6 +53,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
 
         GlideApp.with(mContext /* context */)
                 .load(profileImageReference)
+                .error(R.drawable.profilepic)
                 .into(holder.studentImage);
 
         holder.studentCardView.setOnClickListener(new View.OnClickListener() {

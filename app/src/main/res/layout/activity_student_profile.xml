@@ -205,7 +205,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        android:text="No note added. Type your note and add"
+        android:text="No Attendance Recorded Yet"
         android:textColor="@color/colorDarkPink"/>
 
     <android.support.v7.widget.RecyclerView
