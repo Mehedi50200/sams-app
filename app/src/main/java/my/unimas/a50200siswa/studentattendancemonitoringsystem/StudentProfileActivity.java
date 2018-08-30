@@ -41,7 +41,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     String NumberOfPresence;
     String NumberOfAbsence;
     String Percentage;
-    TextView btnSignOut, UserName,NoAbsence,NoPresence, NoPercentage, EmptyViewAteendance;
+    TextView btnSignOut, UserName,NoAbsence,NoPresence, NoPercentage, NoClass, EmptyViewAteendance;
     Button btnNotifyStudent;
     private TextView studentName,studentId;
     CircleImageView ProfileImage;
@@ -89,6 +89,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         NoPresence= findViewById(R.id.noP);
         NoAbsence= findViewById(R.id.noA);
         NoPercentage = findViewById(R.id.noPer);
+        NoClass =findViewById(R.id.noClass);
         AttendanceProgress =findViewById(R.id.attendanceprogressBar);
         EmptyViewAteendance =findViewById(R.id.empty_view_attendance);
 
@@ -196,6 +197,8 @@ public class StudentProfileActivity extends AppCompatActivity {
 
                         NumberOfPresence = String.valueOf(nop);
                         NoPresence.setText(NumberOfPresence);
+
+                        NoClass.setText(String.valueOf(noa+nop));
 
 
                         Percentage = String.valueOf(AttendancePercentage(i,nop));

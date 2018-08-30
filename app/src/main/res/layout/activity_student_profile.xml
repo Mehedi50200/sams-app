@@ -19,8 +19,7 @@
             android:transitionName="imageorange"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:elevation="-20dp"
-            android:background="@drawable/probg"/>
+            android:elevation="-20dp"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/civprofileimage"
@@ -66,135 +65,259 @@
         android:orientation="vertical"
         android:layout_gravity="center">
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="15dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@color/colorDarkPink">
-
-                <TextView
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:text="Class Attended"
-                    android:layout_marginLeft="40dp"
-                    android:textColor="@color/colorPink"
-                    android:textSize="20dp"
-                    android:layout_gravity="center"/>
-
-                <TextView
-                    android:id="@+id/noP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="25dp"
-                    android:text="00"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="15dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@color/colorDarkPink">
-
-                <TextView
-                    android:layout_width="180dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:textColor="@color/colorPink"
-                    android:text="Class Missed"
-                    android:textSize="20dp"
-                    android:layout_gravity="center"/>
-
-                <TextView
-                    android:id="@+id/noA"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:textSize="25dp"
-                    android:text="00"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_margin="5dp"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="15dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:background="@color/colorDarkPink">
+            <android.support.v7.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="15dp">
 
                 <LinearLayout
+                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:background="@drawable/card_gradientyellow">
 
-                    <TextView
-                        android:layout_width="180dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:textColor="@color/colorPink"
-                        android:text="Attendance"
-                        android:textSize="20dp"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:id="@+id/noPer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="5dp"
-                        android:text="00"
-                        android:textSize="25dp"/>
-
-                    <Button
-                        android:id="@+id/btnnotifystudent"
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_gravity="center"
-                        android:background="@drawable/notification"
-                        android:backgroundTint="@color/colorPink"/>
+                        android:layout_margin="8dp"
+                        android:src="@drawable/c_present"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Class Attended"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/noP"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textSize="15dp"
+                            android:text="00"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-                <ProgressBar
-                    android:id="@+id/attendanceprogressBar"
-                    style="?android:attr/progressBarStyleHorizontal"
+
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:layout_margin="5dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="15dp">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:progressTint="@color/colorPink"/>
+                    android:orientation="vertical"
+                    android:background="@drawable/card_gradientpurple">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="8dp"
+                        android:src="@drawable/c_absent"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Class Missed"
+                            android:textSize="15dp"
+                            android:textStyle="bold"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/noA"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:textSize="15dp"
+                            android:text="00"
+                            android:layout_gravity="center"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@drawable/card_gradientgreen">
+
+                        <LinearLayout
+                            android:layout_width="150dp"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_margin="8dp"
+                                android:src="@drawable/c_percentage" />
+
+                            <Button
+                                android:id="@+id/btnnotifystudent"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="75dp"
+                                android:background="@drawable/notification"
+                                android:backgroundTint="@color/colorBlackFortyPercentAlpha" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:text="Attendance"
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"/>
+
+                            <TextView
+                                android:id="@+id/noPer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:text="00"
+                                android:textSize="15dp"/>
+
+                        </LinearLayout>
+
+                        <ProgressBar
+                            android:id="@+id/attendanceprogressBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:progressTint="@color/colorPink"/>
+
+                    </LinearLayout>
+
+
+
+
+                </android.support.v7.widget.CardView>
+
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="150dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="15dp">
+
+                    <LinearLayout
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/card_gradientblue">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_margin="8dp"
+                            android:src="@drawable/c_totalclass"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="20dp"
+                                android:text="Total Class"
+                                android:textSize="15dp"
+                                android:textStyle="bold"
+                                android:layout_gravity="center"/>
+
+                            <TextView
+                                android:id="@+id/noClass"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:text="00"
+                                android:textSize="15dp"/>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
 
             </LinearLayout>
 
-        </android.support.v7.widget.CardView>
+
+
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -212,19 +335,20 @@
         android:id="@+id/rvattendancehistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center">
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_height="50dp"
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:gravity="center">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
             android:layout_margin="10dp"
             android:src="@drawable/dotpresent"/>
 
@@ -236,8 +360,8 @@
             android:textColor="@color/colorDarkText"/>
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
             android:layout_margin="10dp"
             android:src="@drawable/dotabsent"/>
 
