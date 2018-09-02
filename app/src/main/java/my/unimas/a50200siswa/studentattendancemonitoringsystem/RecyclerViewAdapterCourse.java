@@ -55,8 +55,7 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
             holder.time.setTextColor(Color.parseColor("#822345")); */
 
         }else{
-
-            llCourse.setBackgroundResource(R.drawable.cardbg);
+            llCourse.setBackgroundResource(R.drawable.home_bg);
             divider.setBackgroundColor(Color.parseColor("#c61e4a"));
         }
 

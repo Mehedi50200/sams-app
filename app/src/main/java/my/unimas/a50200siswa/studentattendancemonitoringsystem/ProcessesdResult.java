@@ -71,6 +71,17 @@ public class ProcessesdResult extends AppCompatActivity {
         }
     }
 
+    /*
+
+    public void imageCropSave(Mat bitmap) {
+
+        Mat img = bitmap;
+
+
+    }
+
+*/
+
 }
 
 

@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/cardbg"
+        android:background="@drawable/home_bg"
         android:orientation="vertical">
 
         <include
@@ -77,7 +77,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="@drawable/cardbg"
+        android:background="@drawable/home_bg"
         android:layout_gravity="end|bottom">
 
         <TextView

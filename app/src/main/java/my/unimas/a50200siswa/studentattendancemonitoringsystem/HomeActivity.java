@@ -31,6 +31,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class HomeActivity extends AppCompatActivity {
     String userID;
     List<CourseModel> listCourse;
@@ -38,8 +40,10 @@ public class HomeActivity extends AppCompatActivity {
     TextView btnSignOut, UserName,EmptyViewCourse, EmptyViewNote;
     EditText ETNote;
     Button btnSaveNote, btnAddNote, btnp;
+    CircleImageView userProfileImage;
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
+
 
 
 
@@ -77,6 +81,7 @@ public class HomeActivity extends AppCompatActivity {
         btnAddNote =findViewById(R.id.btnaddnote);
         btnSaveNote =findViewById(R.id.btnsavenote);
         UserName = findViewById(R.id.username);
+        userProfileImage =findViewById(R.id.userprofileimg);
 
 
         final RecyclerView RVCourse = findViewById(R.id.recyclerviewcourse);
@@ -96,6 +101,12 @@ public class HomeActivity extends AppCompatActivity {
         DownUp =AnimationUtils.loadAnimation(this,R.anim.downtoup);
         HomeUp.setAnimation(UpDown);
         HomeDown.setAnimation(DownUp);
+
+
+
+
+
+
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +131,14 @@ public class HomeActivity extends AppCompatActivity {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
         notesRef = rootRef.child("Users").child(userID).child("Notes");
+
         /*----------------------------------------------------------------------------------------*/
+
+
+        String userProfileImageUrl;
+
+
+
 
         /*-------------------------------- Course List Fetch -------------------------------------*/
         listCourse = new ArrayList<>();
@@ -129,7 +147,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
+                String userProfileImageUrl = dataSnapshot.child(userID).child("userProfileImageUrl").getValue(String.class);
                 UserName.setText(userName);
+
+
+                GlideApp.with(HomeActivity.this)
+                        .load(userProfileImageUrl)
+                        .error(R.drawable.profilepic)
+                        .into(userProfileImage);
+
                 String coursecode[] = new String[10];
                 String coursename[] = new String[10];
                 String day[] = new String[10];

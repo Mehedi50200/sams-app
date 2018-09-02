@@ -11,7 +11,7 @@
         android:layout_height="300dp"
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/homebground">
+        android:background="@drawable/home_bg">
 
         <include
             android:id="@+id/actionbar"
