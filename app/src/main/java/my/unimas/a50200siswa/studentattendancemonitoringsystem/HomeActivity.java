@@ -35,6 +35,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity {
     String userID;
+    String userProfileImageUrl;
     List<CourseModel> listCourse;
     List<NoteModel> listNote;
     TextView btnSignOut, UserName,EmptyViewCourse, EmptyViewNote;
@@ -135,9 +136,6 @@ public class HomeActivity extends AppCompatActivity {
         /*----------------------------------------------------------------------------------------*/
 
 
-        String userProfileImageUrl;
-
-
 
 
         /*-------------------------------- Course List Fetch -------------------------------------*/
@@ -147,7 +145,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
-                String userProfileImageUrl = dataSnapshot.child(userID).child("userProfileImageUrl").getValue(String.class);
+                userProfileImageUrl = dataSnapshot.child(userID).child("userProfileImageUrl").getValue(String.class);
                 UserName.setText(userName);
 
 
@@ -172,7 +170,7 @@ public class HomeActivity extends AppCompatActivity {
                         coursename[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("CourseName").getValue(String.class);
                         day[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("Routine").child("Day").getValue(String.class);
                         time[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("Routine").child("Time").getValue(String.class);
-                        listCourse.add(new CourseModel(userID,coursecode[i],coursename[i], day[i],time[i]));
+                        listCourse.add(new CourseModel(userID,userProfileImageUrl,coursecode[i],coursename[i], day[i],time[i]));
                         i++;
                     }
                 }else{

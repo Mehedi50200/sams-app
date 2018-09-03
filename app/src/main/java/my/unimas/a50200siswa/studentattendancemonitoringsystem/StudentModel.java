@@ -3,16 +3,17 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 public class StudentModel {
 
-    public String StudentId, StudentName, StudentSerial, CourseCode,CourseName;
+    public String StudentId, StudentName, StudentSerial, CourseCode,CourseName, UserProfileImageUrl;
 
     public StudentModel(){}
 
-    public StudentModel(String studentId, String studentName, String studentSerial,String courseCode, String courseName) {
+    public StudentModel(String studentId, String studentName, String studentSerial,String courseCode, String courseName, String userProfileImageUrl) {
         StudentSerial = studentSerial;
         StudentId = studentId;
         StudentName = studentName;
         CourseCode = courseCode;
         CourseName = courseName;
+        UserProfileImageUrl = userProfileImageUrl;
     }
 
     public String getStudentId() {
@@ -30,6 +31,9 @@ public class StudentModel {
     public String getCourseName(){
         return CourseName;
     }
+    public String getUserProfileImageUrl(){
+        return UserProfileImageUrl;
+    }
 
     public void setStudentId(String studentId) {
         StudentId = studentId;
@@ -45,5 +49,8 @@ public class StudentModel {
     }
     public void setCourseName(String courseName){
         CourseName = courseName;
+    }
+    public void setUserProfileImageUrl(String userProfileImageUrl){
+        UserProfileImageUrl = userProfileImageUrl;
     }
 }

@@ -26,14 +26,15 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CourseActivity extends AppCompatActivity {
     String userID;
-    String CourseCode;
-    String CourseName;
+    String CourseCode, CourseName;
     String UserId;
+    String UserProfileImageUrl;
+
     List<StudentModel> listStudent;
     TextView btnSignOut, UserName,EmptyViewStudent;
-    CircleImageView cvTakeAttendance, cvGallery;
-    private TextView coursecode,coursename;
+    CircleImageView cvTakeAttendance, cvGallery, userProfileImage;;
 
+    private TextView coursecode,coursename;
     private static final int PICK_IMAGE_REQUEST = 1;
 
 
@@ -41,7 +42,7 @@ public class CourseActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference userRef, studentpicdatabaseref;
+    DatabaseReference userRef;
     RecyclerViewAdapterStudent studentAdapter;
 
     @Override
@@ -56,18 +57,27 @@ public class CourseActivity extends AppCompatActivity {
         coursecode =  findViewById(R.id.coursecode);
         coursename =  findViewById(R.id.coursename);
 
+        userProfileImage =findViewById(R.id.userprofileimg);
+
         final RecyclerView RVStudent = findViewById(R.id.rvstudent);
         RVStudent.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         EmptyViewStudent = findViewById(R.id.empty_view_student);
+
+
 
         /*--------------------------------- Receive data -----------------------------------------*/
         Intent intent = getIntent();
         UserId = intent.getExtras().getString("UserId");
         CourseCode = intent.getExtras().getString("CourseCode");
         CourseName = intent.getExtras().getString("CourseName");
+        UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
 
         coursecode.setText(CourseCode);
         coursename.setText(CourseName);
+        GlideApp.with(CourseActivity.this)
+                .load(UserProfileImageUrl)
+                .error(R.drawable.profilepic)
+                .into(userProfileImage);
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +112,7 @@ public class CourseActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 UserName.setText(userName);
+
                 String studentId[] = new String[20];
                 String studentName[] = new String[20];
                 String studentserial[] = new String[20];
@@ -117,7 +128,7 @@ public class CourseActivity extends AppCompatActivity {
                         studentName[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentName").getValue(String.class);
                         studentserial[i]= String.valueOf(i);
 
-                        listStudent.add(new StudentModel(studentId[i],studentName[i], studentserial[i],CourseCode,CourseName));
+                        listStudent.add(new StudentModel(studentId[i],studentName[i], studentserial[i],CourseCode,CourseName, UserProfileImageUrl));
                         i++;
                     }
 

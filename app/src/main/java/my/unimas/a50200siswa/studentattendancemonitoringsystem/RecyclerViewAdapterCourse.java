@@ -24,12 +24,14 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
     View divider ;
     private LinearLayout llCourse;
 
-    public RecyclerViewAdapterCourse() {}   //Constructor
+    public RecyclerViewAdapterCourse() {
+    }   //Constructor
 
 
     public RecyclerViewAdapterCourse(Context mContext, List<CourseModel> mData) {
         this.mContext = mContext;
         this.mData = mData;
+
     }
 
 
@@ -73,6 +75,7 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
                 intent.putExtra("UserId", mData.get(position).getUserId());
                 intent.putExtra("CourseCode", mData.get(position).getCourseCode());
                 intent.putExtra("CourseName", mData.get(position).getCourseName());
+                intent.putExtra("UserProfileImageUrl", mData.get(position).getUserProfileImageUrl());
                 // start the activity
                 mContext.startActivity(intent);
             }

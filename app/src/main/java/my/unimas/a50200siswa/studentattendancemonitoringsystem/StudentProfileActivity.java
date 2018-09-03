@@ -33,20 +33,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class StudentProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "StudentProfile" ;
-    String userID;
-    String CourseCode;
-    String CourseName;
-    String StudentName;
-    String StudentId;
-    String NumberOfPresence;
-    String NumberOfAbsence;
+    String userID ;
+    String CourseCode, CourseName;
+    String StudentName, StudentId;
+    String NumberOfPresence, NumberOfAbsence;
     String Percentage;
+    String UserProfileImageUrl;
     TextView btnSignOut, UserName,NoAbsence,NoPresence, NoPercentage, NoClass, EmptyViewAteendance;
     Button btnNotifyStudent;
-    private TextView studentName,studentId;
-    CircleImageView ProfileImage;
+
+    CircleImageView ProfileImage, userProfileImage;
     ProgressBar AttendanceProgress;
     RecyclerViewAdapterAttendance attendanceAdapter;
+
+    private TextView studentName,studentId;
+
 
     List<AttendanceModel> listAttendance;
 
@@ -93,6 +94,9 @@ public class StudentProfileActivity extends AppCompatActivity {
         AttendanceProgress =findViewById(R.id.attendanceprogressBar);
         EmptyViewAteendance =findViewById(R.id.empty_view_attendance);
 
+        userProfileImage =findViewById(R.id.userprofileimg);
+        ProfileImage = findViewById(R.id.civprofileimage);
+
         final RecyclerView RVAttendance = findViewById(R.id.rvattendancehistory);
         RVAttendance.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
@@ -102,10 +106,16 @@ public class StudentProfileActivity extends AppCompatActivity {
         CourseName = intent.getExtras().getString("CourseName");
         StudentName = intent.getExtras().getString("StudentName");
         StudentId = intent.getExtras().getString("StudentId");
+        UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
 
         /*---------------------------------- Setting values --------------------------------------*/
         studentName.setText(StudentName);
         studentId.setText(StudentId);
+
+        GlideApp.with(this)
+                .load(UserProfileImageUrl)
+                .error(R.drawable.profilepic)
+                .into(userProfileImage);
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,15 +145,10 @@ public class StudentProfileActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
         profileImageReference =storageReference.child("StudentsPic/" +StudentId+".jpg");
 
-
-        ProfileImage = findViewById(R.id.civprofileimage);
-
-
-
-            GlideApp.with(this /* context */)
-                    .load(profileImageReference)
-                    .error(R.drawable.profilepic)
-                    .into(ProfileImage);
+        GlideApp.with(this /* context */)
+                .load(profileImageReference)
+                .error(R.drawable.profilepic)
+                .into(ProfileImage);
 
         /*----------------------------------------------------------------------------------------*/
 
