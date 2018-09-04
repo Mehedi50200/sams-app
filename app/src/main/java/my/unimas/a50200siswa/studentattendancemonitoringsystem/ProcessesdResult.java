@@ -5,12 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.chrisbanes.photoview.PhotoView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
@@ -51,6 +53,23 @@ public class ProcessesdResult extends AppCompatActivity {
     String photoPath, chunkedImagedDirectory;
     String UserId,userName, CourseCode, CourseName,UserProfileImageUrl;
 
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthListener;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +78,7 @@ public class ProcessesdResult extends AppCompatActivity {
 
         setContentView(R.layout.activity_processesd_result);
 
+        /*------------------------- Receive data From Previous Intent ----------------------------*/
         Intent intent = getIntent();
         fname = intent.getStringExtra("fname");
         UserId = intent.getExtras().getString("UserId");
@@ -66,6 +86,7 @@ public class ProcessesdResult extends AppCompatActivity {
         CourseCode = intent.getExtras().getString("CourseCode");
         CourseName = intent.getExtras().getString("CourseName");
         UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
+        /*------------------------- Receive data From Previous Intent ----------------------------*/
 
         String root = Environment.getExternalStorageDirectory().toString();
         final File myDir = new File(root);
@@ -82,6 +103,10 @@ public class ProcessesdResult extends AppCompatActivity {
         btnSignOut = findViewById(R.id.btnsignout_home);
         UserName = findViewById(R.id.username);
         userProfileImage =findViewById(R.id.userprofileimg);
+
+        /*----------------------------- Database Reference Elements ------------------------------*/
+        mAuth = FirebaseAuth.getInstance();
+        /*----------------------------------------------------------------------------------------*/
 
         UserName.setText(userName);
         GlideApp.with(this)
@@ -112,6 +137,22 @@ public class ProcessesdResult extends AppCompatActivity {
                 startActivity(processedresultintent);
             }
         });
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+            }
+        });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    startActivity(new Intent(ProcessesdResult.this, SignInActivity.class));
+                }
+            }
+        };
 
     }
 

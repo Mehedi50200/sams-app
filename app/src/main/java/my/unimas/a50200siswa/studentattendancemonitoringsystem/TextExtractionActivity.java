@@ -2,12 +2,15 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,10 +32,40 @@ public class TextExtractionActivity extends AppCompatActivity {
 
     String UserId,userName,CourseCode, CourseName,UserProfileImageUrl;
 
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthListener;
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_extraction);
+
+        /*------------------------- Receive data From Previous Intent ----------------------------*/
+        Intent intent = getIntent();
+        String croppedImageDirectory = intent.getStringExtra("chunkedImagedDirectory");
+        UserId = intent.getExtras().getString("UserId");
+        userName = intent.getExtras().getString("UserName");
+        CourseCode = intent.getExtras().getString("CourseCode");
+        CourseName = intent.getExtras().getString("CourseName");
+        UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
+        /*----------------------------------------------------------------------------------------*/
 
         btnSignOut = findViewById(R.id.btnsignout_home);
         UserName = findViewById(R.id.username);
@@ -42,13 +75,10 @@ public class TextExtractionActivity extends AppCompatActivity {
         RVCroppedImages = findViewById(R.id.rvcroppedimage);
         RVCroppedImages.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
-        Intent intent = getIntent();
-        String croppedImageDirectory = intent.getStringExtra("chunkedImagedDirectory");
-        UserId = intent.getExtras().getString("UserId");
-        userName = intent.getExtras().getString("UserName");
-        CourseCode = intent.getExtras().getString("CourseCode");
-        CourseName = intent.getExtras().getString("CourseName");
-        UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
+        /*----------------------------- Database Reference Elements ------------------------------*/
+        mAuth = FirebaseAuth.getInstance();
+        /*----------------------------------------------------------------------------------------*/
+
 
         UserName.setText(userName);
         GlideApp.with(TextExtractionActivity.this)
@@ -80,6 +110,25 @@ public class TextExtractionActivity extends AppCompatActivity {
 
         CroppedImageAdapter = new RecyclerViewAdapterCroppedImages(this,listCroppedImages);
         RVCroppedImages.setAdapter(CroppedImageAdapter);
+
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+            }
+        });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    startActivity(new Intent(TextExtractionActivity.this, SignInActivity.class));
+                }
+            }
+        };
+
+
 
     }
 

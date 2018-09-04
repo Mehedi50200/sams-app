@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.adityaarora.liveedgedetection.activity.ScanActivity;
 import com.adityaarora.liveedgedetection.constants.ScanConstants;
 import com.adityaarora.liveedgedetection.util.ScanUtils;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -40,10 +42,27 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
     TextView UserName;
     CircleImageView userProfileImage;
 
-
     Uri fileuri;
     String fname, data;
     String UserId,userName, CourseCode, CourseName,UserProfileImageUrl;
+
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthListener;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +76,9 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
         UserName = findViewById(R.id.username);
         userProfileImage =findViewById(R.id.userprofileimg);
 
+        /*----------------------------- Database Reference Elements ------------------------------*/
+        mAuth = FirebaseAuth.getInstance();
+        /*----------------------------------------------------------------------------------------*/
 
         Intent intent = getIntent();
         UserId = intent.getExtras().getString("UserId");
@@ -72,10 +94,8 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
                 .error(R.drawable.profilepic)
                 .into(userProfileImage);
 
-
         if(intent.getData() != null){
             fileuri = intent.getData();
-
 
             try {
                 capturedpic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), fileuri);
@@ -102,6 +122,24 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+            }
+        });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    startActivity(new Intent(TakeAttendancePictureActivity.this, SignInActivity.class));
+                }
+            }
+        };
+
+
 
     }
 

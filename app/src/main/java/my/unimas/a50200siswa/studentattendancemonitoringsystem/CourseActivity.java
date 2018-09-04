@@ -48,11 +48,35 @@ public class CourseActivity extends AppCompatActivity {
     FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference userRef;
     RecyclerViewAdapterStudent studentAdapter;
+    /*--------------------------------------------------------------------------------------------*/
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+        /*------------------------- Receive data From Previous Intent ----------------------------*/
+        Intent intent = getIntent();
+        UserId = intent.getExtras().getString("UserId");
+        CourseCode = intent.getExtras().getString("CourseCode");
+        CourseName = intent.getExtras().getString("CourseName");
+        UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
+        /*----------------------------------------------------------------------------------------*/
 
         cvTakeAttendance =findViewById(R.id.cvtakeattendance);
         cvGallery=findViewById(R.id.cvgallery);
@@ -69,14 +93,6 @@ public class CourseActivity extends AppCompatActivity {
         EmptyViewStudent = findViewById(R.id.empty_view_student);
 
 
-
-        /*--------------------------------- Receive data -----------------------------------------*/
-        Intent intent = getIntent();
-        UserId = intent.getExtras().getString("UserId");
-        CourseCode = intent.getExtras().getString("CourseCode");
-        CourseName = intent.getExtras().getString("CourseName");
-        UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
-
         coursecode.setText(CourseCode);
         coursename.setText(CourseName);
 
@@ -85,21 +101,6 @@ public class CourseActivity extends AppCompatActivity {
                 .error(R.drawable.profilepic)
                 .into(userProfileImage);
 
-        btnSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-            }
-        });
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null) {
-                    startActivity(new Intent(CourseActivity.this, SignInActivity.class));
-                }
-            }
-        };
 
         /*----------------------------- Database Reference Elements ------------------------------*/
         mAuth = FirebaseAuth.getInstance();
@@ -183,6 +184,23 @@ public class CourseActivity extends AppCompatActivity {
             }
         });
 
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+            }
+        });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    startActivity(new Intent(CourseActivity.this, SignInActivity.class));
+                }
+            }
+        };
+
+
     }
 
 
@@ -214,6 +232,8 @@ public class CourseActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 
 }

@@ -100,6 +100,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         final RecyclerView RVAttendance = findViewById(R.id.rvattendancehistory);
         RVAttendance.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false));
 
+
         /*----------------------------------- Receiving data ------------------------------------ */
         Intent intent = getIntent();
         CourseCode = intent.getExtras().getString("CourseCode");
@@ -117,24 +118,6 @@ public class StudentProfileActivity extends AppCompatActivity {
                 .error(R.drawable.profilepic)
                 .into(userProfileImage);
 
-        btnSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-            }
-
-        });
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null) {
-                    startActivity(new Intent(StudentProfileActivity.this, SignInActivity.class));
-                }
-            }
-        };
-
         /* ------------------------------- Firebase Elements -------------------------------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -144,13 +127,12 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference();
         profileImageReference =storageReference.child("StudentsPic/" +StudentId+".jpg");
+        /*----------------------------------------------------------------------------------------*/
 
         GlideApp.with(this /* context */)
                 .load(profileImageReference)
                 .error(R.drawable.profilepic)
                 .into(ProfileImage);
-
-        /*----------------------------------------------------------------------------------------*/
 
 
         /*------------------------------- Attendance Fetching ------------------------------------*/
@@ -232,6 +214,22 @@ public class StudentProfileActivity extends AppCompatActivity {
 
         attendanceAdapter = new RecyclerViewAdapterAttendance(this,listAttendance);
         RVAttendance.setAdapter(attendanceAdapter);
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+            }
+        });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    startActivity(new Intent(StudentProfileActivity.this, SignInActivity.class));
+                }
+            }
+        };
 
     }
 
