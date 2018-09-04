@@ -33,9 +33,10 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".CourseActivity" />
         <activity android:name=".StudentProfileActivity" />
-        <activity android:name=".TakeAttendanceActivity" />
+        <activity android:name=".TakeAttendancePictureActivity" />
         <activity android:name=".ProcessesdResult" />
-        <activity android:name=".TextExtractionActivity"></activity>
+        <activity android:name=".TextExtractionActivity"/>
+
     </application>
 
 </manifest>

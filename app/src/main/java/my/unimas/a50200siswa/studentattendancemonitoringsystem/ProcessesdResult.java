@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.github.chrisbanes.photoview.PhotoView;
 
@@ -30,14 +31,25 @@ import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class ProcessesdResult extends AppCompatActivity {
 
     Bitmap image;
-    String photoPath, chunkedImagedDirectory;
     Mat imageMat;
-    PhotoView ProcessedImage;
+
     Button btnProcessText, btnTakePicture;
     File myDir;
+
+    PhotoView ProcessedImage;
+
+    Button btnSignOut;
+    TextView UserName;
+    CircleImageView userProfileImage;
+
+    String fname;
+    String photoPath, chunkedImagedDirectory;
+    String UserId,userName, CourseCode, CourseName,UserProfileImageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +59,16 @@ public class ProcessesdResult extends AppCompatActivity {
 
         setContentView(R.layout.activity_processesd_result);
 
-        Intent intenttakeattendance = getIntent();
-        String fname = intenttakeattendance.getStringExtra("fname");
+        Intent intent = getIntent();
+        fname = intent.getStringExtra("fname");
+        UserId = intent.getExtras().getString("UserId");
+        userName = intent.getExtras().getString("UserName");
+        CourseCode = intent.getExtras().getString("CourseCode");
+        CourseName = intent.getExtras().getString("CourseName");
+        UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
 
         String root = Environment.getExternalStorageDirectory().toString();
         final File myDir = new File(root);
-
         photoPath = myDir+"/sams_images/"+ fname;
 
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -63,21 +79,36 @@ public class ProcessesdResult extends AppCompatActivity {
         btnProcessText = findViewById(R.id.btnprocesstext);
         btnTakePicture = findViewById(R.id.btntakepictureagain);
 
+        btnSignOut = findViewById(R.id.btnsignout_home);
+        UserName = findViewById(R.id.username);
+        userProfileImage =findViewById(R.id.userprofileimg);
+
+        UserName.setText(userName);
+        GlideApp.with(this)
+                .load(UserProfileImageUrl)
+                .error(R.drawable.profilepic)
+                .into(userProfileImage);
+
         imageCropIntoPiecess(image);
 
         btnProcessText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent processedresultintent= new Intent(ProcessesdResult.this, TextExtractionActivity.class);
-                processedresultintent.putExtra("chunkedImagedDirectory", chunkedImagedDirectory);
-                startActivity(processedresultintent);
+                Intent intent= new Intent(ProcessesdResult.this, TextExtractionActivity.class);
+                intent.putExtra("chunkedImagedDirectory", chunkedImagedDirectory);
+                intent.putExtra("UserId", UserId );
+                intent.putExtra("UserName", userName );
+                intent.putExtra("CourseCode", CourseCode);
+                intent.putExtra("CourseName", CourseName);
+                intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
+                startActivity(intent);
             }
         });
 
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent processedresultintent= new Intent(ProcessesdResult.this, TakeAttendanceActivity.class);
+                Intent processedresultintent= new Intent(ProcessesdResult.this, TakeAttendancePictureActivity.class);
                 startActivity(processedresultintent);
             }
         });
@@ -140,43 +171,6 @@ public class ProcessesdResult extends AppCompatActivity {
         ProcessedImage.setImageBitmap(analyzed);
 
     }
-
-
-
-
-/*
-    public void imageProcess(Bitmap bitmap){
-        TextRecognizer txtRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
-        if (!txtRecognizer.isOperational()) {
-            tvProcessedText.setText("Try Again");
-        } else {
-                Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-                SparseArray items = txtRecognizer.detect(frame);
-                StringBuilder strBuilder = new StringBuilder();
-                for (int i = 0; i < items.size(); i++) {
-                    TextBlock item = (TextBlock) items.valueAt(i);
-                    strBuilder.append(item.getValue());
-                    strBuilder.append("/");
-                    for (Text line : item.getComponents()) {
-                        //extract scanned text lines here
-                        Log.v("lines", line.getValue());
-                        for (Text element : line.getComponents()) {
-                            //extract scanned text words here
-                            Log.v("element", element.getValue());
-
-                        }
-                    }
-                }
-                tvProcessedText.setMovementMethod(new ScrollingMovementMethod());
-                tvProcessedText.setText(strBuilder.toString().substring(0, strBuilder.toString().length()));
-        }
-    }
-
-*/
-
-
-
-
 
 
 

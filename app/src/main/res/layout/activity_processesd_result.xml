@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/home_bg">
+
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/action_bar">
+    </include>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,30 +24,28 @@
             android:layout_height="500dp"
             android:layout_margin="8dp" />
 
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:layout_gravity="end|bottom">
+        android:layout_gravity="end|bottom"
+        android:gravity="center">
 
         <Button
             android:id="@+id/btntakepictureagain"
-            android:layout_width="195dp"
+            android:layout_width="190dp"
             android:layout_height="match_parent"
             android:background="@drawable/bgtpink"
-            android:gravity="center"
             android:text="Take Picture"
             android:textSize="10sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnprocesstext"
-            android:layout_width="195dp"
+            android:layout_width="190dp"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:text="Process Image"
             android:textSize="10sp"
             android:textStyle="bold"

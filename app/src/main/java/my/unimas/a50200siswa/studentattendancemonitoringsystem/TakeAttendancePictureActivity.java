@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.adityaarora.liveedgedetection.activity.ScanActivity;
@@ -23,31 +24,61 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
-public class TakeAttendanceActivity extends AppCompatActivity {
+
+public class TakeAttendancePictureActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 101;
     private static final String TAG = "Take Picture";
     private ImageView scannedImageView;
+
     Button btnProcess;
     Bitmap capturedpic;
-    Uri furi;
+
+    Button btnSignOut;
+    TextView UserName;
+    CircleImageView userProfileImage;
+
+
+    Uri fileuri;
     String fname, data;
+    String UserId,userName, CourseCode, CourseName,UserProfileImageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_take_attendance);
+        setContentView(R.layout.activity_take_attendance_picture);
+
         scannedImageView = findViewById(R.id.scanned_image);
         btnProcess =findViewById(R.id.btnprocess);
 
+        btnSignOut = findViewById(R.id.btnsignout_home);
+        UserName = findViewById(R.id.username);
+        userProfileImage =findViewById(R.id.userprofileimg);
 
-        Intent fileintent = getIntent();
 
-        if(fileintent.getData() != null){
-           furi = fileintent.getData();
+        Intent intent = getIntent();
+        UserId = intent.getExtras().getString("UserId");
+        userName = intent.getExtras().getString("UserName");
+        CourseCode = intent.getExtras().getString("CourseCode");
+        CourseName = intent.getExtras().getString("CourseName");
+        UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
+
+        UserName.setText(userName);
+
+        GlideApp.with(this)
+                .load(UserProfileImageUrl)
+                .error(R.drawable.profilepic)
+                .into(userProfileImage);
+
+
+        if(intent.getData() != null){
+            fileuri = intent.getData();
+
+
             try {
-                capturedpic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), furi);
+                capturedpic = MediaStore.Images.Media.getBitmap(this.getContentResolver(), fileuri);
                 scannedImageView.setImageBitmap(capturedpic);
                 saveTempImage(capturedpic);
             } catch (IOException e) {
@@ -61,9 +92,14 @@ public class TakeAttendanceActivity extends AppCompatActivity {
         btnProcess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent processedresultintent= new Intent(TakeAttendanceActivity.this, ProcessesdResult.class);
-                processedresultintent.putExtra("fname", fname);
-                startActivity(processedresultintent);
+                Intent intent= new Intent(TakeAttendancePictureActivity.this, ProcessesdResult.class);
+                intent.putExtra("fname", fname);
+                intent.putExtra("UserId", UserId );
+                intent.putExtra("UserName", userName );
+                intent.putExtra("CourseCode", CourseCode);
+                intent.putExtra("CourseName", CourseName);
+                intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
+                startActivity(intent);
             }
         });
 

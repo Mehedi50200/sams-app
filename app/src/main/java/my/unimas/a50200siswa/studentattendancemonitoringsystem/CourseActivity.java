@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,14 +26,17 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CourseActivity extends AppCompatActivity {
-    String userID;
-    String CourseCode, CourseName;
-    String UserId;
-    String UserProfileImageUrl;
+    String userID, userName;
+    String CourseCode, CourseName, UserId, UserProfileImageUrl ;
 
     List<StudentModel> listStudent;
-    TextView btnSignOut, UserName,EmptyViewStudent;
-    CircleImageView cvTakeAttendance, cvGallery, userProfileImage;;
+
+    TextView EmptyViewStudent;
+    CircleImageView cvTakeAttendance, cvGallery;
+
+    Button btnSignOut;
+    TextView UserName;
+    CircleImageView userProfileImage;
 
     private TextView coursecode,coursename;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -52,11 +56,12 @@ public class CourseActivity extends AppCompatActivity {
 
         cvTakeAttendance =findViewById(R.id.cvtakeattendance);
         cvGallery=findViewById(R.id.cvgallery);
-        btnSignOut = findViewById(R.id.btnsignout_home);
-        UserName = findViewById(R.id.username);
+
         coursecode =  findViewById(R.id.coursecode);
         coursename =  findViewById(R.id.coursename);
 
+        btnSignOut = findViewById(R.id.btnsignout_home);
+        UserName = findViewById(R.id.username);
         userProfileImage =findViewById(R.id.userprofileimg);
 
         final RecyclerView RVStudent = findViewById(R.id.rvstudent);
@@ -74,6 +79,7 @@ public class CourseActivity extends AppCompatActivity {
 
         coursecode.setText(CourseCode);
         coursename.setText(CourseName);
+
         GlideApp.with(CourseActivity.this)
                 .load(UserProfileImageUrl)
                 .error(R.drawable.profilepic)
@@ -110,7 +116,7 @@ public class CourseActivity extends AppCompatActivity {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
+                userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 UserName.setText(userName);
 
                 String studentId[] = new String[20];
@@ -158,7 +164,13 @@ public class CourseActivity extends AppCompatActivity {
         cvTakeAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CourseActivity.this, TakeAttendanceActivity.class));
+                Intent intent = new Intent(CourseActivity.this, TakeAttendancePictureActivity.class);
+                intent.putExtra("UserId", UserId );
+                intent.putExtra("UserName", userName );
+                intent.putExtra("CourseCode", CourseCode);
+                intent.putExtra("CourseName", CourseName);
+                intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
+                startActivity(intent);
 
             }
         });
@@ -189,9 +201,15 @@ public class CourseActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null && data.getData() != null) {
             Uri mImageUri = data.getData();
-            Intent processedresultintent= new Intent(CourseActivity.this, TakeAttendanceActivity.class);
-            processedresultintent.setData(mImageUri);
-            startActivity(processedresultintent);
+
+            Intent intent= new Intent(CourseActivity.this, TakeAttendancePictureActivity.class);
+            intent.setData(mImageUri);
+            intent.putExtra("UserId", UserId );
+            intent.putExtra("UserName", userName );
+            intent.putExtra("CourseCode", CourseCode);
+            intent.putExtra("CourseName", CourseName);
+            intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
+            startActivity(intent);
 
 
         }

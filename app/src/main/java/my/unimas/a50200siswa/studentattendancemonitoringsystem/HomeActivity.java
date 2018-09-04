@@ -38,10 +38,15 @@ public class HomeActivity extends AppCompatActivity {
     String userProfileImageUrl;
     List<CourseModel> listCourse;
     List<NoteModel> listNote;
-    TextView btnSignOut, UserName,EmptyViewCourse, EmptyViewNote;
-    EditText ETNote;
-    Button btnSaveNote, btnAddNote, btnp;
+
+    Button btnSignOut;
+    TextView UserName;
     CircleImageView userProfileImage;
+
+    TextView EmptyViewCourse, EmptyViewNote;
+    EditText ETNote;
+    Button btnSaveNote, btnAddNote;
+    ;
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
 
@@ -77,13 +82,14 @@ public class HomeActivity extends AppCompatActivity {
 
 
         /*---------------------------------- Finding View ----------------------------------------*/
-        btnSignOut = findViewById(R.id.btnsignout_home);
+
         ETNote = findViewById(R.id.etnote);
         btnAddNote =findViewById(R.id.btnaddnote);
         btnSaveNote =findViewById(R.id.btnsavenote);
+
+        btnSignOut = findViewById(R.id.btnsignout_home);
         UserName = findViewById(R.id.username);
         userProfileImage =findViewById(R.id.userprofileimg);
-
 
         final RecyclerView RVCourse = findViewById(R.id.recyclerviewcourse);
         final RecyclerView RVNote = findViewById(R.id.rvnote);
@@ -105,26 +111,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
 
-
-
-
-
-        btnSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-            }
-        });
-
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (firebaseAuth.getCurrentUser() == null) {
-                    startActivity(new Intent(HomeActivity.this, SignInActivity.class));
-                }
-            }
-        };
-
         /* ------------------------------ Firebase Elements --------------------------------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -134,7 +120,6 @@ public class HomeActivity extends AppCompatActivity {
         notesRef = rootRef.child("Users").child(userID).child("Notes");
 
         /*----------------------------------------------------------------------------------------*/
-
 
 
 
@@ -194,6 +179,23 @@ public class HomeActivity extends AppCompatActivity {
 
 
         /*--------------------------------------- Notes ------------------------------------------*/
+
+        btnSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+            }
+        });
+
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() == null) {
+                    startActivity(new Intent(HomeActivity.this, SignInActivity.class));
+                }
+            }
+        };
+
 
         btnAddNote.setOnClickListener(new View.OnClickListener() {
             @Override

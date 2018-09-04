@@ -3,46 +3,52 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:gravity="center"
-    android:background="@drawable/navigation_bg">
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="20dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/userprofileimg"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_margin="5dp"/>
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="220dp"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="User Name"/>
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/btnnotification_home"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_margin="5dp"
-        android:background="@drawable/bell"
-        android:gravity="right|center"
-        android:textSize="12sp" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userprofileimg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="5dp"/>
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:text="User Name"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#bdbdbd"/>
 
-    <Button
-        android:id="@+id/btnsetting_home"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_margin="5dp"
-        android:gravity="right|center"
-        android:background="@drawable/settings"
-        android:textSize="12sp" />
+        <Button
+            android:id="@+id/btnnotification_home"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/notification"
+            android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/btnsignout_home"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_margin="5dp"
-        android:background="@android:drawable/ic_lock_power_off"
-        android:gravity="right|center"
-        android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btnsignout_home"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/btnlogout"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+
 
 </android.support.v7.widget.Toolbar>

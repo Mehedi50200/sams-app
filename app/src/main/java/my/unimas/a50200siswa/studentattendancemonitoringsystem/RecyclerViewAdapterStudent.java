@@ -2,6 +2,7 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -27,7 +29,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
 
-    public RecyclerViewAdapterStudent() {}  //Constructor
+    public RecyclerViewAdapterStudent(TextExtractionActivity mContext, ArrayList<Bitmap> listCroppedImages) {}  //Constructor
 
     public RecyclerViewAdapterStudent(Context mContext, List<StudentModel> mData) {
         this.mContext = mContext;

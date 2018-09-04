@@ -49,19 +49,12 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
         holder.day.setText(mData.get(position).getDay());
         if(mData.get(position).getDay().trim().equals(getCurrentDay().trim())){
             llCourse.setBackgroundColor(Color.parseColor("#562235"));
-
             holder.courseName.setTextColor(Color.parseColor("#b23b66"));
-          /*  holder.courseCode.setTextColor(Color.parseColor("#822345"));
-            divider.setBackgroundColor(Color.WHITE);
-            holder.day.setTextColor(Color.parseColor("#822345"));
-            holder.time.setTextColor(Color.parseColor("#822345")); */
-
         }else{
             llCourse.setBackgroundResource(R.drawable.home_bg);
             divider.setBackgroundColor(Color.parseColor("#c61e4a"));
         }
 
-      //holder.userID.setText(mData.get(position).getUserId());
         holder.courseCode.setText(mData.get(position).getCourseCode());
         holder.courseName.setText(mData.get(position).getCourseName());
         holder.day.setText(mData.get(position).getDay());
