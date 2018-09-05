@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    android:transitionName="tparent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +41,6 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/colorLightText"
                 android:text="Course Name"
-                android:textStyle="bold"
                 android:textSize="18sp"/>
 
         </LinearLayout>

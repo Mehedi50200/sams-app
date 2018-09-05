@@ -1,12 +1,16 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -117,6 +121,7 @@ public class ProcessesdResult extends AppCompatActivity {
         imageCropIntoPiecess(image);
 
         btnProcessText.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(ProcessesdResult.this, TextExtractionActivity.class);
@@ -126,7 +131,14 @@ public class ProcessesdResult extends AppCompatActivity {
                 intent.putExtra("CourseCode", CourseCode);
                 intent.putExtra("CourseName", CourseName);
                 intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
-                startActivity(intent);
+
+                Pair[] pairs = new Pair[1];
+                pairs[0]= new Pair<View, String>(ProcessedImage, "tmainlayout");
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ProcessesdResult.this, pairs);
+
+                startActivity(intent, options.toBundle());
+
+
             }
         });
 

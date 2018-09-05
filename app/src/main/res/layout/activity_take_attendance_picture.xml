@@ -10,7 +10,8 @@
 
     <include
         android:id="@+id/actionbar"
-        layout="@layout/action_bar">
+        layout="@layout/action_bar"
+        android:transitionName="tactionbar">
     </include>
 
     <com.adityaarora.liveedgedetection.view.TouchImageView
@@ -18,7 +19,8 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:scaleType="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:transitionName="tmainimage"/>
 
     <LinearLayout
         android:layout_width="match_parent"

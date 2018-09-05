@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/home_bg">
+    android:background="@drawable/home_bg"
+    android:transitionName="tmainlayout">
 
     <include
         android:id="@+id/actionbar"
-        layout="@layout/action_bar">
+        layout="@layout/action_bar"
+        android:transitionName="tactionbar">
     </include>
 
     <LinearLayout
@@ -22,7 +24,8 @@
             android:id="@+id/pvprocessedimage"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_margin="8dp" />
+            android:layout_margin="8dp"
+            android:transitionName="tmainimage"/>
 
     </LinearLayout>
 

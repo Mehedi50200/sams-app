@@ -1,10 +1,15 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +50,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     @Override
-    public void onBindViewHolder(StudentViewHolder holder, final int position) {
+    public void onBindViewHolder(final StudentViewHolder holder, final int position) {
 
         StorageReference profileImageReference =storageReference.child("StudentsPic/" +mData.get(position).getStudentId()+".jpg");
 
@@ -59,6 +64,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
                 .into(holder.studentImage);
 
         holder.studentCardView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, StudentProfileActivity.class);
@@ -67,7 +73,17 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("CourseCode", mData.get(position).getCourseCode());
                 intent.putExtra("CourseName", mData.get(position).getCourseName());
                 intent.putExtra("UserProfileImageUrl", mData.get(position).getUserProfileImageUrl());
-                mContext.startActivity(intent);
+
+                Pair[] pairs = new Pair[4];
+                pairs[0]= new Pair<View, String>(holder.studentId, "tstudentmatric");
+                pairs[1]= new Pair<View, String>(holder.studentName, "tstudentname");
+                pairs[2]= new Pair<View, String>(holder.studentImage, "tstudentpic");
+                pairs[3]= new Pair<View, String>(holder.studentCardView, "tcard");
+
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, pairs);
+                mContext.startActivity(intent, options.toBundle() );
+
+
             }
         });
 

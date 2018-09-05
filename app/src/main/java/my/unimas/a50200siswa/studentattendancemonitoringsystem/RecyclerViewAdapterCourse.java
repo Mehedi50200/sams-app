@@ -1,10 +1,15 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +49,7 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
     }
 
     @Override
-    public void onBindViewHolder(CourseViewHolder holder, final int position) {
+    public void onBindViewHolder(final CourseViewHolder holder, final int position) {
 
         holder.day.setText(mData.get(position).getDay());
         if(mData.get(position).getDay().trim().equals(getCurrentDay().trim())){
@@ -61,6 +66,7 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
         holder.time.setText(mData.get(position).getTime());
 
         holder.courseCardView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, CourseActivity.class);
@@ -69,8 +75,15 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
                 intent.putExtra("CourseCode", mData.get(position).getCourseCode());
                 intent.putExtra("CourseName", mData.get(position).getCourseName());
                 intent.putExtra("UserProfileImageUrl", mData.get(position).getUserProfileImageUrl());
+
+                Pair[] pairs = new Pair[2];
+                pairs[0]= new Pair<View, String>(holder.courseCardView, "tparent");
+                pairs[1]= new Pair<View, String>(holder.courseName, "tcoursename");
+                pairs[1]= new Pair<View, String>(holder.courseCode, "tcoursecode");
+
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, pairs);
                 // start the activity
-                mContext.startActivity(intent);
+                mContext.startActivity(intent, options.toBundle());
             }
         });
     }

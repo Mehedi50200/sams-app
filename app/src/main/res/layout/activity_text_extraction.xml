@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TextExtractionActivity">
+    tools:context=".TextExtractionActivity"
+    android:transitionName="tmainlayout">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,18 +29,6 @@
 
     </LinearLayout>
 
-
-<!--
-    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/croppedimagegridview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:gravity="center"
-        android:numColumns="auto_fit">
-    </GridView>
-
-    -->
 
     <TextView
         android:id="@+id/empty_view_croppedimage"

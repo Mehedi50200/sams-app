@@ -7,7 +7,8 @@
     android:layout_margin="1dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="0dp"
-    app:cardElevation="5dp">
+    app:cardElevation="5dp"
+    android:transitionName="tcard">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,14 +27,16 @@
             android:id="@+id/studentimage"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/profilepic"/>
+            android:src="@drawable/profilepic"
+            android:transitionName="tstudentpic"/>
 
         <TextView
             android:id="@+id/tvstudentmatric"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Matric"/>
+            android:text="Matric"
+            android:transitionName="tstudentmatric"/>
 
         <ImageView
             android:id="@+id/anotific"
@@ -45,7 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Student Name"/>
+            android:text="Student Name"
+            android:transitionName="tstudentname"/>
 
 
     </LinearLayout>

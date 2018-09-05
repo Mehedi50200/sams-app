@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/background_gradient">
+    android:background="@drawable/home_bg">
 
     <include
         android:id="@+id/actionbar"
@@ -28,7 +28,8 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:elevation="20dp"
-            android:src="@drawable/profilepic" />
+            android:src="@drawable/profilepic"
+            android:transitionName="tstudentpic"/>
 
     </FrameLayout>
 
@@ -38,6 +39,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginBottom="10dp">
+
         <TextView
             android:id="@+id/studentname"
             android:layout_width="wrap_content"
@@ -45,16 +47,19 @@
             android:textStyle="bold"
             android:text="Student Name"
             android:layout_gravity="center_horizontal"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:transitionName="tstudentname"/>
 
         <TextView
             android:id="@+id/studentmatric"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:textColor="@color/colorLightViolet"
+            android:textColor="@color/colorLightText"
             android:text="Matric No"
             android:layout_gravity="center_horizontal"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:transitionName="tstudentmatric"/>
+
     </LinearLayout>
 
 
@@ -63,7 +68,8 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:transitionName="tcard">
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -10,11 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,8 +39,6 @@ import java.util.Map;
 public class SignInActivity extends AppCompatActivity {
 
     /*------------------------------- Declaration of UI elements ---------------------------------*/
-    LinearLayout LoginUp, LoginDown;
-    Animation UpDown, DownUp;
     Button btnSignIn, btnSignUp, btnGSignIn;
     EditText Email,Password;
     TextView TVForgotPassword, TVPageTitle;
