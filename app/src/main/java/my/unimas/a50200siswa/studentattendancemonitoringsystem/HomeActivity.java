@@ -51,8 +51,6 @@ public class HomeActivity extends AppCompatActivity {
     LinearLayout HomeUp, HomeDown;
 
 
-
-
     /*------------------------------- Firebase Database stuff ------------------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -82,6 +80,17 @@ public class HomeActivity extends AppCompatActivity {
 
 
         /*---------------------------------- Finding View ----------------------------------------*/
+
+        Button BtnTest = findViewById(R.id.btntest);
+
+        BtnTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, test.class));
+            }
+        });
+
+
 
         ETNote = findViewById(R.id.etnote);
         btnAddNote =findViewById(R.id.btnaddnote);

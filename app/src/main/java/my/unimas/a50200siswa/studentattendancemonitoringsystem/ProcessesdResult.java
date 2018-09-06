@@ -137,8 +137,6 @@ public class ProcessesdResult extends AppCompatActivity {
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ProcessesdResult.this, pairs);
 
                 startActivity(intent, options.toBundle());
-
-
             }
         });
 
@@ -195,17 +193,15 @@ public class ProcessesdResult extends AppCompatActivity {
         List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
         Imgproc.findContours(imageA, contours, new Mat(), Imgproc.RETR_EXTERNAL,Imgproc.CHAIN_APPROX_SIMPLE);
 
+
         Vector<Mat> rectangles = new Vector<Mat>();
         for(int i=0; i< contours.size();i++)
         {
-
             if (Imgproc.contourArea(contours.get(i)) > 100)
             {
-
                 Rect rect = Imgproc.boundingRect(contours.get(i));
                 if ((rect.height > 30 && rect.height < 120) && (rect.width > 120 && rect.width < 500))
                 {
-
                     Rect rec = new Rect(rect.x, rect.y, rect.width, rect.height);
 
                     Mat roi = imageMat.submat(rec);

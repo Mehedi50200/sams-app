@@ -44,13 +44,14 @@
             android:text="Student Id"
             android:textColor="@color/colorLightText"/>
 
+
         <TextView
             android:id="@+id/tvtxtprocessstudentstatus"
             android:layout_height="wrap_content"
             android:layout_width="100dp"
             android:gravity="center"
             android:text="Present"
-            android:textColor="@color/colorOrangeText"/>
+            android:textColor="@color/colorOrangeText"/> -->
 
     </LinearLayout>
 

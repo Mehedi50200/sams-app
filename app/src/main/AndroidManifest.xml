@@ -35,8 +35,11 @@
         <activity android:name=".StudentProfileActivity" />
         <activity android:name=".TakeAttendancePictureActivity" />
         <activity android:name=".ProcessesdResult" />
-        <activity android:name=".TextExtractionActivity"/>
-
+        <activity android:name=".TextExtractionActivity" />
+        <activity
+            android:name=".test"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
