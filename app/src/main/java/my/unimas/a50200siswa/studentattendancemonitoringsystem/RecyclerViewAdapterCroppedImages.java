@@ -168,8 +168,11 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             Imgproc.circle(mask, center, radius, new Scalar(255,0,255), 1, 8, 0 );
         }
 
+        /*
+
         String circledetected = myDir.toString() + "a.jpg";
         Imgcodecs.imwrite(circledetected,src);
+        */
 
         Mat masked = new Mat();
         src.copyTo( masked, mask );
@@ -177,11 +180,8 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         Mat thresh = new Mat();
         Imgproc.threshold( mask, thresh, 1, 255, Imgproc.THRESH_BINARY );
 
-        // Find Contour
-         List<MatOfPoint> contours = new ArrayList<>();
-         Imgproc.findContours(thresh, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-
-        // Crop
+        List<MatOfPoint> contours = new ArrayList<>();
+        Imgproc.findContours(thresh, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
         Rect rect = Imgproc.boundingRect(contours.get(0));
         Mat cropped = src.submat(rect);
@@ -202,20 +202,14 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         Imgproc.findContours(localMat2, contourscircles, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
         Rect rectCrop = boundingRect(contourscircles.get(0));
-        //creating crop of that contour from actual image
         Mat imageROI= thresh2.submat(rectCrop);
         int total = countNonZero(imageROI);
-        double pixel = total / contourArea(contours.get(0)) * 100;
-        //pixel is in percentage of area that is filled
+        double pixel = total / contourArea(contourscircles.get(0)) * 100;
         if (pixel >= 70 && pixel <= 130) {
-            //counting filled circles
-
             attendanceText = "Present";
             String chunkedfilename = chunkedImagedDirectory +"_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
             Imgcodecs.imwrite(chunkedfilename, imageROI);
-
         } else {
-
             attendanceText = "Absent";
             String chunkedfilename = chunkedImagedDirectory +"absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
             Imgcodecs.imwrite(chunkedfilename, imageROI);
