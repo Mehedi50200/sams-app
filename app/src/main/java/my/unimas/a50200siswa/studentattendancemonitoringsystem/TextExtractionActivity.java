@@ -96,6 +96,7 @@ public class TextExtractionActivity extends AppCompatActivity {
 
 
             String PhotoPath[]= new String[100];
+            String AttendanceRecord[]= new String[100];
 
             for (int i=1; i <=fileDirectory.listFiles().length; i++){
                 PhotoPath[i] = croppedImageDirectory+ i + ".jpg";
@@ -131,6 +132,5 @@ public class TextExtractionActivity extends AppCompatActivity {
 
 
     }
-
 
 }

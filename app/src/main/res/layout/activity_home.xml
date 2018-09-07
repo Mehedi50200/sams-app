@@ -59,14 +59,6 @@
                 android:gravity="center"
                 android:background="@drawable/btnadd"/>
 
-            <Button
-                android:id="@+id/btntest"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:transitionName="tbenote"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:background="@drawable/common_google_signin_btn_icon_dark"/>
 
         </LinearLayout>
         

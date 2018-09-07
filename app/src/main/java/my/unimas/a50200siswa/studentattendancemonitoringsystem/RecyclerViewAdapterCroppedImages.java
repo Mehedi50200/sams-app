@@ -19,9 +19,12 @@ import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import org.opencv.android.Utils;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
@@ -69,8 +72,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(final CroppedimageViewHolder holder, final int position) {
 
-
-
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Bitmap croppedimageold = BitmapFactory.decodeFile(mData.get(position).getCroppedImagePath(), options);
@@ -78,20 +79,15 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
 
             holder.StudentNo.setText(mData.get(position).getStudentNo());
             holder.CroppedImage.setImageBitmap(croppedimagenew);
-            // imageProcess(croppedimage);
-
 
             holder.StudentId.setText(TextImageProcess(croppedimagenew));
             holder.StudentStatus.setText(CircleDetection(croppedimagenew));
-
-
 
     }
 
 
     @Override
     public int getItemCount() {
-
         return mData.size();
     }
 
@@ -107,8 +103,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             StudentStatus = itemView.findViewById(R.id.tvtxtprocessstudentstatus);
         }
     }
-
-
 
     public String TextImageProcess(Bitmap bitmap) {
         TextRecognizer txtRecognizer = new TextRecognizer.Builder(mContext.getApplicationContext()).build();
@@ -130,17 +124,15 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
                     for (Text element : line.getComponents()) {
                         //extract scanned text words here
                         Log.v("element", element.getValue());
-
                     }
                 }
             }
-
             processedtext = strBuilder.toString().substring(0, strBuilder.toString().length());
         }
 
         return processedtext;
-
     }
+
 
 
     public String CircleDetection(Bitmap bitmap){
@@ -149,11 +141,52 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/sams_images"+"/"+timeStamp);
         myDir.mkdir();
-
         String chunkedImagedDirectory = myDir.toString() + "/";
 
-        Mat localMat1 = new Mat();
-        Utils.bitmapToMat(bitmap, localMat1);
+        Mat src = new Mat();
+        Utils.bitmapToMat(bitmap, src);
+        Mat gray = new Mat();
+
+        Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
+
+        Imgproc.medianBlur(gray, gray, 5);
+
+        Mat circles = new Mat();
+        Imgproc.HoughCircles(gray, circles, Imgproc.HOUGH_GRADIENT, 1.0,
+                (double)gray.rows()/16, // change this value to detect circles with different distances to each other
+                100.0, 30.0, 1, 30); // change the last two parameters
+        // (min_radius & max_radius) to detect larger circles
+        Mat mask = new Mat(src.rows(), src.cols(), CvType.CV_8U, Scalar.all(0));
+        for (int x = 0; x < circles.cols(); x++) {
+            double[] c = circles.get(0, x);
+            Point center = new Point(Math.round(c[0]), Math.round(c[1]));
+            // circle center
+            Imgproc.circle(src, center, 1, new Scalar(0,100,100), 1, 8, 0 );
+            // circle outline
+            int radius = (int) Math.round(c[2]);
+            Imgproc.circle(src, center, radius, new Scalar(255,0,255), 1, 8, 0 );
+            Imgproc.circle(mask, center, radius, new Scalar(255,0,255), 1, 8, 0 );
+        }
+
+        String circledetected = myDir.toString() + "a.jpg";
+        Imgcodecs.imwrite(circledetected,src);
+
+        Mat masked = new Mat();
+        src.copyTo( masked, mask );
+
+        Mat thresh = new Mat();
+        Imgproc.threshold( mask, thresh, 1, 255, Imgproc.THRESH_BINARY );
+
+        // Find Contour
+         List<MatOfPoint> contours = new ArrayList<>();
+         Imgproc.findContours(thresh, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+
+        // Crop
+
+        Rect rect = Imgproc.boundingRect(contours.get(0));
+        Mat cropped = src.submat(rect);
+
+        Mat localMat1 = cropped;
         Mat localMat2 = new Mat();
         Imgproc.GaussianBlur(localMat1, localMat2, new Size(5, 5), 7);
         Object localObject = new Mat();
@@ -162,51 +195,35 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         localMat2 = localMat1.clone();
         bitwise_not(cloneMat,cloneMat);
         Imgproc.threshold(cloneMat,localMat2,127,255,Imgproc.THRESH_OTSU);
-        Mat thresh=localMat2.clone();
+        Mat thresh2=localMat2.clone();
 
-        List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+        List<MatOfPoint> contourscircles = new ArrayList<MatOfPoint>();
 
-        Imgproc.findContours(localMat2, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        Imgproc.findContours(localMat2, contourscircles, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
 
+        Rect rectCrop = boundingRect(contourscircles.get(0));
+        //creating crop of that contour from actual image
+        Mat imageROI= thresh2.submat(rectCrop);
+        int total = countNonZero(imageROI);
+        double pixel = total / contourArea(contours.get(0)) * 100;
+        //pixel is in percentage of area that is filled
+        if (pixel >= 70 && pixel <= 130) {
+            //counting filled circles
 
+            attendanceText = "Present";
+            String chunkedfilename = chunkedImagedDirectory +"_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
+            Imgcodecs.imwrite(chunkedfilename, imageROI);
 
-         for (int i =0 ; i < contours.size(); i++) {
+        } else {
 
-            Rect rectCrop = boundingRect(contours.get(i));
-            //creating crop of that contour from actual image
-
-
-           /* if((rectCrop.height>=22 && rectCrop.height <= 32) && (rectCrop.width>=22 && rectCrop.width <= 32)) */
-            if((rectCrop.height/rectCrop.width > 0.8) && (rectCrop.height/rectCrop.width < 1.2) && rectCrop.height > 30 && rectCrop.width >30){
-                Mat imageROI= thresh.submat(rectCrop);
-                //apply countnonzero method to that crop
-                int total = countNonZero(imageROI);
-                double pixel = total / contourArea(contours.get(i)) * 100;
-                //pixel is in percentage of area that is filled
-                if (pixel >= 100 && pixel <= 130) {
-                    //counting filled circles
-                    attendanceText = "Present";
-                    String chunkedfilename = chunkedImagedDirectory +x+ "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-                    Imgcodecs.imwrite(chunkedfilename, imageROI);
-
-                    x++;
-
-                    break;
-                } else {
-
-                    attendanceText = "Absent";
-                    String chunkedfilename = chunkedImagedDirectory +x+"absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-                    Imgcodecs.imwrite(chunkedfilename, imageROI);
-
-                    x++;
-                    break;
-                }
-            }
+            attendanceText = "Absent";
+            String chunkedfilename = chunkedImagedDirectory +"absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
+            Imgcodecs.imwrite(chunkedfilename, imageROI);
         }
+
         return attendanceText;
 
     }
-
 
 
 }

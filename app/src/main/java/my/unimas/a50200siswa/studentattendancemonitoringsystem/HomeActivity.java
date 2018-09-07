@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView EmptyViewCourse, EmptyViewNote;
     EditText ETNote;
     Button btnSaveNote, btnAddNote;
-    ;
+
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
 
@@ -80,16 +80,6 @@ public class HomeActivity extends AppCompatActivity {
 
 
         /*---------------------------------- Finding View ----------------------------------------*/
-
-        Button BtnTest = findViewById(R.id.btntest);
-
-        BtnTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this, test.class));
-            }
-        });
-
 
 
         ETNote = findViewById(R.id.etnote);
