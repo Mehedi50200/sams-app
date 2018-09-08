@@ -1,38 +1,41 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 
-public class CroppedImageModel {
+import java.io.Serializable;
 
-    public String CroppedImagePath, StudentNo; //AttendanceRecord;
+public class CroppedImageModel implements Serializable {
+
+    public String CroppedImagePath, StudentNo, StudentMatric, AttendanceRecord;
 
     public CroppedImageModel(){}  //Constructor
 
-    public CroppedImageModel(String croppedImagePath, String studentno/*, String attendanceRecord */) {
-        CroppedImagePath = croppedImagePath;
+    public CroppedImageModel(String studentno, String croppedImagePath) {
         StudentNo = studentno;
-      //  AttendanceRecord = attendanceRecord;
+        CroppedImagePath = croppedImagePath;
     }
 
-    public String getCroppedImagePath() {
-        return CroppedImagePath;
-    }
     public String getStudentNo() {
         return StudentNo;
     }
-
-
-
-    public void setCroppedImagePath(String croppedImagePath) {
-        CroppedImagePath = croppedImagePath;
+    public String getCroppedImagePath() {
+        return CroppedImagePath;
     }
 
     public void setStudentNo(String studentNo) {
         StudentNo = studentNo;
     }
 
+    public void setCroppedImagePath(String croppedImagePath) {
+        CroppedImagePath = croppedImagePath;
+    }
+
     /*
-    public String getAttendanceRecord() {
-        return AttendanceRecord;
+
+    public String getStudentMatric(){return StudentMatric;}
+    public String getAttendanceRecord(){return AttendanceRecord;}
+
+    public void  setStudentMatric(String studentMatric){
+        StudentMatric = studentMatric;
     }
 
     public void setAttendanceRecord(String attendanceRecord) {
@@ -40,4 +43,6 @@ public class CroppedImageModel {
     }
 
     */
+
+
 }

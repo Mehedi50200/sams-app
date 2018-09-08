@@ -1,6 +1,8 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.opencv.android.OpenCVLoader;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -35,6 +39,8 @@ public class TextExtractionActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
 
+    String processedtext, attendanceText;
+
 
     @Override
     protected void onStart() {
@@ -51,11 +57,11 @@ public class TextExtractionActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_extraction);
+        OpenCVLoader.initDebug();
 
         /*------------------------- Receive data From Previous Intent ----------------------------*/
         Intent intent = getIntent();
@@ -93,14 +99,24 @@ public class TextExtractionActivity extends AppCompatActivity {
         if(fileDirectory.isDirectory()){
             EmptyViewCroppedImage.setVisibility(View.GONE);
             RVCroppedImages.setVisibility(View.VISIBLE);
-
-
+            listCroppedImages.clear();
             String PhotoPath[]= new String[100];
+            String StudentMatric[] = new String[100];
             String AttendanceRecord[]= new String[100];
 
             for (int i=1; i <=fileDirectory.listFiles().length; i++){
                 PhotoPath[i] = croppedImageDirectory+ i + ".jpg";
-                listCroppedImages.add(new CroppedImageModel(PhotoPath[i], String.valueOf(i)));
+
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                Bitmap croppedimageold = BitmapFactory.decodeFile(PhotoPath[i], options);
+                Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 400, 60, true);
+                //   StudentMatric[i]=TextImageProcess(croppedimagenew);
+                //   AttendanceRecord[i]=CircleDetection(croppedimagenew);
+
+
+                //   listCroppedImages.add(new CroppedImageModel(String.valueOf(i),PhotoPath[i], StudentMatric[i], AttendanceRecord[i] ));
+                listCroppedImages.add(new CroppedImageModel(String.valueOf(i), PhotoPath[i]));
             }
 
         }else{
@@ -128,9 +144,7 @@ public class TextExtractionActivity extends AppCompatActivity {
                 }
             }
         };
-
-
-
     }
+
 
 }
