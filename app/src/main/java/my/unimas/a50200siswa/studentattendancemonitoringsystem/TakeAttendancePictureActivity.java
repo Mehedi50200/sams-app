@@ -153,8 +153,6 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
             }
         };
 
-
-
     }
 
     /*------------------------------------ Edge Detection -----------------------------------------*/
@@ -203,8 +201,8 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
             // use directory.mkdirs(); here instead.
         }
 
-        String  timeStamp = new SimpleDateFormat("yyyyMMdd_HHmm").format(new Date());
-        fname = timeStamp +".jpg";
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HH").format(new Date());
+        fname = CourseCode + "_" + timeStamp + ".jpg";
 
         File file = new File(myDir, fname);
         if (file.exists()) file.delete ();
@@ -222,10 +220,7 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
     /* Checks if external storage is available for read and write */
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
+        return Environment.MEDIA_MOUNTED.equals(state);
     }
    /*------------------------------------ ************* -----------------------------------------*/
 

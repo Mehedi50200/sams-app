@@ -174,9 +174,9 @@ public class ProcessesdResult extends AppCompatActivity {
 
     public void imageCropIntoPiecess(Bitmap bitmap){
 
-        String  timeStamp = new SimpleDateFormat("yyyyMMdd_HHmm").format(new Date());
+        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String root = Environment.getExternalStorageDirectory().toString();
-        myDir = new File(root + "/sams_images"+"/"+timeStamp);
+        myDir = new File(root + "/sams_images" + "/" + CourseCode + "_" + timeStamp);
         myDir.mkdir();
 
         chunkedImagedDirectory = myDir.toString() + "/";

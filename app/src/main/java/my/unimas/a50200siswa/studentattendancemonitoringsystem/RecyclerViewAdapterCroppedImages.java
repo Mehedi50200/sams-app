@@ -3,7 +3,6 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
@@ -27,13 +26,9 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.opencv.core.Core.bitwise_not;
@@ -41,6 +36,19 @@ import static org.opencv.core.Core.countNonZero;
 import static org.opencv.imgproc.Imgproc.COLOR_RGB2GRAY;
 import static org.opencv.imgproc.Imgproc.boundingRect;
 import static org.opencv.imgproc.Imgproc.contourArea;
+
+/*
+import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
+import org.opencv.core.CvType;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
+import org.opencv.core.Rect;
+import org.opencv.core.Scalar;
+import org.opencv.core.Size;
+import org.opencv.imgproc.Imgproc;
+*/
 
 
 class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerViewAdapterCroppedImages.CroppedimageViewHolder> {
@@ -94,7 +102,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
 
     }
 
-
     @Override
     public int getItemCount() {
         return mData.size();
@@ -104,9 +111,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         this.notifyDataSetChanged();
 
     }
-
-
-
 
     class CroppedimageViewHolder extends RecyclerView.ViewHolder {
         TextView StudentNo, StudentId, StudentStatus;
@@ -152,11 +156,14 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     }
 
     public String CircleDetection(Bitmap bitmap) {
+
+        /*
         String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/sams_images" + "/" + timeStamp);
         myDir.mkdir();
         String chunkedImagedDirectory = myDir.toString() + "/";
+        */
 
         Mat src = new Mat();
         Utils.bitmapToMat(bitmap, src);
@@ -184,8 +191,8 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             Imgproc.circle(mask, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
         }
 
-        String circledetected = myDir.toString() + "_" + String.valueOf(radius) + "_" + "a.jpg";
-        Imgcodecs.imwrite(circledetected, src);
+        //String circledetected = myDir.toString() + "_" + String.valueOf(radius) + "_" + "a.jpg";
+        //Imgcodecs.imwrite(circledetected, src);
 
         Mat masked = new Mat();
         src.copyTo(masked, mask);
@@ -224,12 +231,12 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         double pixel = total / contourArea(contourscircles.get(0)) * 100;
         if (pixel >= 70 && pixel <= 130) {
             attendanceText = "Present";
-            String chunkedfilename = chunkedImagedDirectory + "_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-            Imgcodecs.imwrite(chunkedfilename, imageROI);
+        /*    String chunkedfilename = chunkedImagedDirectory + "_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
+            Imgcodecs.imwrite(chunkedfilename, imageROI);   */
         } else {
             attendanceText = "Absent";
-            String chunkedfilename = chunkedImagedDirectory + "absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-            Imgcodecs.imwrite(chunkedfilename, imageROI);
+        /*    String chunkedfilename = chunkedImagedDirectory + "absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
+            Imgcodecs.imwrite(chunkedfilename, imageROI); */
         }
 
         return attendanceText;
