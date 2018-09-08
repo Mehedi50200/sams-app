@@ -94,10 +94,18 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
 
     }
 
+
     @Override
     public int getItemCount() {
         return mData.size();
     }
+
+    public void myMotifyDataSetChanged() {
+        this.notifyDataSetChanged();
+
+    }
+
+
 
 
     class CroppedimageViewHolder extends RecyclerView.ViewHolder {

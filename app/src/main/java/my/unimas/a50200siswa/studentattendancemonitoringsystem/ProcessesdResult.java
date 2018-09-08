@@ -143,8 +143,13 @@ public class ProcessesdResult extends AppCompatActivity {
         btnTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent processedresultintent= new Intent(ProcessesdResult.this, TakeAttendancePictureActivity.class);
-                startActivity(processedresultintent);
+                Intent intent = new Intent(ProcessesdResult.this, TakeAttendancePictureActivity.class);
+                intent.putExtra("UserId", UserId);
+                intent.putExtra("UserName", userName);
+                intent.putExtra("CourseCode", CourseCode);
+                intent.putExtra("CourseName", CourseName);
+                intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
+                startActivity(intent);
             }
         });
 

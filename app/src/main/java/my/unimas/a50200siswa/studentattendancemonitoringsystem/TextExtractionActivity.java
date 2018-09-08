@@ -114,7 +114,6 @@ public class TextExtractionActivity extends AppCompatActivity {
                 //   StudentMatric[i]=TextImageProcess(croppedimagenew);
                 //   AttendanceRecord[i]=CircleDetection(croppedimagenew);
 
-
                 //   listCroppedImages.add(new CroppedImageModel(String.valueOf(i),PhotoPath[i], StudentMatric[i], AttendanceRecord[i] ));
                 listCroppedImages.add(new CroppedImageModel(String.valueOf(i), PhotoPath[i]));
             }

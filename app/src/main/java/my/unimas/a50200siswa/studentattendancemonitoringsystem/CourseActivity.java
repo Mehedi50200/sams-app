@@ -172,7 +172,6 @@ public class CourseActivity extends AppCompatActivity {
                 intent.putExtra("CourseName", CourseName);
                 intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
                 startActivity(intent);
-
             }
         });
 
@@ -199,7 +198,6 @@ public class CourseActivity extends AppCompatActivity {
                 }
             }
         };
-
 
     }
 
@@ -228,8 +226,6 @@ public class CourseActivity extends AppCompatActivity {
             intent.putExtra("CourseName", CourseName);
             intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
             startActivity(intent);
-
-
         }
     }
 
