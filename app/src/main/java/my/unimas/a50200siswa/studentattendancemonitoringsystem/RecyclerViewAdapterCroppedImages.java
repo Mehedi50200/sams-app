@@ -61,7 +61,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     private List<CroppedImageModel> mData;
     int x =0;
 
-    String StudentMatric, processedtext, AttendanceStatus, attendanceText;
+    private String StudentMatric, processedtext, AttendanceStatus, attendanceText;
 
     public RecyclerViewAdapterCroppedImages() {
     }   //Constructor
@@ -87,7 +87,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap croppedimageold = BitmapFactory.decodeFile(mData.get(position).getCroppedImagePath(), options);
-        Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 400, 60, true);
+        Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 440, 66, true);
 
 
         holder.StudentNo.setText(mData.get(position).getStudentNo());
@@ -113,7 +113,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
                 Bitmap a = BitmapFactory.decodeFile(retryImagePath, options);
-                Bitmap b = Bitmap.createScaledBitmap(a, 420, 70, true);
+                Bitmap b = Bitmap.createScaledBitmap(a, 480, 72, true);
 
                 try {
                     //       holder.StudentId.setText(StudentMatric);
@@ -128,9 +128,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
 
             }
         });
-
-
-
     }
 
     @Override
