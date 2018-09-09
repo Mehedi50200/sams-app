@@ -223,15 +223,12 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         Imgproc.findContours(thresh, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
         Mat cropped = null;
         Rect rect = null;
-        Mat RECTS = new Mat();
         for (int i = 0; i < contours.size(); i++) {
             rect = boundingRect(contours.get(i));
             if (rect.width / rect.height > 0.75 && rect.width / rect.height < 1.25 && rect.width > 25 && rect.height > 25) {
                 cropped = src.submat(rect);
             }
-            RECTS = src.submat(rect);
         }
-
 
         if (cropped == null) {
             attendanceText = "Process Fail";
