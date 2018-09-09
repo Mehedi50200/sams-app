@@ -1,16 +1,14 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 
-import java.io.Serializable;
-
-public class CroppedImageModel implements Serializable {
+public class CroppedImageModel {
 
     public String CroppedImagePath, StudentNo, StudentMatric, AttendanceRecord;
 
     public CroppedImageModel(){}  //Constructor
 
-    public CroppedImageModel(String studentno, String croppedImagePath) {
-        StudentNo = studentno;
+    public CroppedImageModel(String studentNo, String croppedImagePath) {
+        StudentNo = studentNo;
         CroppedImagePath = croppedImagePath;
     }
 

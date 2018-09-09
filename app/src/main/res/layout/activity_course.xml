@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="115dp"
         android:background="@drawable/home_bg"
         android:orientation="vertical">
 
@@ -41,7 +41,8 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/colorLightText"
                 android:text="Course Name"
-                android:textSize="18sp"/>
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

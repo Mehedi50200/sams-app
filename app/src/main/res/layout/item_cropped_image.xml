@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="1dp"
@@ -39,7 +39,7 @@
         <TextView
             android:id="@+id/tvtxtprocessstudentid"
             android:layout_height="wrap_content"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:gravity="center"
             android:text="Student Id"
             android:textColor="@color/colorLightText"/>
@@ -48,7 +48,7 @@
         <TextView
             android:id="@+id/tvtxtprocessstudentstatus"
             android:layout_height="wrap_content"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:gravity="center"
             android:text="Present"
             android:textColor="@color/colorOrangeText"/> -->

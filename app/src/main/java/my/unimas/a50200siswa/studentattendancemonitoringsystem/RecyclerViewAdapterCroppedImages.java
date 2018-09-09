@@ -3,6 +3,7 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
@@ -11,13 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
-import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
@@ -28,7 +29,10 @@ import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.opencv.core.Core.bitwise_not;
@@ -57,17 +61,15 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     private List<CroppedImageModel> mData;
     int x =0;
 
-    String processedtext, attendanceText;
+    String StudentMatric, processedtext, AttendanceStatus, attendanceText;
 
     public RecyclerViewAdapterCroppedImages() {
-        OpenCVLoader.initDebug();
     }   //Constructor
 
 
     public RecyclerViewAdapterCroppedImages(Context mContext, List<CroppedImageModel> mData) {
         this.mContext = mContext;
         this.mData = mData;
-
     }
 
 
@@ -87,29 +89,53 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         Bitmap croppedimageold = BitmapFactory.decodeFile(mData.get(position).getCroppedImagePath(), options);
         Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 400, 60, true);
 
+
         holder.StudentNo.setText(mData.get(position).getStudentNo());
         holder.CroppedImage.setImageBitmap(croppedimagenew);
 
+        StudentMatric = TextImageProcess(croppedimagenew);
+        AttendanceStatus = CircleDetection(croppedimagenew, StudentMatric);
+
+
         try {
-            holder.StudentId.setText(TextImageProcess(croppedimagenew));
-            holder.StudentStatus.setText(CircleDetection(croppedimagenew));
+            holder.StudentId.setText(StudentMatric);
+            holder.StudentStatus.setText(AttendanceStatus);
             //  holder.StudentId.setText(mData.get(position).getStudentMatric());
             //  holder.StudentStatus.setText(mData.get(position).getAttendanceRecord());
         } catch (Exception e) {
-            holder.StudentId.setText("wait");
-            holder.StudentStatus.setText("wait");
+            holder.StudentId.setText("Detection Error!");
+            holder.StudentStatus.setText("Detection Error");
         }
+
+        holder.CroppedImage.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String retryImagePath = mData.get(position).getCroppedImagePath();
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                Bitmap a = BitmapFactory.decodeFile(retryImagePath, options);
+                Bitmap b = Bitmap.createScaledBitmap(a, 420, 70, true);
+
+                try {
+                    //       holder.StudentId.setText(StudentMatric);
+                    holder.StudentStatus.setText(CircleDetection(b, StudentMatric));
+                    Toast.makeText(mContext, "Process Successful", Toast.LENGTH_LONG).show();
+
+                } catch (Exception e) {
+                    //     holder.StudentId.setText("Detection Error!");
+                    holder.StudentStatus.setText("Detection Error");
+                    Toast.makeText(mContext, "Could not Solve the Problem. Please try Manually", Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+
 
     }
 
     @Override
     public int getItemCount() {
         return mData.size();
-    }
-
-    public void myMotifyDataSetChanged() {
-        this.notifyDataSetChanged();
-
     }
 
     class CroppedimageViewHolder extends RecyclerView.ViewHolder {
@@ -155,15 +181,12 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         return processedtext;
     }
 
-    public String CircleDetection(Bitmap bitmap) {
+    public String CircleDetection(Bitmap bitmap, String m) {
 
-        /*
         String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/sams_images" + "/" + timeStamp);
-        myDir.mkdir();
-        String chunkedImagedDirectory = myDir.toString() + "/";
-        */
+
 
         Mat src = new Mat();
         Utils.bitmapToMat(bitmap, src);
@@ -190,7 +213,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             Imgproc.circle(src, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
             Imgproc.circle(mask, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
         }
-
         //String circledetected = myDir.toString() + "_" + String.valueOf(radius) + "_" + "a.jpg";
         //Imgcodecs.imwrite(circledetected, src);
 
@@ -203,11 +225,20 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         List<MatOfPoint> contours = new ArrayList<>();
         Imgproc.findContours(thresh, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
         Mat cropped = null;
+        Rect rect = null;
+        Mat RECTS = new Mat();
         for (int i = 0; i < contours.size(); i++) {
-            Rect rect = boundingRect(contours.get(i));
-            if (rect.width / rect.height > 0.8 && rect.width / rect.height < 1.2 && rect.width > 25 & rect.height > 25) {
+            rect = boundingRect(contours.get(i));
+            if (rect.width / rect.height > 0.75 && rect.width / rect.height < 1.25 && rect.width > 25 && rect.height > 25) {
                 cropped = src.submat(rect);
             }
+            RECTS = src.submat(rect);
+        }
+
+
+        if (cropped == null) {
+            attendanceText = "Process Fail";
+            return attendanceText;
         }
 
         Mat localMat1 = cropped;
@@ -242,6 +273,5 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         return attendanceText;
 
     }
-
 
 }

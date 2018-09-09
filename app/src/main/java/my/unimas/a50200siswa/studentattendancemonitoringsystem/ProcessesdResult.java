@@ -48,9 +48,9 @@ public class ProcessesdResult extends AppCompatActivity {
     File myDir;
 
     PhotoView ProcessedImage;
+    TextView UserName;
 
     Button btnSignOut;
-    TextView UserName;
     CircleImageView userProfileImage;
 
     String fname;
@@ -113,6 +113,7 @@ public class ProcessesdResult extends AppCompatActivity {
         /*----------------------------------------------------------------------------------------*/
 
         UserName.setText(userName);
+
         GlideApp.with(this)
                 .load(UserProfileImageUrl)
                 .error(R.drawable.profilepic)

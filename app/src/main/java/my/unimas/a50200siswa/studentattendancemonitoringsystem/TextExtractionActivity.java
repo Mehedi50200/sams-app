@@ -96,16 +96,17 @@ public class TextExtractionActivity extends AppCompatActivity {
 
         listCroppedImages = new ArrayList<>();
 
-        if(fileDirectory.isDirectory()){
+        if (fileDirectory.isDirectory()) {
+            listCroppedImages.clear();
             EmptyViewCroppedImage.setVisibility(View.GONE);
             RVCroppedImages.setVisibility(View.VISIBLE);
             listCroppedImages.clear();
-            String PhotoPath[]= new String[100];
+            String PhotoPath[] = new String[100];
             String StudentMatric[] = new String[100];
-            String AttendanceRecord[]= new String[100];
+            String AttendanceRecord[] = new String[100];
 
-            for (int i=1; i <=fileDirectory.listFiles().length; i++){
-                PhotoPath[i] = croppedImageDirectory+ i + ".jpg";
+            for (int i = 1; i <= fileDirectory.listFiles().length; i++) {
+                PhotoPath[i] = croppedImageDirectory + i + ".jpg";
 
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -117,12 +118,11 @@ public class TextExtractionActivity extends AppCompatActivity {
                 //   listCroppedImages.add(new CroppedImageModel(String.valueOf(i),PhotoPath[i], StudentMatric[i], AttendanceRecord[i] ));
                 listCroppedImages.add(new CroppedImageModel(String.valueOf(i), PhotoPath[i]));
             }
-
-        }else{
-
+        } else {
             EmptyViewCroppedImage.setVisibility(View.VISIBLE);
             RVCroppedImages.setVisibility(View.GONE);
         }
+
 
         CroppedImageAdapter = new RecyclerViewAdapterCroppedImages(this,listCroppedImages);
         RVCroppedImages.setAdapter(CroppedImageAdapter);
