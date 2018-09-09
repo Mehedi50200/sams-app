@@ -61,7 +61,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     private List<CroppedImageModel> mData;
     int x =0;
 
-    private String StudentMatric, processedtext, AttendanceStatus, attendanceText;
+    private String StudentMatric, processedtext, AttendanceStatus, attendanceStatus;
 
     public RecyclerViewAdapterCroppedImages() {
     }   //Constructor
@@ -231,8 +231,8 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         }
 
         if (cropped == null) {
-            attendanceText = "Process Fail";
-            return attendanceText;
+            attendanceStatus = "Process Fail";
+            return attendanceStatus;
         }
 
         Mat localMat1 = cropped;
@@ -255,16 +255,16 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         int total = countNonZero(imageROI);
         double pixel = total / contourArea(contourscircles.get(0)) * 100;
         if (pixel >= 70 && pixel <= 130) {
-            attendanceText = "Present";
+            attendanceStatus = "Present";
         /*    String chunkedfilename = chunkedImagedDirectory + "_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
             Imgcodecs.imwrite(chunkedfilename, imageROI);   */
         } else {
-            attendanceText = "Absent";
+            attendanceStatus = "Absent";
         /*    String chunkedfilename = chunkedImagedDirectory + "absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
             Imgcodecs.imwrite(chunkedfilename, imageROI); */
         }
 
-        return attendanceText;
+        return attendanceStatus;
 
     }
 
