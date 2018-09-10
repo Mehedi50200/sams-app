@@ -81,8 +81,6 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
 
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, pairs);
                 mContext.startActivity(intent, options.toBundle() );
-
-
             }
         });
 
