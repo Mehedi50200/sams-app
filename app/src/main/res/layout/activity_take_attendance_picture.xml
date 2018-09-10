@@ -9,7 +9,6 @@
     android:background="@drawable/home_bg">
 
     <include
-        android:id="@+id/actionbar"
         layout="@layout/action_bar"
         android:transitionName="tactionbar">
     </include>
@@ -20,22 +19,26 @@
         android:layout_height="450dp"
         android:scaleType="center"
         android:layout_weight="1"
-        android:transitionName="tmainimage"/>
+        android:transitionName="tmainimage"
+        android:fadingEdge="vertical"
+        android:fadingEdgeLength="10dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="vertical"
+        android:gravity="center"
         android:layout_gravity="end|bottom">
 
         <Button
             android:id="@+id/btnprocess"
-            style="@style/button_style"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="35dp"
-            android:layout_gravity="center"
             android:text="Process Image"
-            android:textAllCaps="false"/>
+            android:textColor="@color/colorDarkGrayText"
+            android:textAllCaps="false"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/colorWhite"/>
 
 
     </LinearLayout>

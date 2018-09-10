@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackground">
+    android:background="@drawable/home_bg"
+    android:transitionName="tparent">
 
     <LinearLayout
         android:id="@+id/hometop"
         android:layout_height="290dp"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/home_bg">
+        android:orientation="vertical">
 
-        <include
-            android:id="@+id/actionbar"
-            layout="@layout/action_bar">
+        <include layout="@layout/action_bar">
         </include>
 
 
@@ -25,30 +24,30 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-
             <EditText
                 android:id="@+id/etnote"
                 android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:hint="type your note here"
                 android:textStyle="italic"
-                android:textColor="@color/colorPink"
-                android:textColorHint="@color/colorDarkPink"
-                android:backgroundTint="@color/colorDarkPink"
+                android:textColor="@color/colorDarkGrayText"
+                android:textColorHint="@color/colorDarkGrayText"
+                android:backgroundTint="@color/colorTransparentBlue"
                 android:visibility="gone"/>
 
             <Button
-                style="@style/button_style"
                 android:id="@+id/btnsavenote"
                 android:layout_width="60dp"
-                android:layout_height="20dp"
-                android:transitionName="tbenote"
+                android:layout_height="28dp"
+                android:background="@drawable/button_background"
+                android:backgroundTint="@color/colorWhite"
                 android:gravity="center"
                 android:text="Save"
-                android:textColor="@color/colorPink"
-                android:textSize="13dp"
-                android:backgroundTint="@color/colorDarkPink"
-                android:visibility="gone"/>
+                android:textColor="@color/colorDarkGrayText"
+                android:textSize="12dp"
+                android:transitionName="tbenote"
+                android:textAllCaps="false"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btnaddnote"
@@ -57,31 +56,33 @@
                 android:transitionName="tbenote"
                 android:layout_margin="10dp"
                 android:gravity="center"
-                android:background="@drawable/btnadd"/>
+                android:background="@drawable/addnote"/>
 
 
         </LinearLayout>
         
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:layout_margin="2dp"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
             android:orientation="vertical">
-
             <TextView
                 android:id="@+id/empty_view_note"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:visibility="gone"
-                android:text="No note added. Type your note and add"
-                android:textColor="@color/colorDarkPink"/>
+                android:gravity="center|top"
+                android:visibility="visible"
+                android:text="''You can add your Notes or Reminder here''"
+                android:textStyle="bold|italic"
+                android:textSize="25sp"
+                android:textColor="@color/colorTransparentBlue"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvnote"
-                android:layout_width="wrap_content"
-                android:layout_height="165dp"
-                android:layout_gravity="center">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:requiresFadingEdge="vertical">
             </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
@@ -93,7 +94,7 @@
         android:id="@+id/homebottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
+        android:layout_margin="10dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/empty_view_course"
@@ -106,7 +107,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerviewcourse"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center">
         </android.support.v7.widget.RecyclerView>
@@ -116,4 +117,4 @@
     </LinearLayout>
 
 
-</android.widget.LinearLayout>
+</LinearLayout>

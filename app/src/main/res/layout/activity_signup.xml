@@ -130,17 +130,17 @@
 
             <Button
                 android:id="@+id/btnsignin_signup"
-                style="@style/button_style"
                 android:transitionName="signin"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:clickable="true"
                 android:text="Sign in"
                 android:textSize="12sp"
+                android:textColor="@color/colorLightViolet"
                 android:textAllCaps="false"
-                android:background="@drawable/button_background"
-                android:textColor="@color/colorDarkText" />
+                android:background="@drawable/button_background"/>
 
         </LinearLayout>
 
@@ -159,28 +159,28 @@
         android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:gravity="bottom"
+        android:gravity="bottom|center"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/btngsignin_signup"
             android:transitionName="gsignin"
-            style="@style/button_style"
             android:layout_width="50dp"
             android:layout_height="30dp"
+            android:layout_margin="10dp"
             android:text="G+"
-            android:textColor="@color/colorDarkText"
+            android:textColor="@color/colorLightViolet"
             android:textAllCaps="false"
             android:background="@drawable/button_background"/>
 
         <Button
             android:id="@+id/btnsignup_signup"
             android:transitionName="signup"
-            style="@style/button_style"
             android:layout_width="200dp"
             android:layout_height="30dp"
+            android:layout_margin="10dp"
             android:text="Sign Up "
-            android:textColor="@color/colorDarkText"
+            android:textColor="@color/colorLightViolet"
             android:textAllCaps="false"
             android:background="@drawable/button_background"/>
 

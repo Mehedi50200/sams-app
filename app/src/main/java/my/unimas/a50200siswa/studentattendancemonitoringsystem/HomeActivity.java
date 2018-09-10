@@ -98,6 +98,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
         /*------------------------------------- Animation --------------------------------------- */
+
         HomeUp =findViewById(R.id.hometop);
         HomeDown=findViewById(R.id.homebottom);
         RightToLeft = AnimationUtils.loadAnimation(this,R.anim.rightleft);

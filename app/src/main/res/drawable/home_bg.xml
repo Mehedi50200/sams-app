@@ -6,11 +6,11 @@
 
             <gradient
                 android:angle="45"
-                android:startColor="#37383e"
-                android:endColor="#3d3f44"
-                android:centerColor="#50525a"
+                android:startColor="@color/colorLightBackground"
+                android:endColor="@color/colorLightBackground"
+                android:centerColor="@color/colorDarkBackground"
                 android:type="linear"
-                android:gradientRadius="200dp"/>
+                android:gradientRadius="250dp"/>
         </shape>
 
     </item>

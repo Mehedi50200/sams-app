@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#600040</color>
-    <color name="colorPrimaryDark">#1c0d1c</color>
+    <color name="colorPrimaryDark">#282735</color>
     <color name="colorAccent">#aa0071</color>
 
     <color name="colorDarkViolet">#39243a</color>
@@ -9,23 +9,21 @@
     <color name="colorDarkText">#624963</color>
 
     <color name="colorLightText">#818182</color>
-    <color name="colorText">#624963</color>
     <color name="colorOrangeText">#f68a5a</color>
     <color name="colorMistakeRed">#7a3232</color>
-    <color name="colorCardText">#e1f7b5cb</color>
 
 
-    <color name="colorViolet">#663754</color>
-    <color name="colorOrange">#f58758</color>
     <color name="colorPink">#c61e4a</color>
-    <color name="colorYellow">#fcaa1a</color>
 
-    <color name="colorGrey">#282735</color>
-    <color name="colorDarkGrey">#1d1c2a</color>
-    <color name="colorTransparentOrange">#30f58758</color>
-    <color name="colorTransparentYellow">#30fcaa1a</color>
     <color name="colorDarkPink">#562235</color>
-    <color name="colorBackground">#332e30</color>
+
+    <color name="colorTransparentBlue">#5036D1DC</color>
+    <color name="colorLightBackground">#f0f2f4</color>
+    <color name="colorDarkBackground">#dadde2</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorLightGrayText">#dadde2</color>
+    <color name="colorDarkGrayText">#969696</color>
+
 
 
 </resources>

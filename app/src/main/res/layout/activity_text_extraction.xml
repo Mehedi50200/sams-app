@@ -5,17 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TextExtractionActivity"
-    android:transitionName="tmainlayout">
+    android:transitionName="tmainlayout"
+    android:background="@drawable/home_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="115dp"
-        android:orientation="vertical"
-        android:background="@drawable/home_bg">
+        android:orientation="vertical">
 
-        <include
-            android:id="@+id/actionbar"
-            layout="@layout/action_bar">
+        <include layout="@layout/action_bar">
         </include>
 
         <TextView
@@ -42,40 +40,38 @@
         android:layout_width="match_parent"
         android:layout_height="450dp"
         android:layout_gravity="center"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:requiresFadingEdge="vertical"
+        android:fadingEdgeLength="20dp">
     </android.support.v7.widget.RecyclerView>
 
-    <android.support.v7.widget.CardView
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="20dp">
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom|end"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:background="@drawable/home_bg">
+            android:layout_height="10dp"
+            android:layout_marginBottom="5dp" />
 
-            <ProgressBar
-                android:id="@+id/progressuploadattendance"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_marginBottom="5dp" />
+        <Button
+            android:id="@+id/btnuploadattendance"
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:text="Upload"
+            android:textAllCaps="false"
+            android:textColor="@color/colorDarkGrayText"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/colorWhite"/>
 
-            <Button
-                android:background="@drawable/button_background"
-                android:id="@+id/btnuploadattendance"
-                android:layout_width="100dp"
-                android:layout_height="35dp"
-                android:text="Upload"/>
+    </LinearLayout>
 
-
-        </LinearLayout>
-
-    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

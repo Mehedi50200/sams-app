@@ -4,10 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/home_bg"
-    android:transitionName="">
+    android:transitionName="tparent">
 
     <include
-        android:id="@+id/actionbar"
         layout="@layout/action_bar"
         android:transitionName="tactionbar">
     </include>
@@ -23,7 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="450dp"
             android:layout_margin="8dp"
-            android:transitionName="tmainimage"/>
+            android:transitionName="tmainimage"
+            android:fadingEdge="vertical"
+            android:fadingEdgeLength="10dp"/>
 
     </LinearLayout>
 
@@ -36,21 +37,25 @@
 
         <Button
             android:id="@+id/btntakepictureagain"
-            android:layout_width="190dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/bgtpink"
+            android:layout_width="130dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
             android:text="Take Picture"
-            android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textColor="@color/colorDarkGrayText"
+            android:textAllCaps="false"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/colorWhite"/>
 
         <Button
             android:id="@+id/btnprocesstext"
-            android:layout_width="190dp"
-            android:layout_height="match_parent"
+            android:layout_width="130dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
             android:text="Process Image"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:background="@drawable/bgtpinkr"/>
+            android:textAllCaps="false"
+            android:textColor="@color/colorDarkGrayText"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/colorWhite"/>
 
     </LinearLayout>
 

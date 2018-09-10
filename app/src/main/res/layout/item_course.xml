@@ -3,21 +3,18 @@
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coursecardview"
     android:clickable="true"
-    android:layout_width="160dp"
+    android:layout_width="match_parent"
     android:layout_height="140dp"
-    android:layout_margin="5dp"
     android:layout_gravity="center"
-    android:padding="3dp"
-    cardview:cardCornerRadius="7dp"
+    android:layout_margin="5dp"
+    cardview:cardCornerRadius="5dp"
     cardview:cardElevation="5dp">
-
 
     <LinearLayout
         android:id="@+id/llcourse"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <TextView
             android:id="@+id/coursecode"
@@ -27,7 +24,7 @@
             android:textSize="17sp"
             android:gravity="center"
             android:textStyle="bold"
-            android:textColor="@color/colorPink"
+            android:textColor="@color/colorLightGrayText"
             android:text="Course Code"/>
 
         <TextView
@@ -43,9 +40,9 @@
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_margin="5dp"
-            android:background="@color/colorPink"/>
+            android:background="@color/colorDarkGrayText"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -60,7 +57,7 @@
                 android:layout_gravity="center"
                 android:text="Day"
                 android:textStyle="bold"
-                android:textColor="@color/colorPink"/>
+                android:textColor="@color/colorLightGrayText"/>
 
 
         </LinearLayout>
@@ -73,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Time"
-            android:textColor="@color/colorPink"/>
+            android:textColor="@color/colorLightGrayText"/>
     </LinearLayout>
 
 

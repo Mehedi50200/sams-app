@@ -74,11 +74,10 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
                 intent.putExtra("CourseName", mData.get(position).getCourseName());
                 intent.putExtra("UserProfileImageUrl", mData.get(position).getUserProfileImageUrl());
 
-                Pair[] pairs = new Pair[4];
+                Pair[] pairs = new Pair[3];
                 pairs[0]= new Pair<View, String>(holder.studentId, "tstudentmatric");
                 pairs[1]= new Pair<View, String>(holder.studentName, "tstudentname");
                 pairs[2]= new Pair<View, String>(holder.studentImage, "tstudentpic");
-                pairs[3]= new Pair<View, String>(holder.studentCardView, "tcard");
 
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, pairs);
                 mContext.startActivity(intent, options.toBundle() );

@@ -116,7 +116,7 @@ public class TextExtractionActivity extends AppCompatActivity {
         userProfileImage =findViewById(R.id.userprofileimg);
         btnUploadAttendance = findViewById(R.id.btnuploadattendance);
 
-        ProgressUploadAttendance = findViewById(R.id.progressuploadattendance);
+       // ProgressUploadAttendance = findViewById(R.id.progressuploadattendance);
 
         EmptyViewCroppedImage =findViewById(R.id.empty_view_croppedimage);
         RVCroppedImages = findViewById(R.id.rvcroppedimage);
