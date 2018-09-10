@@ -53,13 +53,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_gravity="end|bottom"
+            android:layout_gravity="bottom|end"
             android:gravity="center"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:background="@drawable/home_bg">
 
+            <ProgressBar
+                android:id="@+id/progressuploadattendance"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginBottom="5dp" />
+
             <Button
-                style="@style/button_style"
+                android:background="@drawable/button_background"
                 android:id="@+id/btnuploadattendance"
                 android:layout_width="100dp"
                 android:layout_height="35dp"

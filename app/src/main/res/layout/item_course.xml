@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coursecardview"
     android:clickable="true"
-    android:layout_width="150dp"
-    android:layout_height="130dp"
-    android:layout_margin="10dp"
+    android:layout_width="160dp"
+    android:layout_height="140dp"
+    android:layout_margin="5dp"
     android:layout_gravity="center"
     android:padding="3dp"
     cardview:cardCornerRadius="7dp"
-    cardview:cardElevation="15dp">
+    cardview:cardElevation="5dp">
 
 
     <LinearLayout

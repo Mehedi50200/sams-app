@@ -3,43 +3,14 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.text.Text;
-import com.google.android.gms.vision.text.TextBlock;
-import com.google.android.gms.vision.text.TextRecognizer;
-
-import org.opencv.android.Utils;
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
-import org.opencv.core.Size;
-import org.opencv.imgproc.Imgproc;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import static org.opencv.core.Core.bitwise_not;
-import static org.opencv.core.Core.countNonZero;
-import static org.opencv.imgproc.Imgproc.COLOR_RGB2GRAY;
-import static org.opencv.imgproc.Imgproc.boundingRect;
-import static org.opencv.imgproc.Imgproc.contourArea;
 
 /*
 import org.opencv.android.OpenCVLoader;
@@ -52,6 +23,13 @@ import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+
+
+import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.text.Text;
+import com.google.android.gms.vision.text.TextBlock;
+import com.google.android.gms.vision.text.TextRecognizer;
+
 */
 
 
@@ -61,7 +39,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     private List<CroppedImageModel> mData;
     int x =0;
 
-    private String StudentMatric, processedtext, AttendanceStatus, attendanceStatus;
+    //   private String StudentMatric, studentMatric, AttendanceStatus, attendanceStatus;
 
     public RecyclerViewAdapterCroppedImages() {
     }   //Constructor
@@ -92,16 +70,29 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
 
         holder.StudentNo.setText(mData.get(position).getStudentNo());
         holder.CroppedImage.setImageBitmap(croppedimagenew);
+        holder.StudentId.setText(mData.get(position).getStudentMatric());
+        holder.StudentStatus.setText(mData.get(position).getAttendanceRecord());
 
-        StudentMatric = TextImageProcess(croppedimagenew);
+        holder.StudentStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mData.get(position).getAttendanceRecord().equals("Failed")) {
+                    holder.StudentStatus.setText("Present");
+                } else if (mData.get(position).getAttendanceRecord().equals("Present")) {
+                    holder.StudentStatus.setText("Absent");
+                } else if (mData.get(position).getAttendanceRecord().equals("Absent")) {
+                    holder.StudentStatus.setText("Present");
+                }
+            }
+        });
+
+/*        StudentMatric = TextImageProcess(croppedimagenew);
         AttendanceStatus = CircleDetection(croppedimagenew, StudentMatric);
 
 
         try {
             holder.StudentId.setText(StudentMatric);
             holder.StudentStatus.setText(AttendanceStatus);
-            //  holder.StudentId.setText(mData.get(position).getStudentMatric());
-            //  holder.StudentStatus.setText(mData.get(position).getAttendanceRecord());
         } catch (Exception e) {
             holder.StudentId.setText("Detection Error!");
             holder.StudentStatus.setText("Detection Error");
@@ -128,6 +119,8 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
 
             }
         });
+
+        */
     }
 
     @Override
@@ -148,6 +141,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         }
     }
 
+    /*
 
     public String TextImageProcess(Bitmap bitmap) {
         TextRecognizer txtRecognizer = new TextRecognizer.Builder(mContext.getApplicationContext()).build();
@@ -172,10 +166,10 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
                     }
                 }
             }
-            processedtext = strBuilder.toString().substring(0, strBuilder.toString().length());
+            studentMatric = strBuilder.toString().substring(0, strBuilder.toString().length());
         }
 
-        return processedtext;
+        return studentMatric;
     }
 
     public String CircleDetection(Bitmap bitmap, String m) {
@@ -257,15 +251,17 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         if (pixel >= 70 && pixel <= 130) {
             attendanceStatus = "Present";
         /*    String chunkedfilename = chunkedImagedDirectory + "_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-            Imgcodecs.imwrite(chunkedfilename, imageROI);   */
+            Imgcodecs.imwrite(chunkedfilename, imageROI);   */ /*
         } else {
             attendanceStatus = "Absent";
         /*    String chunkedfilename = chunkedImagedDirectory + "absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-            Imgcodecs.imwrite(chunkedfilename, imageROI); */
+            Imgcodecs.imwrite(chunkedfilename, imageROI); */ /*
         }
 
         return attendanceStatus;
 
     }
+
+    */
 
 }

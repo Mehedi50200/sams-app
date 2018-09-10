@@ -7,9 +7,11 @@ public class CroppedImageModel {
 
     public CroppedImageModel(){}  //Constructor
 
-    public CroppedImageModel(String studentNo, String croppedImagePath) {
+    public CroppedImageModel(String studentNo, String croppedImagePath, String studentMatric, String attendanceRecord) {
         StudentNo = studentNo;
         CroppedImagePath = croppedImagePath;
+        StudentMatric = studentMatric;
+        AttendanceRecord = attendanceRecord;
     }
 
     public String getStudentNo() {
@@ -27,7 +29,6 @@ public class CroppedImageModel {
         CroppedImagePath = croppedImagePath;
     }
 
-    /*
 
     public String getStudentMatric(){return StudentMatric;}
     public String getAttendanceRecord(){return AttendanceRecord;}
@@ -39,8 +40,6 @@ public class CroppedImageModel {
     public void setAttendanceRecord(String attendanceRecord) {
         AttendanceRecord = attendanceRecord;
     }
-
-    */
 
 
 }
