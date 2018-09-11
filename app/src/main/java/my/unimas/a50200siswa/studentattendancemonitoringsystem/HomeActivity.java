@@ -51,6 +51,7 @@ public class HomeActivity extends AppCompatActivity {
     LinearLayout HomeUp, HomeDown;
 
 
+
     /*------------------------------- Firebase Database stuff ------------------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
@@ -79,7 +80,6 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         /*---------------------------------- Finding View ----------------------------------------*/
 
-
         ETNote = findViewById(R.id.etnote);
         btnAddNote =findViewById(R.id.btnaddnote);
         btnSaveNote =findViewById(R.id.btnsavenote);
@@ -95,7 +95,6 @@ public class HomeActivity extends AppCompatActivity {
 
         EmptyViewNote = findViewById(R.id.empty_view_note);
         EmptyViewCourse = findViewById(R.id.empty_view_course);
-
 
         /*------------------------------------- Animation --------------------------------------- */
 

@@ -65,7 +65,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap croppedimageold = BitmapFactory.decodeFile(mData.get(position).getCroppedImagePath(), options);
-        Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 440, 66, true);
+        Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 528, 80, true);
 
 
         holder.StudentNo.setText(mData.get(position).getStudentNo());
@@ -86,47 +86,14 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             }
         });
 
-/*        StudentMatric = TextImageProcess(croppedimagenew);
-        AttendanceStatus = CircleDetection(croppedimagenew, StudentMatric);
 
-
-        try {
-            holder.StudentId.setText(StudentMatric);
-            holder.StudentStatus.setText(AttendanceStatus);
-        } catch (Exception e) {
-            holder.StudentId.setText("Detection Error!");
-            holder.StudentStatus.setText("Detection Error");
-        }
-
-        holder.CroppedImage.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String retryImagePath = mData.get(position).getCroppedImagePath();
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-                Bitmap a = BitmapFactory.decodeFile(retryImagePath, options);
-                Bitmap b = Bitmap.createScaledBitmap(a, 480, 72, true);
-
-                try {
-                    //       holder.StudentId.setText(StudentMatric);
-                    holder.StudentStatus.setText(CircleDetection(b, StudentMatric));
-                    Toast.makeText(mContext, "Process Successful", Toast.LENGTH_LONG).show();
-
-                } catch (Exception e) {
-                    //     holder.StudentId.setText("Detection Error!");
-                    holder.StudentStatus.setText("Detection Error");
-                    Toast.makeText(mContext, "Could not Solve the Problem. Please try Manually", Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-
-        */
     }
 
     @Override
     public int getItemCount() {
         return mData.size();
     }
+
 
     class CroppedimageViewHolder extends RecyclerView.ViewHolder {
         TextView StudentNo, StudentId, StudentStatus;
@@ -140,128 +107,5 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             StudentStatus = itemView.findViewById(R.id.tvtxtprocessstudentstatus);
         }
     }
-
-    /*
-
-    public String TextImageProcess(Bitmap bitmap) {
-        TextRecognizer txtRecognizer = new TextRecognizer.Builder(mContext.getApplicationContext()).build();
-
-        if (!txtRecognizer.isOperational()) {
-            //   tvProcessedText.setText("Try Again");
-        } else {
-
-            Frame frame = new Frame.Builder().setBitmap(bitmap).build();
-            SparseArray items = txtRecognizer.detect(frame);
-            StringBuilder strBuilder = new StringBuilder();
-            for (int i = 0; i < items.size(); i++) {
-                TextBlock item = (TextBlock) items.valueAt(i);
-                strBuilder.append(item.getValue());
-                // strBuilder.append("/");
-                for (Text line : item.getComponents()) {
-                    //extract scanned text lines here
-                    Log.v("lines", line.getValue());
-                    for (Text element : line.getComponents()) {
-                        //extract scanned text words here
-                        Log.v("element", element.getValue());
-                    }
-                }
-            }
-            studentMatric = strBuilder.toString().substring(0, strBuilder.toString().length());
-        }
-
-        return studentMatric;
-    }
-
-    public String CircleDetection(Bitmap bitmap, String m) {
-
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/sams_images" + "/" + timeStamp);
-
-
-        Mat src = new Mat();
-        Utils.bitmapToMat(bitmap, src);
-        Mat gray = new Mat();
-
-        Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
-
-        Imgproc.medianBlur(gray, gray, 5);
-
-        Mat circles = new Mat();
-        Imgproc.HoughCircles(gray, circles, Imgproc.HOUGH_GRADIENT, 1.0,
-                (double) gray.rows() / 16, // change this value to detect circles with different distances to each other
-                100.0, 30.0, 1, 30); // change the last two parameters
-        // (min_radius & max_radius) to detect larger circles
-        Mat mask = new Mat(src.rows(), src.cols(), CvType.CV_8U, Scalar.all(0));
-        int radius = 0;
-        for (int x = 0; x < circles.cols(); x++) {
-            double[] c = circles.get(0, x);
-            Point center = new Point(Math.round(c[0]), Math.round(c[1]));
-            // circle center
-            Imgproc.circle(src, center, 1, new Scalar(0, 100, 100), 1, 8, 0);
-            // circle outline
-            radius = (int) Math.round(c[2]);
-            Imgproc.circle(src, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
-            Imgproc.circle(mask, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
-        }
-        //String circledetected = myDir.toString() + "_" + String.valueOf(radius) + "_" + "a.jpg";
-        //Imgcodecs.imwrite(circledetected, src);
-
-        Mat masked = new Mat();
-        src.copyTo(masked, mask);
-
-        Mat thresh = new Mat();
-        Imgproc.threshold(mask, thresh, 1, 255, Imgproc.THRESH_BINARY);
-
-        List<MatOfPoint> contours = new ArrayList<>();
-        Imgproc.findContours(thresh, contours, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-        Mat cropped = null;
-        Rect rect = null;
-        for (int i = 0; i < contours.size(); i++) {
-            rect = boundingRect(contours.get(i));
-            if (rect.width / rect.height > 0.75 && rect.width / rect.height < 1.25 && rect.width > 25 && rect.height > 25) {
-                cropped = src.submat(rect);
-            }
-        }
-
-        if (cropped == null) {
-            attendanceStatus = "Process Fail";
-            return attendanceStatus;
-        }
-
-        Mat localMat1 = cropped;
-        Mat localMat2 = new Mat();
-        Imgproc.GaussianBlur(localMat1, localMat2, new Size(5, 5), 7);
-        Object localObject = new Mat();
-        Imgproc.cvtColor(localMat2, (Mat) localObject, COLOR_RGB2GRAY);
-        Mat cloneMat = ((Mat) localObject).clone();
-        localMat2 = localMat1.clone();
-        bitwise_not(cloneMat, cloneMat);
-        Imgproc.threshold(cloneMat, localMat2, 127, 255, Imgproc.THRESH_OTSU);
-        Mat thresh2 = localMat2.clone();
-
-        List<MatOfPoint> contourscircles = new ArrayList<MatOfPoint>();
-
-        Imgproc.findContours(localMat2, contourscircles, new Mat(), Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-
-        Rect rectCrop = boundingRect(contourscircles.get(0));
-        Mat imageROI = thresh2.submat(rectCrop);
-        int total = countNonZero(imageROI);
-        double pixel = total / contourArea(contourscircles.get(0)) * 100;
-        if (pixel >= 70 && pixel <= 130) {
-            attendanceStatus = "Present";
-        /*    String chunkedfilename = chunkedImagedDirectory + "_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-            Imgcodecs.imwrite(chunkedfilename, imageROI);   */ /*
-        } else {
-            attendanceStatus = "Absent";
-        /*    String chunkedfilename = chunkedImagedDirectory + "absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-            Imgcodecs.imwrite(chunkedfilename, imageROI); */ /*
-        }
-
-        return attendanceStatus;
-
-    }
-
-    */
 
 }

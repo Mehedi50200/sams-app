@@ -30,9 +30,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
     private List<StudentModel> mData;
     View divider ;
 
-    StorageReference storageReference = FirebaseStorage.getInstance().getReference();
-
-
+    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     public RecyclerViewAdapterStudent(TextExtractionActivity mContext, ArrayList<Bitmap> listCroppedImages) {}  //Constructor
 

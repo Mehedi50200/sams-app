@@ -1,6 +1,8 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,13 +49,36 @@ class RecyclerViewAdapterNote extends RecyclerView.Adapter<RecyclerViewAdapterNo
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth = FirebaseAuth.getInstance();
-                FirebaseUser user = mAuth.getCurrentUser();
-                userID = user.getUid();
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-                ref.child("Users").child(userID).child("Notes").child(mData.get(position).getNoteId()).removeValue();
+
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(mContext);
+                View view = ((Activity)mContext).getLayoutInflater().inflate(R.layout.alert_delete, null);
+                final Button btnYes = view.findViewById(R.id.btnyes);
+                final Button btnNo = view.findViewById(R.id.btnno);
+                mBuilder.setView(view);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mAuth = FirebaseAuth.getInstance();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        userID = user.getUid();
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+                        ref.child("Users").child(userID).child("Notes").child(mData.get(position).getNoteId()).removeValue();
+                        dialog.dismiss();
+                    }
+                });
+
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
+
+
     }
 
 
@@ -63,16 +88,18 @@ class RecyclerViewAdapterNote extends RecyclerView.Adapter<RecyclerViewAdapterNo
     }
 
     class NoteViewHolder extends RecyclerView.ViewHolder {
-        TextView NoteId, Note,Date;
-        Button btnRemove;
+        TextView Note,Date;
+        Button btnRemove; //, btnYes, btnNo;
+    //    LinearLayout LayoutConfirmDelete;
 
         private NoteViewHolder(View itemView) {
             super(itemView);
             Note = itemView.findViewById(R.id.tvnote);
             Date = itemView.findViewById(R.id.tvdate);
             btnRemove =itemView.findViewById(R.id.btnremove);
-
-
+       //     btnYes = itemView.findViewById(R.id.btnyes);
+      //      btnNo =itemView.findViewById(R.id.btnno);
+       //     LayoutConfirmDelete =itemView.findViewById(R.id.layoutconfirmdelete);
         }
     }
 

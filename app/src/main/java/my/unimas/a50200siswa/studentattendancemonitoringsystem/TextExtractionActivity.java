@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.Frame;
-import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.google.firebase.auth.FirebaseAuth;
@@ -116,7 +114,7 @@ public class TextExtractionActivity extends AppCompatActivity {
         userProfileImage =findViewById(R.id.userprofileimg);
         btnUploadAttendance = findViewById(R.id.btnuploadattendance);
 
-       // ProgressUploadAttendance = findViewById(R.id.progressuploadattendance);
+        ProgressUploadAttendance = findViewById(R.id.progressupload);
 
         EmptyViewCroppedImage =findViewById(R.id.empty_view_croppedimage);
         RVCroppedImages = findViewById(R.id.rvcroppedimage);
@@ -167,7 +165,6 @@ public class TextExtractionActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-
                         for (int x = 1; x <= listCroppedImages.size(); x++) {
                             UploadData(StudentMatric[x], AttendanceRecord[x], x);
                         }
@@ -211,7 +208,7 @@ public class TextExtractionActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    int progress = x / listCroppedImages.size() * 100;
+                    int progress = x*100 / listCroppedImages.size();
                     DatabaseReference StudentMatricRef = StudentsRef.child(StudentMatric).child("Attendance").push();
                     StudentMatricRef.child("Status").setValue(AttendanceRecord);
                     StudentMatricRef.child("Date").setValue(getCurrentDate());
@@ -244,7 +241,7 @@ public class TextExtractionActivity extends AppCompatActivity {
             for (int i = 0; i < items.size(); i++) {
                 TextBlock item = (TextBlock) items.valueAt(i);
                 strBuilder.append(item.getValue());
-                // strBuilder.append("/");
+                /* strBuilder.append("/");
                 for (Text line : item.getComponents()) {
                     //extract scanned text lines here
                     Log.v("lines", line.getValue());
@@ -253,6 +250,7 @@ public class TextExtractionActivity extends AppCompatActivity {
                         Log.v("element", element.getValue());
                     }
                 }
+                */
             }
             studentMatric = strBuilder.toString().substring(0, strBuilder.toString().length());
         }
@@ -264,7 +262,10 @@ public class TextExtractionActivity extends AppCompatActivity {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
         String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/sams_images" + "/" + timeStamp);
+        File myDirCirecle = new File(root + "/sams_images/" + "Circles/");
+        File myDirRectCrop = new File(root + "/sams_images/" + "Crop/");
+      //  myDirCirecle.mkdir();
+      //  myDirRectCrop.mkdir();
 
 
         Mat src = new Mat();
@@ -286,11 +287,17 @@ public class TextExtractionActivity extends AppCompatActivity {
             double[] c = circles.get(0, x);
             Point center = new Point(Math.round(c[0]), Math.round(c[1]));
             // circle center
-            Imgproc.circle(src, center, 1, new Scalar(0, 100, 100), 1, 8, 0);
+       //     Imgproc.circle(src, center, 1, new Scalar(0, 100, 100), 1, 8, 0);
             // circle outline
             radius = (int) Math.round(c[2]);
-            Imgproc.circle(src, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
-            Imgproc.circle(mask, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
+            if (radius >=15) {
+                Imgproc.circle(src, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
+                Imgproc.circle(mask, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
+            }
+
+            /*
+            String circledetected = myDirCirecle.toString() + "_" + String.valueOf(radius)+"_"+ m +"_"+ x+ "_" + ".jpg";
+            Imgcodecs.imwrite(circledetected, src); */
         }
         //String circledetected = myDir.toString() + "_" + String.valueOf(radius) + "_" + "a.jpg";
         //Imgcodecs.imwrite(circledetected, src);
@@ -307,9 +314,13 @@ public class TextExtractionActivity extends AppCompatActivity {
         Rect rect = null;
         for (int i = 0; i < contours.size(); i++) {
             rect = boundingRect(contours.get(i));
-            if (rect.width / rect.height > 0.75 && rect.width / rect.height < 1.25 && rect.width > 25 && rect.height > 25) {
+            if (rect.width / rect.height > 0.8 && rect.width / rect.height < 1.2 && rect.width > 30 && rect.height > 30) {
                 cropped = src.submat(rect);
             }
+
+         /* Mat newRec = src.submat(rect);
+            String circledetected = myDirRectCrop.toString() + "_" + "_"+ m +"_"+ i+ "_"+rect.height+"_"+rect.width + ".jpg";
+            Imgcodecs.imwrite(circledetected, newRec); */
         }
 
         if (cropped == null) {
