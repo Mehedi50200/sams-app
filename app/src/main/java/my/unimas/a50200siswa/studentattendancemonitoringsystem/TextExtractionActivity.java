@@ -37,6 +37,7 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
@@ -262,24 +263,20 @@ public class TextExtractionActivity extends AppCompatActivity {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
         String root = Environment.getExternalStorageDirectory().toString();
-        File myDirCirecle = new File(root + "/sams_images/" + "Circles/");
-        File myDirRectCrop = new File(root + "/sams_images/" + "Crop/");
-      //  myDirCirecle.mkdir();
-      //  myDirRectCrop.mkdir();
+        File myDirCirecle = new File(root + "/sams_images/circle/");
+        File myDirRectCrop = new File(root + "/sams_images/crop/");
 
 
         Mat src = new Mat();
         Utils.bitmapToMat(bitmap, src);
         Mat gray = new Mat();
-
         Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
-
         Imgproc.medianBlur(gray, gray, 5);
 
         Mat circles = new Mat();
         Imgproc.HoughCircles(gray, circles, Imgproc.HOUGH_GRADIENT, 1.0,
-                (double) gray.rows() / 16, // change this value to detect circles with different distances to each other
-                100.0, 30.0, 1, 30); // change the last two parameters
+                (double) gray.rows() / 8, // change this value to detect circles with different distances to each other .. previous value was 16
+                100.0, 30.0, 13, 25); // change the last two parameters
         // (min_radius & max_radius) to detect larger circles
         Mat mask = new Mat(src.rows(), src.cols(), CvType.CV_8U, Scalar.all(0));
         int radius = 0;
@@ -287,17 +284,17 @@ public class TextExtractionActivity extends AppCompatActivity {
             double[] c = circles.get(0, x);
             Point center = new Point(Math.round(c[0]), Math.round(c[1]));
             // circle center
-       //     Imgproc.circle(src, center, 1, new Scalar(0, 100, 100), 1, 8, 0);
+            //     Imgproc.circle(src, center, 1, new Scalar(0, 100, 100), 1, 8, 0);
             // circle outline
             radius = (int) Math.round(c[2]);
-            if (radius >=15) {
-                Imgproc.circle(src, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
-                Imgproc.circle(mask, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
-            }
 
-            /*
-            String circledetected = myDirCirecle.toString() + "_" + String.valueOf(radius)+"_"+ m +"_"+ x+ "_" + ".jpg";
-            Imgcodecs.imwrite(circledetected, src); */
+            Imgproc.circle(src, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
+            Imgproc.circle(mask, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
+
+
+
+            String circledetected = myDirCirecle.toString() +m+"_"+x+ "_"+ String.valueOf(radius)+ "_"+".jpg";
+            Imgcodecs.imwrite(circledetected, src);
         }
         //String circledetected = myDir.toString() + "_" + String.valueOf(radius) + "_" + "a.jpg";
         //Imgcodecs.imwrite(circledetected, src);
@@ -318,9 +315,9 @@ public class TextExtractionActivity extends AppCompatActivity {
                 cropped = src.submat(rect);
             }
 
-         /* Mat newRec = src.submat(rect);
-            String circledetected = myDirRectCrop.toString() + "_" + "_"+ m +"_"+ i+ "_"+rect.height+"_"+rect.width + ".jpg";
-            Imgcodecs.imwrite(circledetected, newRec); */
+            Mat newRec = src.submat(rect);
+            String cropdetected = myDirRectCrop.toString() +m+"_" +i +"_"+ rect.height+"_"+rect.width + ".jpg";
+            Imgcodecs.imwrite(cropdetected, newRec);
         }
 
         if (cropped == null) {

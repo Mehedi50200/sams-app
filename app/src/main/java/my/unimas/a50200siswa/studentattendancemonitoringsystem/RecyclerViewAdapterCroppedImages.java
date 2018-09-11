@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -73,6 +74,13 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         holder.StudentId.setText(mData.get(position).getStudentMatric());
         holder.StudentStatus.setText(mData.get(position).getAttendanceRecord());
 
+        if(mData.get(position).getAttendanceRecord().equals("Failed")){
+            holder.LPData.setBackgroundResource(R.drawable.card_gradientpurple);
+        }
+        if(mData.get(position).getStudentMatric().length()<5){
+            holder.LPData.setBackgroundResource(R.drawable.card_gradientblue);
+        }
+
         holder.StudentStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +106,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     class CroppedimageViewHolder extends RecyclerView.ViewHolder {
         TextView StudentNo, StudentId, StudentStatus;
         ImageView CroppedImage;
+        LinearLayout LPData;
 
         private CroppedimageViewHolder(View itemView) {
             super(itemView);
@@ -105,6 +114,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             CroppedImage = itemView.findViewById(R.id.ivcroppedimage);
             StudentId = itemView.findViewById(R.id.tvtxtprocessstudentid);
             StudentStatus = itemView.findViewById(R.id.tvtxtprocessstudentstatus);
+            LPData = itemView.findViewById(R.id.lpdata);
         }
     }
 
