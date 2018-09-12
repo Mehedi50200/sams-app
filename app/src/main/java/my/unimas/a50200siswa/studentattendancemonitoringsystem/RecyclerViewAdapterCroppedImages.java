@@ -84,17 +84,31 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         holder.StudentStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mData.get(position).getAttendanceRecord().equals("Failed")) {
-                    mData.get(position).setAttendanceRecord("Present");
-                  //  holder.StudentStatus.setText(mData.get(position).getAttendanceRecord());
-                    correctionAttendance(position, changedRecord);
-                } else if (mData.get(position).getAttendanceRecord().equals("Present")) {
-                    mData.get(position).setAttendanceRecord("Present");
-                    correctionAttendance(position, changedRecord);
-                } else if (mData.get(position).getAttendanceRecord().equals("Absent")) {
-                    mData.get(position).setAttendanceRecord("Present");
-                    correctionAttendance(position, changedRecord);
+
+                switch (mData.get(position).getAttendanceRecord())
+                {
+                    case "Failed":
+                        mData.get(position).setAttendanceRecord("Present");
+                        correctionAttendance(position, changedRecord);//code
+                        break;
+
+                    case "Present":
+                        mData.get(position).setAttendanceRecord("Absent");
+                        correctionAttendance(position, changedRecord);
+                        break;
+
+                    case "Absent":
+                        mData.get(position).setAttendanceRecord("Present");
+                        correctionAttendance(position, changedRecord);
+                        break;
+
+                    default:
+                        break;
                 }
+
+
+
+
             }
 
         });

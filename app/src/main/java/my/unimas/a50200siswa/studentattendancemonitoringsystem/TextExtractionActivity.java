@@ -72,6 +72,7 @@ public class TextExtractionActivity extends AppCompatActivity {
     String croppedImageDirectory;
     String userID;
     ProgressBar ProgressUploadAttendance;
+
     /*------------------------- Firebase Database Element Declaration ----------------------------*/
     FirebaseAuth mAuth;
     FirebaseUser user;
