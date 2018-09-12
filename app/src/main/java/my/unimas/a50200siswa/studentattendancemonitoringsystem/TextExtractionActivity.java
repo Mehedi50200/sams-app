@@ -37,7 +37,6 @@ import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
@@ -70,6 +69,7 @@ public class TextExtractionActivity extends AppCompatActivity {
     String UserId,userName,CourseCode, CourseName,UserProfileImageUrl;
 
     String studentMatric, attendanceStatus;
+    String croppedImageDirectory;
     String userID;
     ProgressBar ProgressUploadAttendance;
     /*------------------------- Firebase Database Element Declaration ----------------------------*/
@@ -102,7 +102,7 @@ public class TextExtractionActivity extends AppCompatActivity {
         OpenCVLoader.initDebug();
         /*------------------------- Receive data From Previous Intent ----------------------------*/
         Intent intent = getIntent();
-        String croppedImageDirectory = intent.getStringExtra("chunkedImagedDirectory");
+        croppedImageDirectory = intent.getStringExtra("chunkedImagedDirectory");
         UserId = intent.getExtras().getString("UserId");
         userName = intent.getExtras().getString("UserName");
         CourseCode = intent.getExtras().getString("CourseCode");
@@ -130,7 +130,6 @@ public class TextExtractionActivity extends AppCompatActivity {
         /*----------------------------------------------------------------------------------------*/
 
 
-
         UserName.setText(userName);
         GlideApp.with(TextExtractionActivity.this)
                 .load(UserProfileImageUrl)
@@ -139,10 +138,11 @@ public class TextExtractionActivity extends AppCompatActivity {
 
         final File fileDirectory = new File(croppedImageDirectory);
 
+
         listCroppedImages = new ArrayList<>();
 
         if (fileDirectory.isDirectory()) {
-            listCroppedImages.clear();
+
             EmptyViewCroppedImage.setVisibility(View.GONE);
             RVCroppedImages.setVisibility(View.VISIBLE);
             listCroppedImages.clear();
@@ -150,7 +150,10 @@ public class TextExtractionActivity extends AppCompatActivity {
             final String StudentMatric[] = new String[100];
             final String AttendanceRecord[] = new String[100];
 
-            for (int i = 1; i <= fileDirectory.listFiles().length; i++) {
+            listCroppedImages.clear();
+
+            for (int i = 1; i <= fileDirectory.listFiles().length; i++)
+            {
                 PhotoPath[i] = croppedImageDirectory + i + ".jpg";
 
                 BitmapFactory.Options options = new BitmapFactory.Options();
@@ -159,29 +162,30 @@ public class TextExtractionActivity extends AppCompatActivity {
                 Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 460, 66, true);
 
                 StudentMatric[i] = TextImageProcess(croppedimagenew);
-                AttendanceRecord[i] = CircleDetection(croppedimagenew, StudentMatric[i]);
+                AttendanceRecord[i] = CircleDetection(croppedimagenew);
                 listCroppedImages.add(new CroppedImageModel(String.valueOf(i), PhotoPath[i], StudentMatric[i], AttendanceRecord[i]));
-
-                btnUploadAttendance.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        for (int x = 1; x <= listCroppedImages.size(); x++) {
-                            UploadData(StudentMatric[x], AttendanceRecord[x], x);
-                        }
-                    }
-                });
-
-
             }
+
+
+            btnUploadAttendance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    for (int x = 0; x < listCroppedImages.size(); x++) {
+                     //   UploadData(StudentMatric[x], AttendanceRecord[x]);
+                        UploadData(listCroppedImages.get(x).getStudentMatric(),listCroppedImages.get(x).getAttendanceRecord());
+                    }
+                }
+            });
+
+            CroppedImageAdapter = new RecyclerViewAdapterCroppedImages(this,listCroppedImages);
+            RVCroppedImages.setAdapter(CroppedImageAdapter);
+
+
         } else {
             EmptyViewCroppedImage.setVisibility(View.VISIBLE);
             RVCroppedImages.setVisibility(View.GONE);
         }
-
-
-        CroppedImageAdapter = new RecyclerViewAdapterCroppedImages(this,listCroppedImages);
-        RVCroppedImages.setAdapter(CroppedImageAdapter);
 
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +205,7 @@ public class TextExtractionActivity extends AppCompatActivity {
         };
     }
 
-    public void UploadData(final String StudentMatric, final String AttendanceRecord, final int x) {
+    public void UploadData(final String StudentMatric, final String AttendanceRecord) {
         ProgressUploadAttendance.setVisibility(View.VISIBLE);
 
         Query query = StudentsRef.orderByKey().equalTo(StudentMatric);
@@ -209,11 +213,11 @@ public class TextExtractionActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    int progress = x*100 / listCroppedImages.size();
+                 //   int progress = x*100 / listCroppedImages.size();
                     DatabaseReference StudentMatricRef = StudentsRef.child(StudentMatric).child("Attendance").push();
                     StudentMatricRef.child("Status").setValue(AttendanceRecord);
                     StudentMatricRef.child("Date").setValue(getCurrentDate());
-                    ProgressUploadAttendance.setProgress(progress);
+                  //  ProgressUploadAttendance.setProgress(progress);
                 } else {
                     Toast.makeText(TextExtractionActivity.this, "Could not Find " + StudentMatric, Toast.LENGTH_LONG).show();
                 }
@@ -259,7 +263,7 @@ public class TextExtractionActivity extends AppCompatActivity {
         return studentMatric;
     }
 
-    public String CircleDetection(Bitmap bitmap, String m) {
+    public String CircleDetection(Bitmap bitmap) {
 
         String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
         String root = Environment.getExternalStorageDirectory().toString();
@@ -291,10 +295,8 @@ public class TextExtractionActivity extends AppCompatActivity {
             Imgproc.circle(src, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
             Imgproc.circle(mask, center, radius, new Scalar(255, 0, 255), 1, 8, 0);
 
-
-
-            String circledetected = myDirCirecle.toString() +m+"_"+x+ "_"+ String.valueOf(radius)+ "_"+".jpg";
-            Imgcodecs.imwrite(circledetected, src);
+            //String circledetected = myDirCirecle.toString() +m+"_"+x+ "_"+ String.valueOf(radius)+ "_"+".jpg";
+            //Imgcodecs.imwrite(circledetected, src);
         }
         //String circledetected = myDir.toString() + "_" + String.valueOf(radius) + "_" + "a.jpg";
         //Imgcodecs.imwrite(circledetected, src);
@@ -315,9 +317,9 @@ public class TextExtractionActivity extends AppCompatActivity {
                 cropped = src.submat(rect);
             }
 
-            Mat newRec = src.submat(rect);
-            String cropdetected = myDirRectCrop.toString() +m+"_" +i +"_"+ rect.height+"_"+rect.width + ".jpg";
-            Imgcodecs.imwrite(cropdetected, newRec);
+          //  Mat newRec = src.submat(rect);
+          //  String cropdetected = myDirRectCrop.toString() +m+"_" +i +"_"+ rect.height+"_"+rect.width + ".jpg";
+          //  Imgcodecs.imwrite(cropdetected, newRec);
         }
 
         if (cropped == null) {

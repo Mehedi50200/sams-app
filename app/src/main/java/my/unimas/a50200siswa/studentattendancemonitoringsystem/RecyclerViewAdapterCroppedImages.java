@@ -39,7 +39,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     private Context mContext;
     private List<CroppedImageModel> mData;
     int x =0;
-
     //   private String StudentMatric, studentMatric, AttendanceStatus, attendanceStatus;
 
     public RecyclerViewAdapterCroppedImages() {
@@ -81,20 +80,31 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             holder.LPData.setBackgroundResource(R.drawable.card_gradientblue);
         }
 
+        final CroppedImageModel changedRecord = mData.get(position);
         holder.StudentStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mData.get(position).getAttendanceRecord().equals("Failed")) {
-                    holder.StudentStatus.setText("Present");
+                    mData.get(position).setAttendanceRecord("Present");
+                  //  holder.StudentStatus.setText(mData.get(position).getAttendanceRecord());
+                    correctionAttendance(position, changedRecord);
                 } else if (mData.get(position).getAttendanceRecord().equals("Present")) {
-                    holder.StudentStatus.setText("Absent");
+                    mData.get(position).setAttendanceRecord("Present");
+                    correctionAttendance(position, changedRecord);
                 } else if (mData.get(position).getAttendanceRecord().equals("Absent")) {
-                    holder.StudentStatus.setText("Present");
+                    mData.get(position).setAttendanceRecord("Present");
+                    correctionAttendance(position, changedRecord);
                 }
             }
+
         });
 
+    }
 
+    public void correctionAttendance(int position, CroppedImageModel attendanceRecord ) {
+        mData.set(position, attendanceRecord);
+        notifyItemChanged(position);
+        notifyDataSetChanged();
     }
 
     @Override

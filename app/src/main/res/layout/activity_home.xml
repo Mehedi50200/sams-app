@@ -44,7 +44,7 @@
                 android:gravity="center"
                 android:text="Save"
                 android:textColor="@color/colorDarkGrayText"
-                android:textSize="12dp"
+                android:textSize="12sp"
                 android:transitionName="tbenote"
                 android:textAllCaps="false"
                 android:visibility="gone" />
@@ -95,7 +95,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="1">
         <TextView
             android:id="@+id/empty_view_course"
             android:layout_width="match_parent"
@@ -111,10 +112,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="center">
         </android.support.v7.widget.RecyclerView>
-
-
-
     </LinearLayout>
-
 
 </LinearLayout>

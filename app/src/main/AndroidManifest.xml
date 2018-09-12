@@ -27,15 +27,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".CourseActivity" />
-        <activity android:name=".StudentProfileActivity" />
-        <activity android:name=".TakeAttendancePictureActivity" />
-        <activity android:name=".ProcessesdResult" />
-        <activity android:name=".TextExtractionActivity" />
+        <activity
+            android:name=".SignInActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HomeActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".CourseActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".StudentProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".TakeAttendancePictureActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ProcessesdResult"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".TextExtractionActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
