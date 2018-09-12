@@ -173,8 +173,7 @@ public class TextExtractionActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
                     for (int x = 0; x < listCroppedImages.size(); x++) {
-                     //   UploadData(StudentMatric[x], AttendanceRecord[x]);
-                        UploadData(listCroppedImages.get(x).getStudentMatric(),listCroppedImages.get(x).getAttendanceRecord());
+                        UploadData(listCroppedImages.get(x).getStudentMatric(),listCroppedImages.get(x).getAttendanceRecord(),x);
                     }
                 }
             });
@@ -206,21 +205,27 @@ public class TextExtractionActivity extends AppCompatActivity {
         };
     }
 
-    public void UploadData(final String StudentMatric, final String AttendanceRecord) {
+    public void UploadData(final String StudentMatric, final String AttendanceRecord, final int px) {
         ProgressUploadAttendance.setVisibility(View.VISIBLE);
+        final int progress = px*100 / listCroppedImages.size();
 
         Query query = StudentsRef.orderByKey().equalTo(StudentMatric);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                 //   int progress = x*100 / listCroppedImages.size();
+
                     DatabaseReference StudentMatricRef = StudentsRef.child(StudentMatric).child("Attendance").push();
                     StudentMatricRef.child("Status").setValue(AttendanceRecord);
                     StudentMatricRef.child("Date").setValue(getCurrentDate());
-                  //  ProgressUploadAttendance.setProgress(progress);
+
                 } else {
                     Toast.makeText(TextExtractionActivity.this, "Could not Find " + StudentMatric, Toast.LENGTH_LONG).show();
+                }
+
+                ProgressUploadAttendance.setProgress(progress);
+                if(progress == 100 || px == listCroppedImages.size()-1){
+                    ProgressUploadAttendance.setVisibility(View.GONE);
                 }
 
             }
