@@ -2,19 +2,15 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="8dp"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     app:cardCornerRadius="1dp">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/lpdata"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/colorWhite"
-        android:gravity="center">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <View
             android:id="@+id/divider"
@@ -22,42 +18,104 @@
             android:layout_height="match_parent"
             android:background="@drawable/card_gradientblue"/>
 
-        <TextView
-            android:id="@+id/tvtxtprocessstudentno"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_width="25dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="8dp"
-            android:gravity="center"
-            android:text="01"
-            android:textColor="@color/colorLightText"/>
+            android:orientation="vertical"
+            android:background="@color/colorWhite">
 
-        <ImageView
-            android:id="@+id/ivcroppedimage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:transitionName="tmainimage"/>
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/lpdata"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/colorWhite">
 
-        <TextView
-            android:id="@+id/tvtxtprocessstudentid"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:gravity="center"
-            android:text="Student Id"
-            android:textColor="@color/colorLightText"/>
+                <TextView
+                    android:id="@+id/tvtxtprocessstudentno"
+                    android:layout_height="wrap_content"
+                    android:layout_width="25dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center"
+                    android:text="01"
+                    android:textColor="@color/colorLightText"/>
 
-        <TextView
-            android:id="@+id/tvtxtprocessstudentstatus"
-            android:layout_height="wrap_content"
-            android:layout_width="80dp"
-            android:gravity="center"
-            android:text="Present"
-            android:textColor="@color/colorOrangeText"/>
+                <ImageView
+                    android:id="@+id/ivcroppedimage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:transitionName="tmainimage"/>
+
+                <TextView
+                    android:id="@+id/tvtxtprocessstudentid"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center"
+                    android:text="Student Id"
+                    android:textColor="@color/colorLightText"/>
+                <TextView
+                    android:id="@+id/tvtxtprocessstudentstatus"
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:layout_gravity="center"
+                    android:text="Present"
+                    android:textColor="@color/colorOrangeText"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/leditstudentmatric"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/etcstudentid"
+                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_marginLeft="38dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:textColor="@color/colorLightText"
+                    android:backgroundTint="@color/colorDarkGrayText"/>
+
+                <Button
+                    android:id="@+id/btnsavestudentmatric"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="8dp"
+                    android:text="Ok"
+                    android:textColor="@color/colorDarkGrayText"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/colorWhite"/>
+
+                <Button
+                    android:id="@+id/btncanceleditingstudentmatric"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Cancel"
+                    android:textColor="@color/colorMistakeRed"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/colorWhite"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
 
     </LinearLayout>
+
+
+
 
 </android.support.v7.widget.CardView>

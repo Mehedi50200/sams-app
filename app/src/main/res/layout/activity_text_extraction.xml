@@ -45,11 +45,10 @@
         android:fadingEdgeLength="20dp">
     </android.support.v7.widget.RecyclerView>
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="5dp"
         android:layout_gravity="bottom|end"
         android:gravity="center"
         android:orientation="vertical">
@@ -58,8 +57,9 @@
             android:id="@+id/progressupload"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_marginBottom="5dp" />
+            android:layout_height="5dp"
+            android:layout_marginBottom="5dp"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/btnuploadattendance"

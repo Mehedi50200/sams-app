@@ -7,6 +7,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -62,6 +64,8 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     @Override
     public void onBindViewHolder(final CroppedimageViewHolder holder, final int position) {
 
+        final CroppedImageModel changedRecord = mData.get(position);
+
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap croppedimageold = BitmapFactory.decodeFile(mData.get(position).getCroppedImagePath(), options);
@@ -70,7 +74,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
 
         holder.StudentNo.setText(mData.get(position).getStudentNo());
         holder.CroppedImage.setImageBitmap(croppedimagenew);
-        holder.StudentId.setText(mData.get(position).getStudentMatric());
+        holder.StudentMatric.setText(mData.get(position).getStudentMatric());
         holder.StudentStatus.setText(mData.get(position).getAttendanceRecord());
 
         if(mData.get(position).getAttendanceRecord().equals("Failed")){
@@ -80,7 +84,29 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
             holder.LPData.setBackgroundResource(R.drawable.card_gradientblue);
         }
 
-        final CroppedImageModel changedRecord = mData.get(position);
+        holder.StudentMatric.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.lEditStudentMatric.setVisibility(View.VISIBLE);
+            }
+
+        });
+
+        holder.btnSaveStudentMatric.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mData.get(position).setStudentMatric(holder.ETCorrectStudentMatric.getText().toString());
+                correctionAttendance(position, changedRecord);
+            }
+        });
+
+        holder.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.lEditStudentMatric.setVisibility(View.GONE);
+            }
+        });
+
         holder.StudentStatus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,12 +131,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
                     default:
                         break;
                 }
-
-
-
-
             }
-
         });
 
     }
@@ -128,17 +149,25 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
 
 
     class CroppedimageViewHolder extends RecyclerView.ViewHolder {
-        TextView StudentNo, StudentId, StudentStatus;
+        TextView StudentNo, StudentMatric, StudentStatus;
         ImageView CroppedImage;
         LinearLayout LPData;
+        EditText ETCorrectStudentMatric;
+        Button btnSaveStudentMatric, btnCancel;
+        LinearLayout lEditStudentMatric;
 
         private CroppedimageViewHolder(View itemView) {
             super(itemView);
             StudentNo = itemView.findViewById(R.id.tvtxtprocessstudentno);
             CroppedImage = itemView.findViewById(R.id.ivcroppedimage);
-            StudentId = itemView.findViewById(R.id.tvtxtprocessstudentid);
+            StudentMatric = itemView.findViewById(R.id.tvtxtprocessstudentid);
             StudentStatus = itemView.findViewById(R.id.tvtxtprocessstudentstatus);
             LPData = itemView.findViewById(R.id.lpdata);
+            ETCorrectStudentMatric = itemView.findViewById(R.id.etcstudentid);
+            btnSaveStudentMatric =itemView.findViewById(R.id.btnsavestudentmatric);
+            lEditStudentMatric = itemView.findViewById(R.id.leditstudentmatric);
+            btnCancel = itemView.findViewById(R.id.btncanceleditingstudentmatric);
+
         }
     }
 
