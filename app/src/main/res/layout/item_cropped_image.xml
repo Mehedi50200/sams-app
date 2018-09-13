@@ -1,4 +1,5 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cardviewcroppedimage"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,9 +9,11 @@
     app:cardCornerRadius="1dp">
 
     <LinearLayout
+        android:id="@+id/lpdata"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorWhite">
 
         <View
             android:id="@+id/divider"
@@ -21,16 +24,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/colorWhite">
+            android:orientation="vertical">
 
             <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
-                android:id="@+id/lpdata"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="@color/colorWhite">
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvtxtprocessstudentno"
@@ -59,13 +59,31 @@
                     android:layout_gravity="center"
                     android:text="Student Id"
                     android:textColor="@color/colorLightText"/>
+
                 <TextView
                     android:id="@+id/tvtxtprocessstudentstatus"
                     android:layout_height="wrap_content"
                     android:layout_width="80dp"
                     android:layout_gravity="center"
                     android:text="Present"
+                    android:visibility="gone"
                     android:textColor="@color/colorOrangeText"/>
+
+                <ImageView
+                    android:id="@+id/ivattendance"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"/>
+
+                <Button
+                    android:id="@+id/btnitemremove"
+                    android:layout_width="12dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_gravity="end|center"
+                    android:background="@drawable/notedelete" />
 
             </LinearLayout>
 
@@ -79,12 +97,13 @@
                 <EditText
                     android:id="@+id/etcstudentid"
                     android:layout_height="wrap_content"
-                    android:layout_width="120dp"
-                    android:layout_marginLeft="38dp"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="38dp"
                     android:gravity="center"
                     android:textSize="14sp"
                     android:layout_weight="1"
                     android:textColor="@color/colorLightText"
+                    android:focusable="true"
                     android:backgroundTint="@color/colorDarkGrayText"/>
 
                 <Button
@@ -110,10 +129,56 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/lremoveitem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_marginStart="38dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:text="Are You Sure?"
+                    android:textColor="@color/colorLightText"/>
+
+                <Button
+                    android:id="@+id/btnritemYes"
+                    android:layout_width="55dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Yes"
+                    android:textColor="@color/colorMistakeRed"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/colorWhite"
+                    android:elevation="10dp"/>
+
+                <Button
+                    android:id="@+id/btnritemNo"
+                    android:layout_width="50dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="No"
+                    android:textColor="@color/colorDarkGrayText"
+                    android:background="@drawable/button_background"
+                    android:backgroundTint="@color/colorWhite"
+                    android:elevation="10dp"/>
+
+
+            </LinearLayout>
+
+
+
         </LinearLayout>
 
 
     </LinearLayout>
+
+
 
 
 
