@@ -2,7 +2,6 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -29,6 +28,8 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static java.lang.Integer.parseInt;
+
 
 public class StudentProfileActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     String userID ;
     String CourseCode, CourseName;
     String StudentName, StudentId;
-    String NumberOfPresence, NumberOfAbsence;
+    String NumberOfPresence, NumberOfAbsence, TotalClass;
     String Percentage;
     String UserProfileImageUrl;
     TextView btnSignOut, UserName,NoAbsence,NoPresence, NoPercentage, NoClass, EmptyViewAteendance;
@@ -155,8 +156,6 @@ public class StudentProfileActivity extends AppCompatActivity {
                     RVAttendance.setVisibility(View.VISIBLE);
                     EmptyViewAteendance.setVisibility(View.GONE);
                     int i = 0;
-                    int nop = 0;
-                    int noa = 0;
 
                     for (DataSnapshot dataSnapshot1 :dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").getChildren()) {
 
@@ -166,35 +165,26 @@ public class StudentProfileActivity extends AppCompatActivity {
                         week[i] = "Week " + String.valueOf(i + 1);
 
                         listAttendance.add(new AttendanceModel(attendanceId[i], attendacedate[i], status[i], week[i]));
-
-                        if (status[i].equals("Present")) {
-                            nop++;
-                        } else {
-                            noa++;
-                        }
-                        i++;
                     }
                     if(listAttendance.size()==0){
                         RVAttendance.setVisibility(View.GONE);
                         EmptyViewAteendance.setVisibility(View.VISIBLE);
                     }else{
 
-                        NumberOfAbsence = String.valueOf(noa);
+                        DataSnapshot dataSnapshot2 = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("AttendanceRecord");
+
+                        NumberOfAbsence = dataSnapshot2.child("ClassMissed").getValue(String.class);
                         NoAbsence.setText(NumberOfAbsence);
 
-                        NumberOfPresence = String.valueOf(nop);
+                        NumberOfPresence = dataSnapshot2.child("ClassAttended").getValue(String.class);
                         NoPresence.setText(NumberOfPresence);
 
-                        NoClass.setText(String.valueOf(noa+nop));
+                        TotalClass = dataSnapshot2.child("TotalClass").getValue(String.class);
+                        NoClass.setText(TotalClass);
 
-
-                        Percentage = String.valueOf(AttendancePercentage(i,nop));
-                        if (AttendancePercentage(i,nop)<=60)
-                        {
-                            NoPercentage.setTextColor(Color.RED);
-                        }
+                        Percentage = dataSnapshot2.child("Percentage").getValue(String.class);
                         NoPercentage.setText(Percentage + " %");
-                        AttendanceProgress.setProgress(AttendancePercentage(i,nop));
+                        AttendanceProgress.setProgress(parseInt(Percentage));
 
                     }
 
@@ -231,12 +221,6 @@ public class StudentProfileActivity extends AppCompatActivity {
             }
         };
 
-    }
-
-    public int AttendancePercentage(int classTaken, int classPresence){
-        int Percentage;
-        Percentage = classPresence * 100 / classTaken;
-        return Percentage;
     }
 
 }

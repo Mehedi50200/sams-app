@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +58,8 @@ import static org.opencv.imgproc.Imgproc.contourArea;
 public class TextExtractionActivity extends AppCompatActivity {
 
     List<CroppedImageModel> listCroppedImages;
+
+
     RecyclerView RVCroppedImages;
     RecyclerViewAdapterCroppedImages CroppedImageAdapter;
 
@@ -219,6 +222,8 @@ public class TextExtractionActivity extends AppCompatActivity {
                     StudentMatricRef.child("Status").setValue(AttendanceRecord);
                     StudentMatricRef.child("Date").setValue(getCurrentDate());
 
+                    updateAttendance(StudentMatric);
+
                 } else {
                     Toast.makeText(TextExtractionActivity.this, "Could not Find " + StudentMatric, Toast.LENGTH_LONG).show();
                 }
@@ -235,6 +240,53 @@ public class TextExtractionActivity extends AppCompatActivity {
                 throw databaseError.toException(); // don't ignore errors
             }
         });
+
+    }
+
+    public void updateAttendance(final String StudentMatric){
+
+        StudentsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                int nop = 0;
+                int noa = 0;
+                String attendanceid[] = new String[35];
+                String status[] = new String[35];
+
+                for (DataSnapshot dataSnapshot1 : dataSnapshot.child(StudentMatric).child("Attendance").getChildren()) {
+                    attendanceid[i] = dataSnapshot1.getKey();
+                    status[i] = dataSnapshot.child(StudentMatric).child("Attendance").child(attendanceid[i]).child("Status").getValue(String.class);
+
+                    if (status[i].equals("Present")) {
+                        nop++;
+                    } else {
+                        noa++;
+                    }
+                    i++;
+                }
+
+                if (noa + nop != 0) {
+
+                    String Percentage = String.valueOf(AttendancePercentage(nop + noa, nop));
+                    String TotalClass = String.valueOf(noa + nop);
+                    String ClassAttended = String.valueOf(nop);
+                    String ClassMissed = String.valueOf(noa);
+
+                    DatabaseReference AttendanceRef = StudentsRef.child(StudentMatric).child("AttendanceRecord");
+                    AttendanceRef.child("ClassAttended").setValue(ClassAttended);
+                    AttendanceRef.child("ClassMissed").setValue(ClassMissed);
+                    AttendanceRef.child("TotalClass").setValue(TotalClass);
+                    AttendanceRef.child("Percentage").setValue(Percentage);
+                }
+            }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w("Hello", "Failed to read value.", error.toException());
+                }
+            });
 
     }
 
@@ -372,6 +424,13 @@ public class TextExtractionActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         dateToday = dateFormat.format(today);
         return dateToday;
+    }
+
+
+    public int AttendancePercentage(int totalClass, int classPresence){
+        int Percentage;
+        Percentage = classPresence * 100 / totalClass;
+        return Percentage;
     }
 
 

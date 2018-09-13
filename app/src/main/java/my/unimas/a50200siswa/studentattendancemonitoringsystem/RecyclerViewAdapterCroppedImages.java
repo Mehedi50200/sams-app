@@ -41,7 +41,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     private Context mContext;
     private List<CroppedImageModel> mData;
     int x =0;
-    //   private String StudentMatric, studentMatric, AttendanceStatus, attendanceStatus;
+
 
     public RecyclerViewAdapterCroppedImages() {
     }   //Constructor
@@ -65,7 +65,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
     public void onBindViewHolder(final CroppedimageViewHolder holder, final int position) {
 
         final CroppedImageModel changedRecord = mData.get(position);
-
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap croppedimageold = BitmapFactory.decodeFile(mData.get(position).getCroppedImagePath(), options);

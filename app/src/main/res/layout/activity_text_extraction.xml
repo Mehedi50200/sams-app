@@ -42,7 +42,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:requiresFadingEdge="vertical"
-        android:fadingEdgeLength="20dp">
+        android:fadingEdgeLength="10dp">
     </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
