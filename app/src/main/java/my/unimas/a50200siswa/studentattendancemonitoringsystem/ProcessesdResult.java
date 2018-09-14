@@ -1,6 +1,5 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,9 +9,11 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.github.chrisbanes.photoview.PhotoView;
@@ -121,23 +122,61 @@ public class ProcessesdResult extends AppCompatActivity {
 
         imageCropIntoPiecess(image);
 
+
+        FrameLayout FrameImage=  findViewById(R.id.frameimageprocess);
+        final View Scannerbar = findViewById(R.id.scannerbar);
+        final Animation ImageprocessAnimation = AnimationUtils.loadAnimation(ProcessesdResult.this, R.anim.imagescanners);
+
+
+
+        ImageprocessAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Scannerbar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+        });
+
         btnProcessText.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(ProcessesdResult.this, TextExtractionActivity.class);
-                intent.putExtra("chunkedImagedDirectory", chunkedImagedDirectory);
-                intent.putExtra("UserId", UserId );
-                intent.putExtra("UserName", userName );
-                intent.putExtra("CourseCode", CourseCode);
-                intent.putExtra("CourseName", CourseName);
-                intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
 
-                Pair[] pairs = new Pair[1];
-                pairs[0]= new Pair<View, String>(ProcessedImage, "tmainlayout");
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(ProcessesdResult.this, pairs);
+            Scannerbar.setVisibility(View.VISIBLE);
+            Scannerbar.startAnimation(ImageprocessAnimation);
 
-                startActivity(intent, options.toBundle());
+            final Intent intent= new Intent(ProcessesdResult.this, TextExtractionActivity.class);
+            intent.putExtra("chunkedImagedDirectory", chunkedImagedDirectory);
+            intent.putExtra("UserId", UserId );
+            intent.putExtra("UserName", userName );
+            intent.putExtra("CourseCode", CourseCode);
+            intent.putExtra("CourseName", CourseName);
+            intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
+
+
+            Thread timer =new Thread() {
+                public void run (){
+                    try {
+                        sleep (3000);
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    finally {
+                        startActivity(intent);
+                    }
+                }
+            };
+            timer.start();
+
+
+
+
             }
         });
 

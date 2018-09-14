@@ -1,6 +1,9 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -49,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
 
     Animation UpDown,DownUp,  RightToLeft;
     LinearLayout HomeUp, HomeDown;
+    CircleImageView CVHomeTakeAttendance;
 
 
 
@@ -87,6 +91,8 @@ public class HomeActivity extends AppCompatActivity {
         btnSignOut = findViewById(R.id.btnsignout_home);
         UserName = findViewById(R.id.username);
         userProfileImage =findViewById(R.id.userprofileimg);
+
+        CVHomeTakeAttendance =findViewById(R.id.cvhometakeattendance);
 
         final RecyclerView RVCourse = findViewById(R.id.recyclerviewcourse);
         final RecyclerView RVNote = findViewById(R.id.rvnote);
@@ -155,6 +161,12 @@ public class HomeActivity extends AppCompatActivity {
                         listCourse.add(new CourseModel(userID,userProfileImageUrl,coursecode[i],coursename[i], day[i],time[i]));
                         i++;
                     }
+                    if(listCourse.size()==0){
+                        RVCourse.setVisibility(View.GONE);
+                        EmptyViewCourse.setVisibility(View.VISIBLE);
+
+                    }
+
                 }else{
                     RVCourse.setVisibility(View.GONE);
                     EmptyViewCourse.setVisibility(View.VISIBLE);
@@ -250,6 +262,10 @@ public class HomeActivity extends AppCompatActivity {
                         listNote.add(new NoteModel(noteid[i],note[i],date[i]));
                         i++;
                     }
+                    if(listCourse.size()==0){
+                        RVNote.setVisibility(View.GONE);
+                        EmptyViewNote.setVisibility(View.VISIBLE);
+                    }
                 }else{
                     RVNote.setVisibility(View.GONE);
                     EmptyViewNote.setVisibility(View.VISIBLE);
@@ -266,6 +282,28 @@ public class HomeActivity extends AppCompatActivity {
 
         noteAdapter = new RecyclerViewAdapterNote(this,listNote);
         RVNote.setAdapter(noteAdapter);
+
+
+        if (!isNetworkConnected(HomeActivity.this)) {
+            EmptyViewCourse.setVisibility(View.VISIBLE);
+            EmptyViewCourse.setText("It Seems You do Not Have Internet Connection. However, You Still Can Take Picture of the Attendance Sheet and Process it Later");
+            CVHomeTakeAttendance.setVisibility(View.VISIBLE);
+            RVCourse.setVisibility(View.GONE);
+
+            CVHomeTakeAttendance.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(HomeActivity.this, TakeAttendancePictureActivity.class);
+                    intent.putExtra("UserId", "UserOfline");
+                    intent.putExtra("UserName", "User Ofline");
+                    intent.putExtra("CourseCode", "UndefinedCourseCode");
+                    intent.putExtra("CourseName", "UndefinedCourseName");
+                    intent.putExtra("UserProfileImageUrl", "No User Image");
+                    startActivity(intent);
+                }
+            });
+        }
+
     }
 
     public String getCurrentDate(){
@@ -274,6 +312,13 @@ public class HomeActivity extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         dateToday= dateFormat.format(today);
         return dateToday;
+    }
+
+    public static boolean isNetworkConnected(Context c) {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 

@@ -49,6 +49,7 @@ import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static my.unimas.a50200siswa.studentattendancemonitoringsystem.HomeActivity.isNetworkConnected;
 import static org.opencv.core.Core.bitwise_not;
 import static org.opencv.core.Core.countNonZero;
 import static org.opencv.imgproc.Imgproc.COLOR_RGB2GRAY;
@@ -67,7 +68,7 @@ public class TextExtractionActivity extends AppCompatActivity {
     TextView UserName;
     CircleImageView userProfileImage;
 
-    TextView EmptyViewCroppedImage;
+    TextView EmptyViewCroppedImage, TVNoNetwork;
 
     String UserId,userName,CourseCode, CourseName,UserProfileImageUrl;
 
@@ -118,6 +119,7 @@ public class TextExtractionActivity extends AppCompatActivity {
         UserName = findViewById(R.id.username);
         userProfileImage =findViewById(R.id.userprofileimg);
         btnUploadAttendance = findViewById(R.id.btnuploadattendance);
+        TVNoNetwork= findViewById(R.id.tvnonetwork);
 
         ProgressUploadAttendance = findViewById(R.id.progressupload);
 
@@ -206,6 +208,18 @@ public class TextExtractionActivity extends AppCompatActivity {
                 }
             }
         };
+
+
+        if (!isNetworkConnected(TextExtractionActivity.this)) {
+            btnUploadAttendance.setVisibility(View.GONE);
+            TVNoNetwork.setVisibility(View.VISIBLE);
+        }else{
+            btnUploadAttendance.setVisibility(View.VISIBLE);
+            TVNoNetwork.setVisibility(View.GONE);
+        }
+
+
+
     }
 
     public void UploadData(final String StudentMatric, final String AttendanceRecord, final int px) {

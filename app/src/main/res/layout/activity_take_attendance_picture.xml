@@ -35,7 +35,7 @@
             android:id="@+id/btnprocess"
             android:layout_width="130dp"
             android:layout_height="35dp"
-            android:text="Process Image"
+            android:text="Save Image"
             android:textColor="@color/colorDarkGrayText"
             android:textAllCaps="false"
             android:background="@drawable/button_background"

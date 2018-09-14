@@ -61,6 +61,16 @@
             android:layout_marginBottom="5dp"
             android:visibility="gone"/>
 
+        <TextView
+            android:id="@+id/tvnonetwork"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="No network connection. Please come back to upload Records when internet connection is available."
+            android:textColor="@color/colorDarkGrayText"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:visibility="gone"/>
+
         <Button
             android:id="@+id/btnuploadattendance"
             android:layout_width="100dp"

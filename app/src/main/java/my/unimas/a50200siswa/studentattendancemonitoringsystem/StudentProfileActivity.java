@@ -165,6 +165,8 @@ public class StudentProfileActivity extends AppCompatActivity {
                         week[i] = "Week " + String.valueOf(i + 1);
 
                         listAttendance.add(new AttendanceModel(attendanceId[i], attendacedate[i], status[i], week[i]));
+
+                        i++;
                     }
                     if(listAttendance.size()==0){
                         RVAttendance.setVisibility(View.GONE);

@@ -9,26 +9,27 @@
         android:id="@+id/tvadate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
         android:text="Date"
-        android:textColor="@color/colorLightText"
-        android:textSize="12sp"
-        android:textStyle="italic"/>
+        android:textColor="@color/colorDarkGrayText"
+        android:textSize="10sp"/>
 
     <ImageView
         android:id="@+id/ivastatus"
         android:layout_width="match_parent"
-        android:layout_height="42dp"/>
+        android:layout_height="15dp"/>
 
 
     <TextView
         android:id="@+id/tvaweek"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:textSize="12sp"
         android:text="Week"
-        android:textColor="@color/colorDarkPink"/>
+        android:textColor="@color/colorDarkGrayText"/>
 
     </LinearLayout>
 

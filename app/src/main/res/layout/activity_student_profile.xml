@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/home_bg"
     android:orientation="vertical">
-
     <include layout="@layout/action_bar" />
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -13,7 +12,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
         android:elevation="15dp"
         android:src="@drawable/profilepic"
         android:transitionName="tstudentpic" />
@@ -27,21 +26,21 @@
         <TextView
             android:id="@+id/studentname"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="25dp"
             android:layout_gravity="center_horizontal"
             android:text="Student Name"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:transitionName="tstudentname" />
 
         <TextView
             android:id="@+id/studentmatric"
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Matric No"
             android:textColor="@color/colorLightText"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:transitionName="tstudentmatric" />
 
     </LinearLayout>
@@ -279,7 +278,6 @@
 
         </android.support.v7.widget.CardView>
 
-
     </LinearLayout>
 
 
@@ -297,7 +295,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"></android.support.v7.widget.RecyclerView>
+        android:layout_marginTop="20dp">
+    </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -307,29 +306,42 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="17dp"
-            android:layout_height="17dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_margin="10dp"
-            android:src="@drawable/dotpresent" />
+            android:src="@drawable/presentdot" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
+            android:layout_marginRight="20dp"
             android:text="Present"
-            android:textColor="@color/colorDarkText" />
+            android:textColor="@color/colorDarkGrayText" />
 
         <ImageView
-            android:layout_width="17dp"
-            android:layout_height="17dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_margin="10dp"
-            android:src="@drawable/dotabsent" />
+            android:src="@drawable/absentdot" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Absent"
-            android:textColor="@color/colorDarkText" />
+            android:layout_marginRight="20dp"
+            android:textColor="@color/colorDarkGrayText" />
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/faileddot" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Failed"
+            android:textColor="@color/colorDarkGrayText" />
 
     </LinearLayout>
 

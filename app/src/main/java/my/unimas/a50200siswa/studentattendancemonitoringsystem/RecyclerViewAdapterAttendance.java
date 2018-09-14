@@ -39,8 +39,10 @@ class RecyclerViewAdapterAttendance extends RecyclerView.Adapter<RecyclerViewAda
         holder.Week.setText(mData.get(position).getWeek());
         if(mData.get(position).getStatus().trim().equals("Present")){
             holder.IVStatus.setBackgroundResource(R.drawable.bgpresent);
-        }else {
+        }else if (mData.get(position).getStatus().trim().equals("Absent")) {
             holder.IVStatus.setBackgroundResource(R.drawable.bgabsent);
+        }else{
+            holder.IVStatus.setBackgroundResource(R.drawable.bgfailed);
         }
     }
 
