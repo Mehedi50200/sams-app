@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -18,7 +20,6 @@
         android:layout_weight="1">
 
         <FrameLayout
-            android:id="@+id/frameimageprocess"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -44,37 +45,66 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal"
-        android:layout_gravity="end|bottom"
-        android:gravity="center">
+        android:layout_gravity="end|bottom">
 
-        <Button
-            android:id="@+id/btntakepictureagain"
-            android:layout_width="130dp"
-            android:layout_height="35dp"
-            android:layout_margin="10dp"
-            android:text="Take Picture"
-            android:textColor="@color/colorDarkGrayText"
-            android:textAllCaps="false"
-            android:background="@drawable/button_background"
-            android:backgroundTint="@color/colorWhite"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cvprtakeattendance"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/c_camera"
+            android:elevation="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnprocesstext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btnprocesstext"
             android:layout_width="130dp"
             android:layout_height="35dp"
-            android:layout_margin="10dp"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_background"
+            android:backgroundTint="@color/colorWhite"
             android:text="Process Image"
             android:textAllCaps="false"
             android:textColor="@color/colorDarkGrayText"
-            android:background="@drawable/button_background"
-            android:backgroundTint="@color/colorWhite"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/cvprhome"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="5dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/c_home"
+            android:elevation="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.422"
+            app:layout_constraintStart_toEndOf="@+id/btnprocesstext"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
 
 

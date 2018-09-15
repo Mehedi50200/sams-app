@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,7 +42,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class GenerateAttendanceSheetActivity extends AppCompatActivity {
 
     List<StudentIdModel> listStudentId;
-    String CourseCode, CourseName, UserId, UserName, UserProfileImageUrl;
+    String CourseCode, CourseName, UserId, UserName, UserProfileImageUrl, UserEmail;
 
     Button btnSignOut;
     TextView TVUserName;
@@ -49,6 +50,9 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
     private TextView coursecode, coursename;
     String AttendanceSheetPath;
     PDFView pdfViewAttendanceSheet;
+    CircleImageView CVSendEmail;
+
+
 
 
 
@@ -82,6 +86,7 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
         Intent intent = getIntent();
         UserId = intent.getExtras().getString("UserId");
         UserName = intent.getExtras().getString("UserName");
+        UserEmail =intent.getExtras().getString("UserEmail");
         CourseCode = intent.getExtras().getString("CourseCode");
         CourseName = intent.getExtras().getString("CourseName");
         UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
@@ -99,6 +104,8 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
         btnSignOut = findViewById(R.id.btnsignout_home);
         TVUserName = findViewById(R.id.username);
         userProfileImage = findViewById(R.id.userprofileimg);
+
+        CVSendEmail =findViewById(R.id.cvsendemail);
 
         coursecode = findViewById(R.id.generatecoursecode);
         coursename = findViewById(R.id.generatecoursename);
@@ -169,6 +176,27 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w("Hello", "Failed to read value", error.toException());
+            }
+        });
+
+        CVSendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                File AttendanceSheetPdf = new File (AttendanceSheetPath);
+                Uri uri = Uri.fromFile(AttendanceSheetPdf);
+
+                if(AttendanceSheetPdf.isFile()){
+                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                    sendIntent.setType("application/pdf");
+                    sendIntent.putExtra(Intent.EXTRA_EMAIL, UserEmail);
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT,"Attendance Sheet For " + CourseCode);
+                    sendIntent.putExtra(Intent.EXTRA_STREAM,uri);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT,"This attendance sheet is auto generated for test purpose ");
+                    startActivity(Intent.createChooser(sendIntent, ""));
+                }else{
+                    Toast.makeText(GenerateAttendanceSheetActivity.this, "Sorry! the file does not exist or the application doesn't have read permission to the directory", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -65,8 +66,9 @@ public class TextExtractionActivity extends AppCompatActivity {
     RecyclerViewAdapterCroppedImages CroppedImageAdapter;
 
     Button btnSignOut, btnUploadAttendance;
-    TextView UserName;
+    TextView TVUserName, TVCourseCode, TVCourseName;
     CircleImageView userProfileImage;
+    CircleImageView cvTEHome, cvTETakeAttendance;
 
     TextView EmptyViewCroppedImage, TVNoNetwork;
 
@@ -116,10 +118,15 @@ public class TextExtractionActivity extends AppCompatActivity {
         /*----------------------------------------------------------------------------------------*/
 
         btnSignOut = findViewById(R.id.btnsignout_home);
-        UserName = findViewById(R.id.username);
+        TVUserName = findViewById(R.id.username);
+        TVCourseCode = findViewById(R.id.tvtecoursecode);
+        TVCourseName = findViewById(R.id.tvtecoursename);
         userProfileImage =findViewById(R.id.userprofileimg);
         btnUploadAttendance = findViewById(R.id.btnuploadattendance);
         TVNoNetwork= findViewById(R.id.tvnonetwork);
+
+        cvTEHome =findViewById(R.id.cvtehome);
+        cvTETakeAttendance =findViewById(R.id.cvtetakeattendance);
 
         ProgressUploadAttendance = findViewById(R.id.progressupload);
 
@@ -136,11 +143,61 @@ public class TextExtractionActivity extends AppCompatActivity {
         /*----------------------------------------------------------------------------------------*/
 
 
-        UserName.setText(userName);
+        TVUserName.setText(userName);
+        TVCourseCode.setText(CourseCode);
+        TVCourseName.setText(CourseName);
         GlideApp.with(TextExtractionActivity.this)
                 .load(UserProfileImageUrl)
                 .error(R.drawable.profilepic)
                 .into(userProfileImage);
+
+
+        cvTETakeAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(TextExtractionActivity.this, TakeAttendancePictureActivity.class);
+                intent.putExtra("UserId", UserId );
+                intent.putExtra("UserName", userName );
+                intent.putExtra("CourseCode", CourseCode);
+                intent.putExtra("CourseName", CourseName);
+                intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
+                startActivity(intent);
+            }
+        });
+
+        cvTEHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(TextExtractionActivity.this);
+                View view = (TextExtractionActivity.this).getLayoutInflater().inflate(R.layout.alert_goback_home, null);
+                final Button btnYes = view.findViewById(R.id.btnhyes);
+                final Button btnNo = view.findViewById(R.id.btnhno);
+                mBuilder.setView(view);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(TextExtractionActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+
+            }
+        });
+
+
 
         final File fileDirectory = new File(croppedImageDirectory);
 
@@ -245,6 +302,7 @@ public class TextExtractionActivity extends AppCompatActivity {
                 ProgressUploadAttendance.setProgress(progress);
                 if(progress == 100 || px == listCroppedImages.size()-1){
                     ProgressUploadAttendance.setVisibility(View.GONE);
+                    Toast.makeText(TextExtractionActivity.this, "Attendance Uploaded", Toast.LENGTH_LONG).show();
                 }
 
             }

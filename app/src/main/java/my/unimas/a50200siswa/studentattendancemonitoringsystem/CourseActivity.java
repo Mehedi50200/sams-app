@@ -26,7 +26,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CourseActivity extends AppCompatActivity {
-    String userID, userName;
+    String userID, userName, userEmail;
     String CourseCode, CourseName, UserId, UserProfileImageUrl ;
 
     List<StudentModel> listStudent;
@@ -120,6 +120,8 @@ public class CourseActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 UserName.setText(userName);
+                userEmail = dataSnapshot.child(userID).child("userEmail").getValue(String.class);
+
 
                 String studentId[] = new String[50];
                 String studentName[] = new String[50];
@@ -169,6 +171,7 @@ public class CourseActivity extends AppCompatActivity {
                 Intent intent = new Intent(CourseActivity.this, GenerateAttendanceSheetActivity.class);
                 intent.putExtra("UserId", UserId );
                 intent.putExtra("UserName", userName );
+                intent.putExtra("UserEmail", userEmail);
                 intent.putExtra("CourseCode", CourseCode);
                 intent.putExtra("CourseName", CourseName);
                 intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);

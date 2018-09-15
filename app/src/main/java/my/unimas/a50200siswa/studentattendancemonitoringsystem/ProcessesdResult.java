@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.github.chrisbanes.photoview.PhotoView;
@@ -45,8 +44,7 @@ public class ProcessesdResult extends AppCompatActivity {
     Bitmap image;
     Mat imageMat;
 
-    Button btnProcessText, btnTakePicture;
-    File myDir;
+    Button btnProcessText;
 
     PhotoView ProcessedImage;
     TextView UserName;
@@ -57,6 +55,8 @@ public class ProcessesdResult extends AppCompatActivity {
     String fname;
     String photoPath, chunkedImagedDirectory;
     String UserId,userName, CourseCode, CourseName,UserProfileImageUrl;
+
+    CircleImageView cvPRHome, cvPRTakeAttendance;
 
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -103,7 +103,9 @@ public class ProcessesdResult extends AppCompatActivity {
 
         ProcessedImage = findViewById(R.id.pvprocessedimage);
         btnProcessText = findViewById(R.id.btnprocesstext);
-        btnTakePicture = findViewById(R.id.btntakepictureagain);
+
+        cvPRHome = findViewById(R.id.cvprhome);
+        cvPRTakeAttendance = findViewById(R.id.cvprtakeattendance);
 
         btnSignOut = findViewById(R.id.btnsignout_home);
         UserName = findViewById(R.id.username);
@@ -123,7 +125,6 @@ public class ProcessesdResult extends AppCompatActivity {
         imageCropIntoPiecess(image);
 
 
-        FrameLayout FrameImage=  findViewById(R.id.frameimageprocess);
         final View Scannerbar = findViewById(R.id.scannerbar);
         final Animation ImageprocessAnimation = AnimationUtils.loadAnimation(ProcessesdResult.this, R.anim.imagescanners);
 
@@ -174,24 +175,31 @@ public class ProcessesdResult extends AppCompatActivity {
             };
             timer.start();
 
-
-
-
             }
         });
 
-        btnTakePicture.setOnClickListener(new View.OnClickListener() {
+
+        cvPRHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProcessesdResult.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        cvPRTakeAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProcessesdResult.this, TakeAttendancePictureActivity.class);
-                intent.putExtra("UserId", UserId);
-                intent.putExtra("UserName", userName);
+                intent.putExtra("UserId", UserId );
+                intent.putExtra("UserName", userName );
                 intent.putExtra("CourseCode", CourseCode);
                 intent.putExtra("CourseName", CourseName);
                 intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
                 startActivity(intent);
             }
         });
+
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
