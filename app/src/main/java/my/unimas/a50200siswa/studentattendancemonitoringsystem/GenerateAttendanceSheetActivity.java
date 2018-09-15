@@ -150,7 +150,7 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
                     File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
                             "/sams_images/AttendanceSheet");
                     root.mkdirs();
-                    AttendanceSheetPath = root.getPath().toString() + "/"+CourseCode+ ".pdf";
+                    AttendanceSheetPath = root.getPath() + "/"+CourseCode+ ".pdf";
                     PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(AttendanceSheetPath));
 
                     document.open();
@@ -219,7 +219,6 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
     }
 
     public void writeData(PdfWriter writer, Document document) throws DocumentException {
-
         int lrectllx = 70;
         int lrectlly = 720;
         int lrecturx = 280;
@@ -263,8 +262,7 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
 
                 lrectlly = lrectlly - 42;
                 lrectury = lrectury - 42;
-               // lcx = lrecturx- 30 ;
-               // lcy = (lrectlly+lrectury)/2;
+
 
             }else{
                 PdfContentByte canvas = writer.getDirectContent();
@@ -292,8 +290,6 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
 
                 rrectlly = rrectlly - 42;
                 rrectury = rrectury - 42;
-            //    rcx = rrecturx- 30 ;
-            //    rcy = (rrectlly+rrectury)/2;
             }
         }
 
