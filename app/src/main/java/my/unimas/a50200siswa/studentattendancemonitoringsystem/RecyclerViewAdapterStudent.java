@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -32,7 +30,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
 
     private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
-    public RecyclerViewAdapterStudent(TextExtractionActivity mContext, ArrayList<Bitmap> listCroppedImages) {}  //Constructor
+    public RecyclerViewAdapterStudent() {}  //Constructor
 
     public RecyclerViewAdapterStudent(Context mContext, List<StudentModel> mData) {
         this.mContext = mContext;

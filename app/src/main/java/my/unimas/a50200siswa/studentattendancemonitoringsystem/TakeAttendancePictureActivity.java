@@ -192,19 +192,20 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
 
     private void saveImage(Bitmap finalBitmap) {
 
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/sams_images");
+        File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
+                "/sams_images/" + CourseCode);
 
-        if (! myDir.exists()){
-            myDir.mkdir();
+        if (! root.exists()){
+            root.mkdirs();
             // If you require it to make the entire directory path including parents,
             // use directory.mkdirs(); here instead.
         }
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HH").format(new Date());
+        String ImagePath = root.getPath().toString();
+        String timeStamp = new SimpleDateFormat("yyyyMMddHH").format(new Date());
         fname = CourseCode + "_" + timeStamp + ".jpg";
 
-        File file = new File(myDir, fname);
+        File file = new File(ImagePath, fname);
         if (file.exists()) file.delete ();
         try {
             FileOutputStream out = new FileOutputStream(file);

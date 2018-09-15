@@ -200,6 +200,7 @@ public class SignInActivity extends AppCompatActivity {
                         }
                         else{
                             startActivity(new Intent(SignInActivity.this,HomeActivity.class));
+                            finish();
                         }
                         simpleProgressBar.setVisibility(View.GONE);
                     }

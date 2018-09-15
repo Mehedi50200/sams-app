@@ -17,14 +17,30 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
-        <com.github.chrisbanes.photoview.PhotoView
-            android:id="@+id/pvprocessedimage"
+        <FrameLayout
+            android:id="@+id/frameimageprocess"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_margin="8dp"
-            android:transitionName="tmainimage"
-            android:fadingEdge="vertical"
-            android:fadingEdgeLength="10dp"/>
+            android:layout_height="match_parent">
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:id="@+id/pvprocessedimage"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_margin="8dp"
+                android:transitionName="tmainimage"
+                android:fadingEdge="vertical"
+                android:fadingEdgeLength="10dp"/>
+
+            <View
+                android:id="@+id/scannerbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/imagescananimation"
+                android:visibility="gone"/>
+
+        </FrameLayout>
+
+
 
     </LinearLayout>
 

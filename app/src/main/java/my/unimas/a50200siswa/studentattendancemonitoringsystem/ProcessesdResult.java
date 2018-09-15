@@ -91,11 +91,11 @@ public class ProcessesdResult extends AppCompatActivity {
         CourseCode = intent.getExtras().getString("CourseCode");
         CourseName = intent.getExtras().getString("CourseName");
         UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
-        /*------------------------- Receive data From Previous Intent ----------------------------*/
 
-        String root = Environment.getExternalStorageDirectory().toString();
-        final File myDir = new File(root);
-        photoPath = myDir+"/sams_images/"+ fname;
+        /*----------------------------------------------------------------------------------------*/
+
+        File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),"/sams_images/" + CourseCode);
+        photoPath = root.getPath().toString()+"/" + fname;
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
@@ -214,12 +214,13 @@ public class ProcessesdResult extends AppCompatActivity {
 
     public void imageCropIntoPiecess(Bitmap bitmap){
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd").format(new Date());
-        String root = Environment.getExternalStorageDirectory().toString();
-        myDir = new File(root + "/sams_images" + "/" + CourseCode + "_" + timeStamp);
-        myDir.mkdir();
+        String timeStamp =  new SimpleDateFormat("yyyyMMddHH").format(new Date());
 
-        chunkedImagedDirectory = myDir.toString() + "/";
+        File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
+                "/sams_images/"+ CourseCode +"/" + timeStamp);
+        root.mkdirs();
+
+        chunkedImagedDirectory = root.getPath().toString() + "/";
 
         int n=1;
 

@@ -78,13 +78,14 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
                 intent.putExtra("CourseName", mData.get(position).getCourseName());
                 intent.putExtra("UserProfileImageUrl", mData.get(position).getUserProfileImageUrl());
 
+
                 Pair[] pairs = new Pair[2];
                 pairs[0]= new Pair<View, String>(holder.courseCardView, "tparent");
                 pairs[1]= new Pair<View, String>(holder.courseName, "tcoursename");
                 pairs[1]= new Pair<View, String>(holder.courseCode, "tcoursecode");
 
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, pairs);
-                // start the activity
+
                 mContext.startActivity(intent, options.toBundle());
             }
         });

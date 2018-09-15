@@ -32,7 +32,7 @@ public class CourseActivity extends AppCompatActivity {
     List<StudentModel> listStudent;
 
     TextView EmptyViewStudent;
-    CircleImageView cvTakeAttendance, cvGallery;
+    CircleImageView cvTakeAttendance, cvGallery, cvGeneratePdf;
 
     Button btnSignOut;
     TextView UserName;
@@ -80,6 +80,7 @@ public class CourseActivity extends AppCompatActivity {
 
         cvTakeAttendance =findViewById(R.id.cvtakeattendance);
         cvGallery=findViewById(R.id.cvgallery);
+        cvGeneratePdf = findViewById(R.id.cvgeneratepdf);
 
         coursecode =  findViewById(R.id.coursecode);
         coursename =  findViewById(R.id.coursename);
@@ -120,9 +121,9 @@ public class CourseActivity extends AppCompatActivity {
                 userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 UserName.setText(userName);
 
-                String studentId[] = new String[20];
-                String studentName[] = new String[20];
-                String studentserial[] = new String[20];
+                String studentId[] = new String[50];
+                String studentName[] = new String[50];
+                String studentserial[] = new String[50];
 
                 listStudent.clear();
                 if (dataSnapshot.exists()) {
@@ -161,6 +162,21 @@ public class CourseActivity extends AppCompatActivity {
 
         studentAdapter = new RecyclerViewAdapterStudent(this,listStudent);
         RVStudent.setAdapter(studentAdapter);
+
+        cvGeneratePdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CourseActivity.this, GenerateAttendanceSheetActivity.class);
+                intent.putExtra("UserId", UserId );
+                intent.putExtra("UserName", userName );
+                intent.putExtra("CourseCode", CourseCode);
+                intent.putExtra("CourseName", CourseName);
+                intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
+                startActivity(intent);
+            }
+        });
+
+
 
         cvTakeAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
