@@ -164,7 +164,9 @@ public class HomeActivity extends AppCompatActivity {
                     if(listCourse.size()==0){
                         RVCourse.setVisibility(View.GONE);
                         EmptyViewCourse.setVisibility(View.VISIBLE);
-
+                    }else{
+                        RVCourse.setVisibility(View.VISIBLE);
+                        EmptyViewCourse.setVisibility(View.GONE);
                     }
 
                 }else{
@@ -241,7 +243,6 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         listNote = new ArrayList<>();
-
         notesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -262,9 +263,12 @@ public class HomeActivity extends AppCompatActivity {
                         listNote.add(new NoteModel(noteid[i],note[i],date[i]));
                         i++;
                     }
-                    if(listCourse.size()==0){
+                    if(listNote.size()==0){
                         RVNote.setVisibility(View.GONE);
                         EmptyViewNote.setVisibility(View.VISIBLE);
+                    }else{
+                        RVNote.setVisibility(View.VISIBLE);
+                        EmptyViewNote.setVisibility(View.GONE);
                     }
                 }else{
                     RVNote.setVisibility(View.GONE);
