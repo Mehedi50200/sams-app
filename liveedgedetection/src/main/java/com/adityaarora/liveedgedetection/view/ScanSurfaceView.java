@@ -370,7 +370,7 @@ public class ScanSurfaceView extends FrameLayout implements SurfaceHolder.Callba
 
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
-            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth() , bitmap.getHeight(), matrix, true);
 
             iScanner.onPictureClicked(bitmap);
             postDelayed(new Runnable() {

@@ -9,13 +9,12 @@
     android:transitionName="tparent">
 
     <include
-        layout="@layout/action_bar"
-        android:transitionName="tactionbar">
+        layout="@layout/action_bar">
     </include>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:layout_weight="1">
 
@@ -79,7 +78,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/button_background"
             android:backgroundTint="@color/colorWhite"
-            android:text="Process Image"
+            android:text="@string/btn_process_image"
             android:textAllCaps="false"
             android:textColor="@color/colorDarkGrayText"
             app:layout_constraintBottom_toBottomOf="parent"

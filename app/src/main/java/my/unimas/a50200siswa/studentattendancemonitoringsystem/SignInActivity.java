@@ -35,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -218,6 +219,7 @@ public class SignInActivity extends AppCompatActivity {
             if (result.isSuccess()) {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = result.getSignInAccount();
+                assert account != null;
                 firebaseAuthWithGoogle(account);
             } else {
                 // Google Sign In failed, update UI appropriately
@@ -238,11 +240,11 @@ public class SignInActivity extends AppCompatActivity {
                             Log.d("TAG", "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            String userID = mAuth.getCurrentUser().getUid();
+                            String userID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                             String userName = mAuth.getCurrentUser().getDisplayName();
                             String userEmail = mAuth.getCurrentUser().getEmail();
                             DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
-                            Map newPost = new HashMap();
+                            Map<String, Object> newPost = new HashMap<>();
                             newPost.put("userName", userName);
                             newPost.put("userEmail", userEmail);
                             current_user_db.updateChildren(newPost);

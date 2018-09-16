@@ -6,6 +6,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,6 +78,37 @@ public class HomeActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
+
+
+
+
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder mBuilder = new AlertDialog.Builder(HomeActivity.this);
+        View view = (HomeActivity.this).getLayoutInflater().inflate(R.layout.alert_exit_app, null);
+        final Button btnYes = view.findViewById(R.id.btnhyes);
+        final Button btnNo = view.findViewById(R.id.btnhno);
+        mBuilder.setView(view);
+        final AlertDialog dialog = mBuilder.create();
+        dialog.show();
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                quit();
+            }
+        });
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,6 +240,7 @@ public class HomeActivity extends AppCompatActivity {
         };
 
 
+
         btnAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -321,9 +354,17 @@ public class HomeActivity extends AppCompatActivity {
     public static boolean isNetworkConnected(Context c) {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    public void quit() {
+        Intent startMain = new Intent(Intent.ACTION_MAIN);
+        startMain.addCategory(Intent.CATEGORY_HOME);
+        startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(startMain);
+    }
 
 }

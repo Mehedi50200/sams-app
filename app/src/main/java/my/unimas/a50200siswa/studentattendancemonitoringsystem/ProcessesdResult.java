@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
@@ -163,13 +164,14 @@ public class ProcessesdResult extends AppCompatActivity {
             Thread timer =new Thread() {
                 public void run (){
                     try {
-                        sleep (3000);
+                        sleep (2000);
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     finally {
                         startActivity(intent);
+                        finish();
                     }
                 }
             };
@@ -182,8 +184,29 @@ public class ProcessesdResult extends AppCompatActivity {
         cvPRHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProcessesdResult.this, HomeActivity.class);
-                startActivity(intent);
+                final AlertDialog.Builder mBuilder = new AlertDialog.Builder(ProcessesdResult.this);
+                View view = (ProcessesdResult.this).getLayoutInflater().inflate(R.layout.alert_goback, null);
+                final Button btnYes = view.findViewById(R.id.btnhyes);
+                final Button btnNo = view.findViewById(R.id.btnhno);
+                mBuilder.setView(view);
+                final AlertDialog dialog = mBuilder.create();
+                dialog.show();
+
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ProcessesdResult.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+                btnNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -197,6 +220,7 @@ public class ProcessesdResult extends AppCompatActivity {
                 intent.putExtra("CourseName", CourseName);
                 intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
                 startActivity(intent);
+                finish();
             }
         });
 

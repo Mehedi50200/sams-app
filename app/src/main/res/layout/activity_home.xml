@@ -28,7 +28,6 @@
                 android:id="@+id/etnote"
                 android:layout_width="260dp"
                 android:layout_height="match_parent"
-                android:hint="type your note here"
                 android:textStyle="italic"
                 android:textColor="@color/colorDarkGrayText"
                 android:textColorHint="@color/colorDarkGrayText"
@@ -73,7 +72,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center|top"
                 android:visibility="gone"
-                android:text="''You can add your Notes or Reminder here''"
+                android:text="@string/empty_note"
                 android:textStyle="bold|italic"
                 android:textSize="25sp"
                 android:textColor="@color/colorTransparentBlue"/>
@@ -107,7 +106,7 @@
             android:gravity="center"
             android:visibility="gone"
             android:textSize="18dp"
-            android:text="You are not assigned with any course yet"
+            android:text="@string/empty_course"
             android:textColor="#ffffff"/>
 
         <de.hdodenhof.circleimageview.CircleImageView

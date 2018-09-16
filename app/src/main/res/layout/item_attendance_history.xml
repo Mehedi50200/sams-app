@@ -11,9 +11,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="Date"
+        android:text="@string/date"
         android:textColor="@color/colorDarkGrayText"
-        android:textSize="10sp"/>
+        android:textSize="12sp"/>
 
     <ImageView
         android:id="@+id/ivastatus"
@@ -28,7 +28,7 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:textSize="12sp"
-        android:text="Week"
+        android:text="@string/week"
         android:textColor="@color/colorDarkGrayText"/>
 
     </LinearLayout>

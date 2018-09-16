@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/home_bg"
@@ -28,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_gravity="center_horizontal"
-            android:text="Student Name"
+            android:text="@string/student_name"
             android:textSize="18sp"
             android:textStyle="bold"
             android:transitionName="tstudentname" />
@@ -38,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Matric No"
+            android:text="@string/matric_no"
             android:textColor="@color/colorLightText"
             android:textSize="16sp"
             android:transitionName="tstudentmatric" />
@@ -81,7 +82,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Class Attended"
+                        android:text="@string/class_attended"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -92,7 +93,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:text="00"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -129,8 +130,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Class Missed"
-                        android:textSize="15dp"
+                        android:text="@string/class_missed"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -140,7 +141,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:text="00"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -184,7 +185,7 @@
                         android:id="@+id/btnnotifystudent"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
-                        android:layout_marginLeft="75dp"
+                        android:layout_marginStart="75dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/notification"
                         android:backgroundTint="@color/colorBlackFortyPercentAlpha" />
@@ -202,8 +203,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="20dp"
-                        android:text="Attendance"
-                        android:textSize="15dp"
+                        android:text="@string/attendance"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -213,7 +214,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:text="00"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -222,7 +223,8 @@
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="match_parent"
                     android:layout_height="10dp"
-                    android:progressTint="@color/colorPink" />
+                    android:progressTint="@color/colorPink"
+                    tools:targetApi="lollipop" />
 
             </LinearLayout>
 
@@ -259,7 +261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginRight="20dp"
-                        android:text="Total Class"
+                        android:text="@string/total_class"
                         android:textSize="15dp"
                         android:textStyle="bold" />
 
@@ -270,7 +272,7 @@
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
                         android:text="00"
-                        android:textSize="15dp" />
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -286,7 +288,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="No Attendance Recorded Yet"
+        android:text="@string/no_attendance_recorded_yet"
         android:textColor="@color/colorDarkPink"
         android:visibility="gone" />
 
@@ -314,7 +316,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:text="Present"
             android:textColor="@color/colorDarkGrayText" />
 
@@ -328,7 +330,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Absent"
-            android:layout_marginRight="20dp"
+            android:layout_marginEnd="20dp"
             android:textColor="@color/colorDarkGrayText" />
 
         <ImageView

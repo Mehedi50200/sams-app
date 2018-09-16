@@ -142,7 +142,6 @@ public class TextExtractionActivity extends AppCompatActivity {
         StudentsRef = rootRef.child("Users").child(userID).child("Course").child(CourseCode).child("Students");
         /*----------------------------------------------------------------------------------------*/
 
-
         TVUserName.setText(userName);
         TVCourseCode.setText(CourseCode);
         TVCourseName.setText(CourseName);
@@ -150,7 +149,6 @@ public class TextExtractionActivity extends AppCompatActivity {
                 .load(UserProfileImageUrl)
                 .error(R.drawable.profilepic)
                 .into(userProfileImage);
-
 
         cvTETakeAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,11 +166,10 @@ public class TextExtractionActivity extends AppCompatActivity {
         cvTEHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 final AlertDialog.Builder mBuilder = new AlertDialog.Builder(TextExtractionActivity.this);
-                View view = (TextExtractionActivity.this).getLayoutInflater().inflate(R.layout.alert_goback_home, null);
-                final Button btnYes = view.findViewById(R.id.btnhyes);
-                final Button btnNo = view.findViewById(R.id.btnhno);
+                View view = (TextExtractionActivity.this).getLayoutInflater().inflate(R.layout.alert_goback, null);
+                final Button btnYes = view.findViewById(R.id.btnteyes);
+                final Button btnNo = view.findViewById(R.id.btnteno);
                 mBuilder.setView(view);
                 final AlertDialog dialog = mBuilder.create();
                 dialog.show();
@@ -193,14 +190,12 @@ public class TextExtractionActivity extends AppCompatActivity {
                     }
                 });
 
-
             }
         });
 
 
 
         final File fileDirectory = new File(croppedImageDirectory);
-
 
         listCroppedImages = new ArrayList<>();
 
@@ -226,9 +221,8 @@ public class TextExtractionActivity extends AppCompatActivity {
 
                 StudentMatric[i] = TextImageProcess(croppedimagenew);
                 AttendanceRecord[i] = CircleDetection(croppedimagenew);
-                listCroppedImages.add(new CroppedImageModel(String.valueOf(i), PhotoPath[i], StudentMatric[i], AttendanceRecord[i]));
+                listCroppedImages.add(new CroppedImageModel(String.valueOf(i), PhotoPath[i], StudentMatric[i], AttendanceRecord[i], CourseCode));
             }
-
 
             btnUploadAttendance.setOnClickListener(new View.OnClickListener() {
                 @Override

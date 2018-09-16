@@ -14,7 +14,7 @@
         android:layout_height="115dp"
         android:orientation="vertical">
 
-        <include layout="@layout/action_bar"></include>
+        <include layout="@layout/action_bar"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:text="Course Code"
+                android:text="@string/course_code"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/colorLightText"
                 android:textStyle="bold"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/colorLightText"
-                android:text="Course Name"
+                android:text="@string/course_name"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
         android:id="@+id/empty_view_croppedimage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="The Images Don't exist"
+        android:text="@string/empty_cropped_image"
         android:visibility="gone" />
 
     <android.support.v7.widget.RecyclerView
@@ -61,7 +61,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:fadingEdgeLength="10dp"
-        android:requiresFadingEdge="vertical"></android.support.v7.widget.RecyclerView>
+        android:requiresFadingEdge="vertical"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,7 +75,7 @@
             android:id="@+id/progressupload"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="10dp"
             android:layout_marginBottom="5dp"
             android:visibility="gone" />
 
@@ -84,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="No network connection. Please come back to upload Records when internet connection is available."
+            android:text="@string/no_internet_upload"
             android:textColor="@color/colorDarkGrayText"
             android:textSize="15sp"
             android:visibility="gone" />
@@ -110,7 +110,8 @@
                 app:layout_constraintEnd_toStartOf="@+id/btnuploadattendance"
                 app:layout_constraintHorizontal_bias="0.511"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="lollipop" />
 
             <Button
                 android:id="@+id/btnuploadattendance"
@@ -124,13 +125,14 @@
                 android:background="@drawable/button_background"
                 android:backgroundTint="@color/colorWhite"
                 android:elevation="25dp"
-                android:text="Upload"
+                android:text="@string/btn_upload"
                 android:textAllCaps="false"
                 android:textColor="@color/colorDarkGrayText"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:targetApi="lollipop" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cvtehome"
@@ -146,7 +148,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnuploadattendance"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="1.0"
+                tools:targetApi="lollipop" />
 
         </android.support.constraint.ConstraintLayout>
 

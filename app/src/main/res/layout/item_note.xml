@@ -28,8 +28,8 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:text="Date"
+            android:layout_marginStart="10dp"
+            android:text="@string/date"
             android:textColor="@color/colorLightGrayText"
             android:textSize="13sp"
             android:textStyle="italic" />
@@ -39,7 +39,7 @@
             android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Note will be added here"
+            android:text="@string/note_add"
             android:textAlignment="center"
             android:textColor="@color/colorDarkGrayText"
             android:textSize="15sp" />
@@ -48,7 +48,7 @@
             android:id="@+id/btnremove"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:layout_gravity="end|top|right"
+            android:layout_gravity="end|top|end"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"

@@ -54,10 +54,10 @@
                 <TextView
                     android:id="@+id/tvtxtprocessstudentid"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_marginEnd="8dp"
                     android:layout_gravity="center"
-                    android:text="Student Id"
+                    android:text="@string/student_id"
                     android:textColor="@color/colorLightText"/>
 
                 <TextView
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="80dp"
                     android:layout_gravity="center"
-                    android:text="Present"
+                    android:text="@string/present"
                     android:visibility="gone"
                     android:textColor="@color/colorOrangeText"/>
 
@@ -110,7 +110,7 @@
                     android:id="@+id/btnsavestudentmatric"
                     android:layout_width="50dp"
                     android:layout_height="25dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="Ok"
                     android:textColor="@color/colorDarkGrayText"
                     android:background="@drawable/button_background"
@@ -121,14 +121,14 @@
                     android:layout_width="70dp"
                     android:layout_height="25dp"
                     android:layout_marginRight="10dp"
-                    android:text="Cancel"
+                    android:text="@string/cancel"
                     android:textColor="@color/colorMistakeRed"
                     android:background="@drawable/button_background"
                     android:backgroundTint="@color/colorWhite"/>
 
             </LinearLayout>
 
-            <LinearLayout
+            <!--LinearLayout
                 android:id="@+id/lremoveitem"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -138,12 +138,12 @@
 
                 <TextView
                     android:layout_height="wrap_content"
-                    android:layout_width="120dp"
+                    android:layout_width="0dp"
                     android:layout_marginStart="38dp"
                     android:gravity="center"
                     android:textSize="14sp"
                     android:layout_weight="1"
-                    android:text="Are You Sure?"
+                    android:text="@string/are_you_sure"
                     android:textColor="@color/colorLightText"/>
 
                 <Button
@@ -151,7 +151,7 @@
                     android:layout_width="55dp"
                     android:layout_height="25dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Yes"
+                    android:text="@string/yes"
                     android:textColor="@color/colorMistakeRed"
                     android:background="@drawable/button_background"
                     android:backgroundTint="@color/colorWhite"
@@ -162,14 +162,13 @@
                     android:layout_width="50dp"
                     android:layout_height="25dp"
                     android:layout_marginEnd="10dp"
-                    android:text="No"
+                    android:text="@string/no"
                     android:textColor="@color/colorDarkGrayText"
                     android:background="@drawable/button_background"
                     android:backgroundTint="@color/colorWhite"
                     android:elevation="10dp"/>
 
-
-            </LinearLayout>
+            </LinearLayout -->
 
 
 

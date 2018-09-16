@@ -134,6 +134,8 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
                 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(TakeAttendancePictureActivity.this, pairs);
 
                 startActivity(intent, options.toBundle());
+
+                finish();
             }
         });
 

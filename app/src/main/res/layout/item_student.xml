@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="center"
-            android:text="Matric"
+            android:text="@string/matric"
             android:textColor="@color/colorDarkGrayText"
             android:transitionName="tstudentmatric"/>
 
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Student Name"
+            android:text="@string/student_name"
             android:textColor="@color/colorDarkGrayText"
             android:transitionName="tstudentname"/>
 

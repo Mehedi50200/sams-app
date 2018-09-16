@@ -2,7 +2,6 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cardview="http://schemas.android.com/apk/res-auto"
     android:id="@+id/coursecardview"
-    android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="140dp"
     android:layout_gravity="center"
@@ -25,7 +24,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textColor="@color/colorLightGrayText"
-            android:text="Course Code"/>
+            android:text="@string/course_code"/>
 
         <TextView
             android:id="@+id/coursename"
@@ -35,7 +34,7 @@
             android:textColor="@color/colorLightText"
             android:textSize="13sp"
             android:gravity="center"
-            android:text="Course Name"/>
+            android:text="@string/course_name"/>
 
         <View
             android:id="@+id/divider"
@@ -55,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Day"
+                android:text="@string/day"
                 android:textStyle="bold"
                 android:textColor="@color/colorLightGrayText"/>
 

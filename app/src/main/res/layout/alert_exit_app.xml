@@ -18,16 +18,16 @@
         android:layout_gravity="center"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@drawable/home_bg">
+        android:background="@drawable/card_gradientpurple">
 
 
         <TextView
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="@string/alert_delete_note"
+            android:text="@string/exit_app"
             android:textSize="13sp"
             android:gravity="center"
-            android:textColor="@color/colorDarkGrayText"/>
+            android:textColor="@color/colorWhite"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:layout_marginTop="10dp">
 
             <Button
-                android:id="@+id/btnyes"
+                android:id="@+id/btnhyes"
                 android:layout_width="60dp"
                 android:layout_height="28dp"
                 android:layout_margin="5dp"
@@ -47,7 +47,7 @@
                 android:textColor="@color/colorMistakeRed" />
 
             <Button
-                android:id="@+id/btnno"
+                android:id="@+id/btnhno"
                 android:layout_width="60dp"
                 android:layout_height="28dp"
                 android:layout_margin="5dp"
@@ -55,13 +55,7 @@
                 android:textColor="@color/colorDarkGrayText"
                 android:background="@drawable/button_background"
                 android:backgroundTint="@color/colorWhite"/>
-
-
         </LinearLayout>
-
-
-
-
 
     </LinearLayout>
 

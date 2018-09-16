@@ -9,14 +9,13 @@
     android:background="@drawable/home_bg">
 
     <include
-        layout="@layout/action_bar"
-        android:transitionName="tactionbar">
+        layout="@layout/action_bar">
     </include>
 
     <com.adityaarora.liveedgedetection.view.TouchImageView
         android:id="@+id/scanned_image"
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="0dp"
         android:scaleType="center"
         android:layout_weight="1"
         android:transitionName="tmainimage"
@@ -35,7 +34,7 @@
             android:id="@+id/btnprocess"
             android:layout_width="130dp"
             android:layout_height="35dp"
-            android:text="Save Image"
+            android:text="@string/btn_save_image"
             android:textColor="@color/colorDarkGrayText"
             android:textAllCaps="false"
             android:background="@drawable/button_background"

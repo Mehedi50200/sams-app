@@ -1,1 +1,40 @@
-<resources></resources>
+<resources>
+    <string name="course_code">Course Code</string>
+    <string name="course_name">Course Name</string>
+    <string name="user_name">User Name</string>
+    <string name="password_change_instruction">We just need your registered email to sent password reset instructions</string>
+    <string name="hint_email">Email</string>
+    <string name="forget_password_signin">Already know your password?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="massage_forgot_password">We just need your registered email to sent password reset instructions</string>
+    <string name="title_forgot_password">Forgot Password</string>
+    <string name="empty_student">No student enrolled for this course</string>
+    <string name="empty_note">\'\'You can add your Notes or Reminder here\'\'</string>
+    <string name="empty_course">You are not assigned with any course yet</string>
+    <string name="btn_process_image">Process Image</string>
+    <string name="matric_no">Matric No</string>
+    <string name="class_attended">Class Attended</string>
+    <string name="class_missed">Class Missed</string>
+    <string name="attendance">Attendance</string>
+    <string name="total_class">Total Class</string>
+    <string name="no_attendance_recorded_yet">No Attendance Recorded Yet</string>
+    <string name="btn_save_image">Save Image</string>
+    <string name="no_internet_upload">No network connection. Please come back to upload Records when internet connection is available.</string>
+    <string name="btn_upload">Upload</string>
+    <string name="empty_cropped_image">The Images Don\'t exist</string>
+    <string name="alert_delete_note">Are you sure you about deleting this item?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="alert_go_back_home">If you go back, all your progress will be lost. Do you still want to go back?</string>
+    <string name="date">Date</string>
+    <string name="week">Week</string>
+    <string name="day">Day</string>
+    <string name="are_you_sure">Are You Sure?</string>
+    <string name="cancel">Cancel</string>
+    <string name="present">Present</string>
+    <string name="student_id">Matric</string>
+    <string name="note_add">Note will be added here</string>
+    <string name="student_name">Student Name</string>
+    <string name="matric">Matric</string>
+    <string name="exit_app">Are you sure you want to exit this app</string>
+</resources>
