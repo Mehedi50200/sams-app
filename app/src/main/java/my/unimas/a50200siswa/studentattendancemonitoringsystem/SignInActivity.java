@@ -244,7 +244,7 @@ public class SignInActivity extends AppCompatActivity {
                             String userName = mAuth.getCurrentUser().getDisplayName();
                             String userEmail = mAuth.getCurrentUser().getEmail();
                             DatabaseReference current_user_db = FirebaseDatabase.getInstance().getReference().child("Users").child(userID);
-                            Map<String, Object> newPost = new HashMap<>();
+                            Map newPost = new HashMap();
                             newPost.put("userName", userName);
                             newPost.put("userEmail", userEmail);
                             current_user_db.updateChildren(newPost);
@@ -254,6 +254,7 @@ public class SignInActivity extends AppCompatActivity {
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
                             Toast.makeText(SignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_LONG).show();
+                            simpleProgressBar.setVisibility(View.GONE);
                             // updateUI(null);
                         }
                         // ...

@@ -2,7 +2,6 @@
     <string name="course_code">Course Code</string>
     <string name="course_name">Course Name</string>
     <string name="user_name">User Name</string>
-    <string name="password_change_instruction">We just need your registered email to sent password reset instructions</string>
     <string name="hint_email">Email</string>
     <string name="forget_password_signin">Already know your password?</string>
     <string name="reset_password">Reset Password</string>
@@ -29,7 +28,6 @@
     <string name="date">Date</string>
     <string name="week">Week</string>
     <string name="day">Day</string>
-    <string name="are_you_sure">Are You Sure?</string>
     <string name="cancel">Cancel</string>
     <string name="present">Present</string>
     <string name="student_id">Matric</string>

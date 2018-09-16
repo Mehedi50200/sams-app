@@ -13,8 +13,7 @@
         android:layout_height="115dp"
         android:orientation="vertical">
 
-        <include layout="@layout/action_bar">
-        </include>
+        <include layout="@layout/action_bar"/>
 
         <LinearLayout
             android:layout_width="match_parent"

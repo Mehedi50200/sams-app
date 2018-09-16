@@ -145,10 +145,10 @@ public class StudentProfileActivity extends AppCompatActivity {
                 String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 UserName.setText(userName);
 
-                String attendanceId[] = new String[35];
-                String attendacedate[] = new String[35];
-                String status[] = new String[35];
-                String week[] = new String[16];
+                String attendanceId[] = new String[50];
+                String attendacedate[] = new String[50];
+                String status[] = new String[50];
+                String week[] = new String[30];
 
                 listAttendance.clear();
                 if (dataSnapshot.exists()) {
