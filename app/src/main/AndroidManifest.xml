@@ -17,6 +17,7 @@
         android:icon="@mipmap/ic_launcher_icon"
         android:label="Student Attendance"
         android:roundIcon="@mipmap/ic_launcher_icon"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label">

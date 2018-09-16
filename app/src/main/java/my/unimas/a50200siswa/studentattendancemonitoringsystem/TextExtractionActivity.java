@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -370,16 +369,6 @@ public class TextExtractionActivity extends AppCompatActivity {
             for (int i = 0; i < items.size(); i++) {
                 TextBlock item = (TextBlock) items.valueAt(i);
                 strBuilder.append(item.getValue());
-                /* strBuilder.append("/");
-                for (Text line : item.getComponents()) {
-                    //extract scanned text lines here
-                    Log.v("lines", line.getValue());
-                    for (Text element : line.getComponents()) {
-                        //extract scanned text words here
-                        Log.v("element", element.getValue());
-                    }
-                }
-                */
             }
             studentMatric = strBuilder.toString().substring(0, strBuilder.toString().length());
         }
@@ -389,10 +378,10 @@ public class TextExtractionActivity extends AppCompatActivity {
 
     public String CircleDetection(Bitmap bitmap) {
 
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDirCirecle = new File(root + "/sams_images/circle/");
-        File myDirRectCrop = new File(root + "/sams_images/crop/");
+    //    String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
+    //    String root = Environment.getExternalStorageDirectory().toString();
+    //    File myDirCirecle = new File(root + "/sams_images/circle/");
+    //    File myDirRectCrop = new File(root + "/sams_images/crop/");
 
 
         Mat src = new Mat();
