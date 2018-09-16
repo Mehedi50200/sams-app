@@ -198,12 +198,15 @@ public class SignInActivity extends AppCompatActivity {
                         if(!task.isSuccessful())
                         {
                             Toast.makeText(SignInActivity.this,"Sorry Wrong Email or Password!", Toast.LENGTH_LONG).show();
+                            simpleProgressBar.setVisibility(View.GONE);
+
                         }
                         else{
+                            simpleProgressBar.setVisibility(View.GONE);
                             startActivity(new Intent(SignInActivity.this,HomeActivity.class));
                             finish();
                         }
-                        simpleProgressBar.setVisibility(View.GONE);
+
                     }
                 });
     }
@@ -251,10 +254,11 @@ public class SignInActivity extends AppCompatActivity {
                             // updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
+                            simpleProgressBar.setVisibility(View.GONE);
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
                             Toast.makeText(SignInActivity.this, "Authentication failed.",
                                     Toast.LENGTH_LONG).show();
-                            simpleProgressBar.setVisibility(View.GONE);
+
                             // updateUI(null);
                         }
                         // ...
