@@ -67,7 +67,6 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="5dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -90,7 +89,7 @@
             android:visibility="gone" />
 
 
-        <android.support.constraint.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
@@ -100,58 +99,34 @@
                 android:id="@+id/cvtetakeattendance"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/c_camera"
-                android:elevation="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnuploadattendance"
-                app:layout_constraintHorizontal_bias="0.511"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:targetApi="lollipop" />
+                android:elevation="25dp" />
 
             <Button
                 android:id="@+id/btnuploadattendance"
-                android:layout_width="100dp"
+                android:layout_width="130dp"
                 android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/button_background"
                 android:backgroundTint="@color/colorWhite"
                 android:elevation="25dp"
                 android:text="@string/btn_upload"
                 android:textAllCaps="false"
-                android:textColor="@color/colorDarkGrayText"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:targetApi="lollipop" />
+                android:textColor="@color/colorDarkGrayText" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cvtehome"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/c_home"
-                android:elevation="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btnuploadattendance"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0"
-                tools:targetApi="lollipop" />
+                android:elevation="25dp" />
 
-        </android.support.constraint.ConstraintLayout>
+        </LinearLayout>
 
 
     </LinearLayout>

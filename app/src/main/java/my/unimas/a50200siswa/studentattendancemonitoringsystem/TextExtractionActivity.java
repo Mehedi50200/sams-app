@@ -273,8 +273,6 @@ public class TextExtractionActivity extends AppCompatActivity {
     }
 
     public void UploadData(final String StudentMatric, final String AttendanceRecord, final int px) {
-        ProgressUploadAttendance.setVisibility(View.VISIBLE);
-        final int progress = px*100 / listCroppedImages.size();
 
         Query query = StudentsRef.orderByKey().equalTo(StudentMatric);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -286,16 +284,10 @@ public class TextExtractionActivity extends AppCompatActivity {
                     StudentMatricRef.child("Status").setValue(AttendanceRecord);
                     StudentMatricRef.child("Date").setValue(getCurrentDate());
 
-                    updateAttendance(StudentMatric);
+                    updateAttendance(StudentMatric, px);
 
                 } else {
                     Toast.makeText(TextExtractionActivity.this, "Could not Find " + StudentMatric, Toast.LENGTH_LONG).show();
-                }
-
-                ProgressUploadAttendance.setProgress(progress);
-                if(progress == 100 || px == listCroppedImages.size()-1){
-                    ProgressUploadAttendance.setVisibility(View.GONE);
-                    Toast.makeText(TextExtractionActivity.this, "Attendance Uploaded", Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -308,7 +300,10 @@ public class TextExtractionActivity extends AppCompatActivity {
 
     }
 
-    public void updateAttendance(final String StudentMatric){
+    public void updateAttendance(final String StudentMatric, final int px){
+
+        ProgressUploadAttendance.setVisibility(View.VISIBLE);
+        final int progress = px*100 / (listCroppedImages.size()-1);
 
         StudentsRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -343,15 +338,24 @@ public class TextExtractionActivity extends AppCompatActivity {
                     AttendanceRef.child("ClassMissed").setValue(ClassMissed);
                     AttendanceRef.child("TotalClass").setValue(TotalClass);
                     AttendanceRef.child("Percentage").setValue(Percentage);
+
+                    ProgressUploadAttendance.setProgress(progress);
+                    if(progress == 100){
+                        ProgressUploadAttendance.setVisibility(View.GONE);
+                        Toast.makeText(TextExtractionActivity.this, "Attendance Uploaded", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
             }
 
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w("Hello", "Failed to read value.", error.toException());
-                }
-            });
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("Hello", "Failed to read value.", error.toException());
+            }
+        });
 
     }
 

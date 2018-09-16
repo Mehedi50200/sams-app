@@ -87,7 +87,8 @@
             android:id="@+id/cvgeneratepdf"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/c_generatepdf"
             android:elevation="25dp"/>
 
@@ -95,7 +96,8 @@
             android:id="@+id/cvtakeattendance"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/c_camera"
             android:elevation="25dp"/>
 
@@ -103,7 +105,8 @@
             android:id="@+id/cvgallery"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/c_gallery"
             android:elevation="25dp"/>
 

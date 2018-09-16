@@ -172,7 +172,6 @@ public class StudentProfileActivity extends AppCompatActivity {
                         RVAttendance.setVisibility(View.GONE);
                         EmptyViewAteendance.setVisibility(View.VISIBLE);
                     }else{
-
                         DataSnapshot dataSnapshot2 = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("AttendanceRecord");
 
                         NumberOfAbsence = dataSnapshot2.child("ClassMissed").getValue(String.class);
