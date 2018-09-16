@@ -227,8 +227,11 @@ public class TextExtractionActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
+                    int listSize = listCroppedImages.size() -1;
+
                     for (int x = 0; x < listCroppedImages.size(); x++) {
-                        UploadData(listCroppedImages.get(x).getStudentMatric(),listCroppedImages.get(x).getAttendanceRecord(),x);
+                        ProgressUploadAttendance.setVisibility(View.VISIBLE);
+                        UploadData(listCroppedImages.get(x).getStudentMatric(),listCroppedImages.get(x).getAttendanceRecord(),x, listSize );
                     }
                 }
             });
@@ -272,7 +275,7 @@ public class TextExtractionActivity extends AppCompatActivity {
 
     }
 
-    public void UploadData(final String StudentMatric, final String AttendanceRecord, final int px) {
+    public void UploadData(final String StudentMatric, final String AttendanceRecord, final int px, final int listSize ) {
 
         Query query = StudentsRef.orderByKey().equalTo(StudentMatric);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -284,7 +287,7 @@ public class TextExtractionActivity extends AppCompatActivity {
                     StudentMatricRef.child("Status").setValue(AttendanceRecord);
                     StudentMatricRef.child("Date").setValue(getCurrentDate());
 
-                    updateAttendance(StudentMatric, px);
+                    updateAttendance(StudentMatric, px, listSize);
 
                 } else {
                     Toast.makeText(TextExtractionActivity.this, "Could not Find " + StudentMatric, Toast.LENGTH_LONG).show();
@@ -300,10 +303,8 @@ public class TextExtractionActivity extends AppCompatActivity {
 
     }
 
-    public void updateAttendance(final String StudentMatric, final int px){
-
-        ProgressUploadAttendance.setVisibility(View.VISIBLE);
-        final int progress = px*100 / (listCroppedImages.size()-1);
+    public void updateAttendance(final String StudentMatric, final int px, int listSize){
+        final int progress = px*100 / listSize;
 
         StudentsRef.addValueEventListener(new ValueEventListener() {
             @Override
