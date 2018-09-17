@@ -262,7 +262,6 @@ public class TextExtractionActivity extends AppCompatActivity {
             }
         };
 
-
         if (!isNetworkConnected(TextExtractionActivity.this)) {
             btnUploadAttendance.setVisibility(View.GONE);
             TVNoNetwork.setVisibility(View.VISIBLE);
@@ -270,26 +269,22 @@ public class TextExtractionActivity extends AppCompatActivity {
             btnUploadAttendance.setVisibility(View.VISIBLE);
             TVNoNetwork.setVisibility(View.GONE);
         }
-
     }
 
-    public void UploadData(final String StudentMatric, final String AttendanceRecord, final int px, final int listSize ) {
 
+    public void UploadData(final String StudentMatric, final String AttendanceRecord, final int px, final int listSize ) {
         Query query = StudentsRef.orderByKey().equalTo(StudentMatric);
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-
                     DatabaseReference StudentMatricRef = StudentsRef.child(StudentMatric).child("Attendance").child(getCurrentDate());
                     StudentMatricRef.setValue(AttendanceRecord);
-
                     updateAttendance(StudentMatric, px, listSize);
 
                 } else {
                     Toast.makeText(TextExtractionActivity.this, "Could not Find " + StudentMatric, Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override
@@ -297,7 +292,6 @@ public class TextExtractionActivity extends AppCompatActivity {
                 throw databaseError.toException(); // don't ignore errors
             }
         });
-
     }
 
     public void updateAttendance(final String StudentMatric, final int px, int listSize){
@@ -342,9 +336,7 @@ public class TextExtractionActivity extends AppCompatActivity {
                        // Toast.makeText(TextExtractionActivity.this, "Attendance Uploaded", Toast.LENGTH_SHORT).show();
                     }
                 }
-
             }
-
 
             @Override
             public void onCancelled(DatabaseError error) {
@@ -362,7 +354,6 @@ public class TextExtractionActivity extends AppCompatActivity {
         if (!txtRecognizer.isOperational()) {
             //   tvProcessedText.setText("Try Again");
         } else {
-
             Frame frame = new Frame.Builder().setBitmap(bitmap).build();
             SparseArray items = txtRecognizer.detect(frame);
             StringBuilder strBuilder = new StringBuilder();
@@ -372,10 +363,8 @@ public class TextExtractionActivity extends AppCompatActivity {
             }
             studentMatric = strBuilder.toString().substring(0, strBuilder.toString().length());
         }
-
         return studentMatric;
     }
-
     public String CircleDetection(Bitmap bitmap) {
 
     //    String timeStamp = new SimpleDateFormat("yyyyMMdd_mmHH").format(new Date());
