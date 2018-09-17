@@ -266,7 +266,7 @@ public class ProcessesdResult extends AppCompatActivity {
         Mat imageA = new Mat(imgSource.size(), CvType.CV_32F);
 
         Imgproc.cvtColor(imgSource, imageHSV, Imgproc.COLOR_BGR2GRAY);
-        Imgproc.GaussianBlur(imageHSV, imageBlurr, new Size(5,5), 0);
+        Imgproc.GaussianBlur(imageHSV, imageBlurr, new Size(1,1), 0);
         Imgproc.adaptiveThreshold(imageBlurr, imageA, 255,Imgproc.ADAPTIVE_THRESH_MEAN_C, Imgproc.THRESH_BINARY_INV,7, 5);
         List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
         Imgproc.findContours(imageA, contours, new Mat(), Imgproc.RETR_EXTERNAL,Imgproc.CHAIN_APPROX_SIMPLE);
@@ -278,11 +278,12 @@ public class ProcessesdResult extends AppCompatActivity {
             if (Imgproc.contourArea(contours.get(i)) > 100)
             {
                 Rect rect = Imgproc.boundingRect(contours.get(i));
-                if ((rect.height > 30 && rect.height < 120) && (rect.width > 120 && rect.width < 500))
+                if ((rect.height > 25 && rect.height < 100) && (rect.width > 150 && rect.width < 500))
                 {
                     Rect rec = new Rect(rect.x, rect.y, rect.width, rect.height);
 
                     Mat roi = imageMat.submat(rec);
+                 //   String chunkedfilename = chunkedImagedDirectory + n+ "w" + rect.width + "h" + rect.height + ".jpg";
                     String chunkedfilename = chunkedImagedDirectory + n + ".jpg";
                     Imgcodecs.imwrite(chunkedfilename, roi);
 

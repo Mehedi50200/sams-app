@@ -8,12 +8,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 public class SplashScreen extends AppCompatActivity {
-private ImageView IVViolet,IVPink,IVOrange, LogoBackground ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        ImageView IVViolet,IVPink,IVOrange, LogoBackground ;
 
         /*------------------------------ Declaration of UI elements ------------------------------*/
         LogoBackground =findViewById(R.id.logobackground);
@@ -35,7 +36,7 @@ private ImageView IVViolet,IVPink,IVOrange, LogoBackground ;
         Thread timer =new Thread() {
             public void run (){
                 try {
-                    sleep (1000);
+                    sleep (2500);
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();

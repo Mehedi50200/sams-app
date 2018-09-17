@@ -159,9 +159,12 @@ public class StudentProfileActivity extends AppCompatActivity {
 
                     for (DataSnapshot dataSnapshot1 :dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").getChildren()) {
 
-                        attendanceId[i] = dataSnapshot1.getKey();
-                        attendacedate[i] = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Date").getValue(String.class);
-                        status[i] = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Status").getValue(String.class);
+                        //  attendanceId[i] = dataSnapshot1.getKey();
+                        //  attendacedate[i] = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Date").getValue(String.class);
+                        //  status[i] = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendanceId[i]).child("Status").getValue(String.class);
+
+                        attendacedate[i] = dataSnapshot1.getKey();
+                        status[i] = dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(StudentId).child("Attendance").child(attendacedate[i]).getValue(String.class);
                         week[i] = "Week " + String.valueOf(i + 1);
 
                         listAttendance.add(new AttendanceModel(attendanceId[i], attendacedate[i], status[i], week[i]));

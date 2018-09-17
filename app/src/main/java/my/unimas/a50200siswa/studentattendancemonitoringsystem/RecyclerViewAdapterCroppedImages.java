@@ -82,7 +82,7 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap croppedimageold = BitmapFactory.decodeFile(mData.get(position).getCroppedImagePath(), options);
-        Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 528, 80, true);
+        Bitmap croppedimagenew = Bitmap.createScaledBitmap(croppedimageold, 435, 64, true);
 
         holder.StudentNo.setText(mData.get(position).getStudentNo());
 
@@ -156,25 +156,6 @@ class RecyclerViewAdapterCroppedImages extends RecyclerView.Adapter<RecyclerView
                 });
             }
         });
-
-        /*
-
-        holder.btnYes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeItem(position);
-                holder.LRemoveItem.setVisibility(View.GONE);
-            }
-        });
-
-        holder.btnNo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                holder.LRemoveItem.setVisibility(View.GONE);
-            }
-        });
-
-        */
 
 
         holder.CroppedImage.setOnClickListener(new View.OnClickListener() {

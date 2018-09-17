@@ -159,6 +159,7 @@ public class TextExtractionActivity extends AppCompatActivity {
                 intent.putExtra("CourseName", CourseName);
                 intent.putExtra("UserProfileImageUrl", UserProfileImageUrl);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -191,7 +192,6 @@ public class TextExtractionActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         final File fileDirectory = new File(croppedImageDirectory);
@@ -271,8 +271,6 @@ public class TextExtractionActivity extends AppCompatActivity {
             TVNoNetwork.setVisibility(View.GONE);
         }
 
-
-
     }
 
     public void UploadData(final String StudentMatric, final String AttendanceRecord, final int px, final int listSize ) {
@@ -283,9 +281,8 @@ public class TextExtractionActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
 
-                    DatabaseReference StudentMatricRef = StudentsRef.child(StudentMatric).child("Attendance").push();
-                    StudentMatricRef.child("Status").setValue(AttendanceRecord);
-                    StudentMatricRef.child("Date").setValue(getCurrentDate());
+                    DatabaseReference StudentMatricRef = StudentsRef.child(StudentMatric).child("Attendance").child(getCurrentDate());
+                    StudentMatricRef.setValue(AttendanceRecord);
 
                     updateAttendance(StudentMatric, px, listSize);
 
@@ -317,7 +314,7 @@ public class TextExtractionActivity extends AppCompatActivity {
 
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.child(StudentMatric).child("Attendance").getChildren()) {
                     attendanceid[i] = dataSnapshot1.getKey();
-                    status[i] = dataSnapshot.child(StudentMatric).child("Attendance").child(attendanceid[i]).child("Status").getValue(String.class);
+                    status[i] = dataSnapshot.child(StudentMatric).child("Attendance").child(attendanceid[i]).getValue(String.class);
 
                     if (status[i].equals("Present")) {
                         nop++;
@@ -328,7 +325,6 @@ public class TextExtractionActivity extends AppCompatActivity {
                 }
 
                 if (noa + nop != 0) {
-
                     String Percentage = String.valueOf(AttendancePercentage(nop + noa, nop));
                     String TotalClass = String.valueOf(noa + nop);
                     String ClassAttended = String.valueOf(nop);
@@ -343,7 +339,7 @@ public class TextExtractionActivity extends AppCompatActivity {
                     ProgressUploadAttendance.setProgress(progress);
                     if(progress == 100){
                         ProgressUploadAttendance.setVisibility(View.GONE);
-                        Toast.makeText(TextExtractionActivity.this, "Attendance Uploaded", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(TextExtractionActivity.this, "Attendance Uploaded", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -480,11 +476,10 @@ public class TextExtractionActivity extends AppCompatActivity {
     public String getCurrentDate() {
         String dateToday;
         Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mm-dd-MM-yyyy", Locale.getDefault());
         dateToday = dateFormat.format(today);
         return dateToday;
     }
-
 
     public int AttendancePercentage(int totalClass, int classPresence){
         int Percentage;

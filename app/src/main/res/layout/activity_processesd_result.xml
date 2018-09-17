@@ -30,7 +30,7 @@
                 android:transitionName="tmainimage"
                 android:fadingEdge="vertical"
                 android:fadingEdgeLength="10dp"/>
-            
+
             <View
                 android:id="@+id/scannerbar"
                 android:layout_width="match_parent"
