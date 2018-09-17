@@ -18,16 +18,16 @@
         android:layout_gravity="center"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@drawable/home_bg">
+        android:background="@drawable/card_gradientpurple">
 
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/alert_go_back_home"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:gravity="center"
-            android:textColor="@color/colorDarkGrayText"/>
+            android:textColor="@color/colorWhite"/>
 
         <LinearLayout
             android:layout_width="match_parent"

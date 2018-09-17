@@ -25,7 +25,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/exit_app"
-            android:textSize="13sp"
+            android:textSize="16sp"
             android:gravity="center"
             android:textColor="@color/colorWhite"/>
 
@@ -34,7 +34,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp">
 
             <Button
                 android:id="@+id/btnhyes"

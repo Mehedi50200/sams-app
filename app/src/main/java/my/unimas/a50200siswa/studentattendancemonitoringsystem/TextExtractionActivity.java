@@ -333,8 +333,8 @@ public class TextExtractionActivity extends AppCompatActivity {
                     ProgressUploadAttendance.setProgress(progress);
                     if(progress == 100){
                         ProgressUploadAttendance.setVisibility(View.GONE);
-                       // Toast.makeText(TextExtractionActivity.this, "Attendance Uploaded", Toast.LENGTH_SHORT).show();
                     }
+
                 }
             }
 
