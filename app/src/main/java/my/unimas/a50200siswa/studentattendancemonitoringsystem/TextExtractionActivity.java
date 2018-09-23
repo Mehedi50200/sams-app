@@ -59,8 +59,7 @@ import static org.opencv.imgproc.Imgproc.contourArea;
 public class TextExtractionActivity extends AppCompatActivity {
 
     List<CroppedImageModel> listCroppedImages;
-
-
+    
     RecyclerView RVCroppedImages;
     RecyclerViewAdapterCroppedImages CroppedImageAdapter;
 
