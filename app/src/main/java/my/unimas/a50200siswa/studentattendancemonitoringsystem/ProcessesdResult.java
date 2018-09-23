@@ -278,12 +278,12 @@ public class ProcessesdResult extends AppCompatActivity {
             if (Imgproc.contourArea(contours.get(i)) > 100)
             {
                 Rect rect = Imgproc.boundingRect(contours.get(i));
-                if ((rect.height > 25 && rect.height < 100) && (rect.width > 150 && rect.width < 500))
+                if ((rect.height > 30 && rect.height < 55) && (rect.width > 200 && rect.width < 400))
                 {
                     Rect rec = new Rect(rect.x, rect.y, rect.width, rect.height);
 
                     Mat roi = imageMat.submat(rec);
-                 //   String chunkedfilename = chunkedImagedDirectory + n+ "w" + rect.width + "h" + rect.height + ".jpg";
+                   // String chunkedfilename = chunkedImagedDirectory + n+ "_w" + rect.width + "_h" + rect.height + ".jpg";
                     String chunkedfilename = chunkedImagedDirectory + n + ".jpg";
                     Imgcodecs.imwrite(chunkedfilename, roi);
 

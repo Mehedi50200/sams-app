@@ -347,7 +347,6 @@ public class TextExtractionActivity extends AppCompatActivity {
 
     }
 
-
     public String TextImageProcess(Bitmap bitmap) {
         TextRecognizer txtRecognizer = new TextRecognizer.Builder(getApplicationContext()).build();
 
@@ -359,6 +358,9 @@ public class TextExtractionActivity extends AppCompatActivity {
             StringBuilder strBuilder = new StringBuilder();
             for (int i = 0; i < items.size(); i++) {
                 TextBlock item = (TextBlock) items.valueAt(i);
+                if(item.equals("S")){
+                    strBuilder.replace(i,i, "5");
+                }
                 strBuilder.append(item.getValue());
             }
             studentMatric = strBuilder.toString().substring(0, strBuilder.toString().length());
