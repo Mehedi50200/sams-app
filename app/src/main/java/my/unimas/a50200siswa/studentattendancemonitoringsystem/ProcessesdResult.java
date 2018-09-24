@@ -246,7 +246,7 @@ public class ProcessesdResult extends AppCompatActivity {
 
     public void imageCropIntoPiecess(Bitmap bitmap){
 
-        String timeStamp =  new SimpleDateFormat("yyyyMMddHH").format(new Date());
+        String timeStamp =  new SimpleDateFormat("ddMMyyyy-HH:mm").format(new Date());
 
         File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath(),
                 "/sams_images/"+ CourseCode +"/" + timeStamp);

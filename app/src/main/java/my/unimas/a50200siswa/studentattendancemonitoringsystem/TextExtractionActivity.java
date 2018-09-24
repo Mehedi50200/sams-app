@@ -59,7 +59,7 @@ import static org.opencv.imgproc.Imgproc.contourArea;
 public class TextExtractionActivity extends AppCompatActivity {
 
     List<CroppedImageModel> listCroppedImages;
-    
+
     RecyclerView RVCroppedImages;
     RecyclerViewAdapterCroppedImages CroppedImageAdapter;
 
@@ -466,7 +466,7 @@ public class TextExtractionActivity extends AppCompatActivity {
     public String getCurrentDate() {
         String dateToday;
         Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm-dd-MM-yyyy", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy_HH:mm", Locale.getDefault());
         dateToday = dateFormat.format(today);
         return dateToday;
     }
