@@ -125,6 +125,8 @@ public class CourseActivity extends AppCompatActivity {
 
                 String studentId[] = new String[50];
                 String studentName[] = new String[50];
+                String studentProgram[] = new String[50];
+                String studentProfileImageUrl[] = new String[50];
                 String studentserial[] = new String[50];
 
                 listStudent.clear();
@@ -136,9 +138,10 @@ public class CourseActivity extends AppCompatActivity {
                     for (DataSnapshot dataSnapshot1 : dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").getChildren()) {
                         studentId[i]= dataSnapshot1.getKey();
                         studentName[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentName").getValue(String.class);
+                        studentProgram[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentProgram").getValue(String.class);
+                        studentProfileImageUrl[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentProfileImageUrl").getValue(String.class);
                         studentserial[i]= String.valueOf(i);
-
-                        listStudent.add(new StudentModel(studentId[i],studentName[i], studentserial[i],CourseCode,CourseName, UserProfileImageUrl));
+                        listStudent.add(new StudentModel(studentId[i],studentName[i], studentProgram[i], studentProfileImageUrl[i], studentserial[i],CourseCode,CourseName, UserProfileImageUrl));
                         i++;
                     }
 

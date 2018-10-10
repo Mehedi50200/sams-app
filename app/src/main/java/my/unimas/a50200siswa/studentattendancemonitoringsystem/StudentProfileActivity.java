@@ -20,8 +20,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +34,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     private static final String TAG = "StudentProfile" ;
     String userID ;
     String CourseCode, CourseName;
-    String StudentName, StudentId;
+    String StudentName, StudentId, StudentProfileImageUrl, StudentProgram;
     String NumberOfPresence, NumberOfAbsence, TotalClass;
     String Percentage;
     String UserProfileImageUrl;
@@ -47,7 +45,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     ProgressBar AttendanceProgress;
     RecyclerViewAdapterAttendance attendanceAdapter;
 
-    private TextView studentName,studentId;
+    private TextView studentName,studentId, studentProgram;
 
 
     List<AttendanceModel> listAttendance;
@@ -57,10 +55,8 @@ public class StudentProfileActivity extends AppCompatActivity {
     FirebaseUser user;
     FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference rootRef,userRef;
-
-    StorageReference storageReference ;
-    StorageReference profileImageReference;
-
+  //  StorageReference storageReference ;
+  //  StorageReference profileImageReference;
 
     @Override
     protected void onStart() {
@@ -88,6 +84,7 @@ public class StudentProfileActivity extends AppCompatActivity {
         UserName = findViewById(R.id.username);
         studentName =  findViewById(R.id.studentname);
         studentId =  findViewById(R.id.studentmatric);
+        studentProgram =findViewById(R.id.studentprogram);
         NoPresence= findViewById(R.id.noP);
         NoAbsence= findViewById(R.id.noA);
         NoPercentage = findViewById(R.id.noPer);
@@ -109,10 +106,13 @@ public class StudentProfileActivity extends AppCompatActivity {
         StudentName = intent.getExtras().getString("StudentName");
         StudentId = intent.getExtras().getString("StudentId");
         UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
+        StudentProgram = intent.getExtras().getString("StudentProgram");
+        StudentProfileImageUrl = intent.getExtras().getString("StudentProfileImageUrl");
 
         /*---------------------------------- Setting values --------------------------------------*/
         studentName.setText(StudentName);
         studentId.setText(StudentId);
+        studentProgram.setText(StudentProgram);
 
         GlideApp.with(this)
                 .load(UserProfileImageUrl)
@@ -126,15 +126,14 @@ public class StudentProfileActivity extends AppCompatActivity {
         rootRef = FirebaseDatabase.getInstance().getReference();
         userRef = rootRef.child("Users");
 
-        storageReference = FirebaseStorage.getInstance().getReference();
-        profileImageReference =storageReference.child("StudentsPic/" +StudentId+".jpg");
+      //  storageReference = FirebaseStorage.getInstance().getReference();
+      //  profileImageReference =storageReference.child("StudentsPic/" +StudentId+".jpg");
         /*----------------------------------------------------------------------------------------*/
 
         GlideApp.with(this /* context */)
-                .load(profileImageReference)
+                .load(StudentProfileImageUrl)
                 .error(R.drawable.profilepic)
                 .into(ProfileImage);
-
 
         /*------------------------------- Attendance Fetching ------------------------------------*/
 

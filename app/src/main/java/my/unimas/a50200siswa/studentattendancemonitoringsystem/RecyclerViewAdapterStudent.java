@@ -47,15 +47,13 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(final StudentViewHolder holder, final int position) {
-
-        StorageReference profileImageReference =storageReference.child("StudentsPic/" +mData.get(position).getStudentId()+".jpg");
-
+    //    StorageReference profileImageReference =storageReference.child("StudentsPic/" +mData.get(position).getStudentId()+".jpg");
         holder.studentId.setText(mData.get(position).getStudentId());
         holder.studentName.setText(mData.get(position).getStudentName());
         holder.studentSerial.setText(mData.get(position).getStudentSerial());
 
         GlideApp.with(mContext /* context */)
-                .load(profileImageReference)
+                .load(mData.get(position).getStudentProfileImageUrl())
                 .error(R.drawable.profilepic)
                 .into(holder.studentImage);
 
@@ -66,6 +64,8 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
                 Intent intent = new Intent(mContext, StudentProfileActivity.class);
                 intent.putExtra("StudentId", mData.get(position).getStudentId());
                 intent.putExtra("StudentName", mData.get(position).getStudentName());
+                intent.putExtra("StudentProgram", mData.get(position).getStudentProgram());
+                intent.putExtra("StudentProfileImageUrl", mData.get(position).getStudentProfileImageUrl());
                 intent.putExtra("CourseCode", mData.get(position).getCourseCode());
                 intent.putExtra("CourseName", mData.get(position).getCourseName());
                 intent.putExtra("UserProfileImageUrl", mData.get(position).getUserProfileImageUrl());

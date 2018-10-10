@@ -44,6 +44,16 @@
             android:textSize="16sp"
             android:transitionName="tstudentmatric" />
 
+        <TextView
+            android:id="@+id/studentprogram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Student Program Name"
+            android:textColor="@color/colorLightText"
+            android:textSize="16sp" />
+
+
     </LinearLayout>
 
 
