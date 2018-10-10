@@ -80,8 +80,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
-
     @Override
     public void onBackPressed() {
         final AlertDialog.Builder mBuilder = new AlertDialog.Builder(HomeActivity.this);
@@ -190,7 +188,9 @@ public class HomeActivity extends AppCompatActivity {
                         coursename[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("CourseName").getValue(String.class);
                         day[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("Routine").child("Day").getValue(String.class);
                         time[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("Routine").child("Time").getValue(String.class);
-                        listCourse.add(new CourseModel(userID,userProfileImageUrl,coursecode[i],coursename[i], day[i],time[i]));
+                        if(coursecode[i] != null && coursename[i] != null && day[i] != null && time[i] != null) {
+                            listCourse.add(new CourseModel(userID,userProfileImageUrl,coursecode[i],coursename[i], day[i],time[i]));
+                        }
                         i++;
                     }
                     if(listCourse.size()==0){
