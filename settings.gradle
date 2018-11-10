@@ -2,4 +2,3 @@ include ':app', ':glideapp'
 include ':liveedgedetection'
 include ':openCVLibrary340'
 
-
