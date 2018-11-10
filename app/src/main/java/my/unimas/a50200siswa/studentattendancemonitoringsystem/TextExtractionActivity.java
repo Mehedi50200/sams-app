@@ -430,6 +430,13 @@ public class TextExtractionActivity extends AppCompatActivity {
             return attendanceStatus;
         }
 
+         /*    String chunkedfilename = chunkedImagedDirectory + "_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
+            Imgcodecs.imwrite(chunkedfilename, imageROI);   */
+
+           /*    String chunkedfilename = chunkedImagedDirectory + "absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
+            Imgcodecs.imwrite(chunkedfilename, imageROI); */
+
+
         Mat localMat1 = cropped;
         Mat localMat2 = new Mat();
         Imgproc.GaussianBlur(localMat1, localMat2, new Size(5, 5), 7);
@@ -451,14 +458,9 @@ public class TextExtractionActivity extends AppCompatActivity {
         double pixel = total / contourArea(contourscircles.get(0)) * 100;
         if (pixel >= 70 && pixel <= 130) {
             attendanceStatus = "Present";
-        /*    String chunkedfilename = chunkedImagedDirectory + "_" + "present" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-            Imgcodecs.imwrite(chunkedfilename, imageROI);   */
         } else {
             attendanceStatus = "Absent";
-        /*    String chunkedfilename = chunkedImagedDirectory + "absent" + "h" + rectCrop.height + "w" + rectCrop.width + ".jpg";
-            Imgcodecs.imwrite(chunkedfilename, imageROI); */
         }
-
         return attendanceStatus;
 
     }

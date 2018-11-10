@@ -199,8 +199,6 @@ public class TakeAttendancePictureActivity extends AppCompatActivity {
 
         if (! root.exists()){
             root.mkdirs();
-            // If you require it to make the entire directory path including parents,
-            // use directory.mkdirs(); here instead.
         }
 
         String ImagePath = root.getPath().toString();

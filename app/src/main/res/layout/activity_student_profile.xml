@@ -42,6 +42,7 @@
             android:text="@string/matric_no"
             android:textColor="@color/colorLightText"
             android:textSize="16sp"
+            android:textStyle="bold"
             android:transitionName="tstudentmatric" />
 
         <TextView
@@ -50,7 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="Student Program Name"
-            android:textColor="@color/colorLightText"
             android:textSize="16sp" />
 
 

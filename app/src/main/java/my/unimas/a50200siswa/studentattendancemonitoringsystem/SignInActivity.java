@@ -192,23 +192,21 @@ public class SignInActivity extends AppCompatActivity {
     private void SignInUser(String email, final String password) {
         simpleProgressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful())
-                        {
-                            Toast.makeText(SignInActivity.this,"Sorry Wrong Email or Password!", Toast.LENGTH_LONG).show();
-                            simpleProgressBar.setVisibility(View.GONE);
-
-                        }
-                        else{
-                            simpleProgressBar.setVisibility(View.GONE);
-                            startActivity(new Intent(SignInActivity.this,HomeActivity.class));
-                            finish();
-                        }
-
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(!task.isSuccessful())
+                    {
+                        Toast.makeText(SignInActivity.this,"Sorry Wrong Email or Password!", Toast.LENGTH_LONG).show();
+                        simpleProgressBar.setVisibility(View.GONE);
                     }
-                });
+                    else{
+                        simpleProgressBar.setVisibility(View.GONE);
+                        startActivity(new Intent(SignInActivity.this,HomeActivity.class));
+                        finish();
+                    }
+                }
+            });
     }
 
 

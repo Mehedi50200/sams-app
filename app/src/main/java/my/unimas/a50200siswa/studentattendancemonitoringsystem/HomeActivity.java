@@ -143,7 +143,6 @@ public class HomeActivity extends AppCompatActivity {
         HomeDown.setAnimation(DownUp);
 
 
-
         /* ------------------------------ Firebase Elements --------------------------------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -200,8 +199,8 @@ public class HomeActivity extends AppCompatActivity {
                         RVCourse.setVisibility(View.VISIBLE);
                         EmptyViewCourse.setVisibility(View.GONE);
                     }
-
-                }else{
+                }
+                else{
                     RVCourse.setVisibility(View.GONE);
                     EmptyViewCourse.setVisibility(View.VISIBLE);
                 }
