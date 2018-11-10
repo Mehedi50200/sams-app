@@ -11,6 +11,7 @@ move your project to a location where this is not a problem.
 D:\Android App Project\Personal\StudentAttendanceMonitoringSystem
           -   -                                                  
 
+
 Ignored Files:
 --------------
 The following files were *not* copied into the new Gradle project; you
