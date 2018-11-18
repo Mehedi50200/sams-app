@@ -128,6 +128,7 @@ public class CourseActivity extends AppCompatActivity {
                 String studentProgram[] = new String[50];
                 String studentProfileImageUrl[] = new String[50];
                 String studentserial[] = new String[50];
+                String studentAttendanceRecord[] = new String[50];
 
                 listStudent.clear();
                 if (dataSnapshot.exists()) {
@@ -140,8 +141,15 @@ public class CourseActivity extends AppCompatActivity {
                         studentName[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentName").getValue(String.class);
                         studentProgram[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentProgram").getValue(String.class);
                         studentProfileImageUrl[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("StudentProfileImageUrl").getValue(String.class);
+                        studentAttendanceRecord[i]=dataSnapshot.child(userID).child("Course").child(CourseCode).child("Students").child(studentId[i]).child("AttendanceRecord").child("Percentage").getValue(String.class);
                         studentserial[i]= String.valueOf(i);
-                        listStudent.add(new StudentModel(studentId[i],studentName[i], studentProgram[i], studentProfileImageUrl[i], studentserial[i],CourseCode,CourseName, UserProfileImageUrl));
+
+                        if(studentAttendanceRecord[i] == null) {
+                            studentAttendanceRecord[i] = "0";
+                            listStudent.add(new StudentModel(studentId[i],studentName[i], studentProgram[i], studentProfileImageUrl[i], studentserial[i], studentAttendanceRecord[i],CourseCode,CourseName, UserProfileImageUrl));
+                        }else {
+                            listStudent.add(new StudentModel(studentId[i], studentName[i], studentProgram[i], studentProfileImageUrl[i], studentserial[i], studentAttendanceRecord[i], CourseCode, CourseName, UserProfileImageUrl));
+                        }
                         i++;
                     }
 

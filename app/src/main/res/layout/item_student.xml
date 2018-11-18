@@ -57,12 +57,14 @@
             android:layout_margin="10dp"
             android:text="@string/student_name"
             android:textColor="@color/colorDarkGrayText"
-            android:transitionName="tstudentname"/>
+            android:transitionName="tstudentname"
+            android:layout_weight="1"/>
 
         <ImageView
+            android:id="@+id/notify"
             android:layout_width="20dp"
-            android:layout_height="20dp" />
-
+            android:layout_height="20dp"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
 

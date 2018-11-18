@@ -12,6 +12,7 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.storage.FirebaseStorage;
@@ -20,6 +21,8 @@ import com.google.firebase.storage.StorageReference;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static java.lang.Integer.parseInt;
 
 
 class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapterStudent.StudentViewHolder> {
@@ -51,6 +54,10 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.studentId.setText(mData.get(position).getStudentId());
         holder.studentName.setText(mData.get(position).getStudentName());
         holder.studentSerial.setText(mData.get(position).getStudentSerial());
+
+        if(parseInt(mData.get(position).getStudentAttendanceRecord()) <= 70){
+            holder.notify.setBackgroundResource(R.drawable.notify);
+        }
 
         GlideApp.with(mContext /* context */)
                 .load(mData.get(position).getStudentProfileImageUrl())
@@ -92,6 +99,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
     class StudentViewHolder extends RecyclerView.ViewHolder {
         TextView studentId, studentName, studentSerial;
         CardView studentCardView;
+        ImageView notify;
         CircleImageView studentImage;
 
         private StudentViewHolder(View itemView) {
@@ -101,7 +109,7 @@ class RecyclerViewAdapterStudent extends RecyclerView.Adapter<RecyclerViewAdapte
             studentSerial =itemView.findViewById(R.id.tvstudentserial);
             studentCardView = itemView.findViewById(R.id.studentcardview);
             studentImage = itemView.findViewById(R.id.studentimage);
-
+            notify = itemView.findViewById(R.id.notify);
         }
     }
 

@@ -15,7 +15,6 @@ public class StudentIdModel {
         return StudentId;
     }
 
-
     public void setStudentId(String studentId) {
         StudentId = studentId;
     }
