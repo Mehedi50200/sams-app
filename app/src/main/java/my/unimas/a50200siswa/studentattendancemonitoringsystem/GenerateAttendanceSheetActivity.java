@@ -189,7 +189,7 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
                 if(AttendanceSheetPdf.isFile()){
                     Intent sendIntent = new Intent(Intent.ACTION_SEND);
                     sendIntent.setType("application/pdf");
-                    sendIntent.putExtra(Intent.EXTRA_EMAIL, UserEmail);
+                    sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{UserEmail});
                     sendIntent.putExtra(Intent.EXTRA_SUBJECT,"Attendance Sheet For " + CourseCode);
                     sendIntent.putExtra(Intent.EXTRA_STREAM,uri);
                     sendIntent.putExtra(Intent.EXTRA_TEXT,"This attendance sheet is auto generated for test purpose ");

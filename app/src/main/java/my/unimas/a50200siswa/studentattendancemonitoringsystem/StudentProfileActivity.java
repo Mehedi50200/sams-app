@@ -189,20 +189,40 @@ public class StudentProfileActivity extends AppCompatActivity {
                         NoPercentage.setText(Percentage + " %");
                         AttendanceProgress.setProgress(parseInt(Percentage));
 
+                        if (parseInt(Percentage) <=70 || Percentage== null){
 
-                        btnNotifyStudent.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent sendIntent = new Intent(Intent.ACTION_SEND);
-                                sendIntent.putExtra(Intent.EXTRA_EMAIL, StudentId +"@siswa.unimas.my");
-                                sendIntent.putExtra(Intent.EXTRA_SUBJECT,"Attendance For " + CourseCode);
-                                sendIntent.putExtra(Intent.EXTRA_TEXT,"Hi " + StudentName + ",! I am concerned that your Current Attendance is " + Percentage + "% which is lower than expected. " +
-                                        "If you cannot keep up you might get barred from final exam.");
-                                sendIntent.setType("message/rfc822");
-                                startActivity(Intent.createChooser(sendIntent, ""));
+                            btnNotifyStudent.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                                    sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {StudentId +"@siswa.unimas.my"});
+                                    sendIntent.putExtra(Intent.EXTRA_SUBJECT,"Attendance For " + CourseCode);
+                                    sendIntent.putExtra(Intent.EXTRA_TEXT,"Hi " + StudentName + "! I am concerned that your Current Attendance is " + Percentage + "% which is lower than expected. " +
+                                            "If you cannot keep up you might get barred from final exam.");
+                                    sendIntent.setType("message/rfc822");
+                                    startActivity(Intent.createChooser(sendIntent, ""));
 
-                            }
-                        });
+                                }
+                            });
+
+                        }else{
+                            btnNotifyStudent.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                                    sendIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {StudentId +"@siswa.unimas.my"});
+                                    sendIntent.putExtra(Intent.EXTRA_SUBJECT,"Attendance For " + CourseCode);
+                                    sendIntent.putExtra(Intent.EXTRA_TEXT,"Hi " + StudentName + "! I need to talk to you. please make an appointment with me");
+                                    sendIntent.setType("message/rfc822");
+                                    startActivity(Intent.createChooser(sendIntent, ""));
+
+                                }
+                            });
+
+                        }
+
+
+
 
                     }
 
