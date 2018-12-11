@@ -32,6 +32,7 @@
             android:text="@string/student_name"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="#B6B6B6"
             android:transitionName="tstudentname" />
 
         <TextView

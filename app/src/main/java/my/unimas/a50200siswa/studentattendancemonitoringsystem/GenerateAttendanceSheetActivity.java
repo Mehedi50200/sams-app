@@ -156,9 +156,9 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
                     document.open();
                     PdfContentByte canvas = writer.getDirectContent();
                     ColumnText ct = new ColumnText(canvas);
-                    ct.setSimpleColumn(200,750,400,780);
+                    ct.setSimpleColumn(70,740,530,780);
                     String documentTitle = CourseCode + " " + CourseName;
-                    Paragraph paragraph = new Paragraph(new Phrase(2,documentTitle, FontFactory.getFont(FontFactory.TIMES_BOLD, 15)));//add ur string here
+                    Paragraph paragraph = new Paragraph(new Phrase(2,documentTitle, FontFactory.getFont(FontFactory.TIMES_BOLD, 14)));//add ur string here
                     ct.addElement(paragraph);
                     ct.setAlignment(Element.ALIGN_CENTER);
                     ct.go();
