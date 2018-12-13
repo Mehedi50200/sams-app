@@ -157,7 +157,7 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
                     PdfContentByte canvas = writer.getDirectContent();
                     ColumnText ct = new ColumnText(canvas);
                     ct.setSimpleColumn(70,740,530,780);
-                    String documentTitle = CourseCode + " " + CourseName;
+                    String documentTitle = CourseCode + " " + CourseName + "  Lecturer: " + UserName;
                     Paragraph paragraph = new Paragraph(new Phrase(2,documentTitle, FontFactory.getFont(FontFactory.TIMES_BOLD, 14)));//add ur string here
                     ct.addElement(paragraph);
                     ct.setAlignment(Element.ALIGN_CENTER);
@@ -166,6 +166,7 @@ public class GenerateAttendanceSheetActivity extends AppCompatActivity {
 
                 } catch (Exception e) {
                     Log.v("PDFcreation", e.toString());
+                    Toast.makeText(GenerateAttendanceSheetActivity.this, "Sorry! There is a Problem in Storage Permission", Toast.LENGTH_LONG).show();
                 }
 
                 pdfViewAttendanceSheet.fromUri(Uri.fromFile(new File(AttendanceSheetPath))).load();
