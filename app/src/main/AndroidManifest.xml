@@ -45,6 +45,9 @@
             android:name=".CourseActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".CourseMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".StudentProfileActivity"
             android:screenOrientation="portrait" />
         <activity

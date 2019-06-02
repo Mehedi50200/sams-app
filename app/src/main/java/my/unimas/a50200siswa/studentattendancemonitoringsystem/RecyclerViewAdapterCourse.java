@@ -1,7 +1,5 @@
 package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,7 +7,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,22 +68,13 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CourseActivity.class);
+                Intent intent = new Intent(mContext, CourseMenuActivity.class);
                 // passing data to the book activity
                 intent.putExtra("UserId", mData.get(position).getUserId());
                 intent.putExtra("CourseCode", mData.get(position).getCourseCode());
                 intent.putExtra("CourseName", mData.get(position).getCourseName());
                 intent.putExtra("UserProfileImageUrl", mData.get(position).getUserProfileImageUrl());
-
-
-                Pair[] pairs = new Pair[2];
-                pairs[0]= new Pair<View, String>(holder.courseCardView, "tparent");
-                pairs[1]= new Pair<View, String>(holder.courseName, "tcoursename");
-                pairs[1]= new Pair<View, String>(holder.courseCode, "tcoursecode");
-
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity) mContext, pairs);
-
-                mContext.startActivity(intent, options.toBundle());
+                mContext.startActivity(intent);
             }
         });
     }
@@ -94,7 +82,6 @@ class RecyclerViewAdapterCourse extends RecyclerView.Adapter<RecyclerViewAdapter
 
     @Override
     public int getItemCount() {
-
         return mData.size();
     }
 

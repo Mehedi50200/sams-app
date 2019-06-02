@@ -154,7 +154,6 @@ public class HomeActivity extends AppCompatActivity {
         /*----------------------------------------------------------------------------------------*/
 
 
-
         /*-------------------------------- Course List Fetch -------------------------------------*/
         listCourse = new ArrayList<>();
 
@@ -164,7 +163,6 @@ public class HomeActivity extends AppCompatActivity {
                 String userName = dataSnapshot.child(userID).child("userName").getValue(String.class);
                 userProfileImageUrl = dataSnapshot.child(userID).child("userProfileImageUrl").getValue(String.class);
                 UserName.setText(userName);
-
 
                 GlideApp.with(HomeActivity.this)
                         .load(userProfileImageUrl)
