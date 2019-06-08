@@ -3,12 +3,13 @@ package my.unimas.a50200siswa.studentattendancemonitoringsystem;
 
 public class CourseModel {
 
-    public String UserId, UserProfileImageUrl, CourseCode, CourseName, Day, Time;
+    public String UserId, UserName, UserProfileImageUrl, CourseCode, CourseName, Day, Time;
 
     public CourseModel(){}  //Constructor
 
-    public CourseModel(String userId, String userProfileImageUrl, String courseCode, String courseName, String day, String time) {
+    public CourseModel(String userId, String userName, String userProfileImageUrl, String courseCode, String courseName, String day, String time) {
         UserId = userId;
+        UserName = userName;
         UserProfileImageUrl =userProfileImageUrl;
         CourseCode = courseCode;
         CourseName = courseName;
@@ -18,6 +19,9 @@ public class CourseModel {
 
     public String getUserId() {
         return UserId;
+    }
+    public String getUserName() {
+        return UserName;
     }
     public String getUserProfileImageUrl() {
         return UserProfileImageUrl;
@@ -36,6 +40,9 @@ public class CourseModel {
 
     public void setUserId(String userId) {
         UserId = userId;
+    }
+    public void setUserName(String userName) {
+        UserId = userName;
     }
     public void setUserProfileImageUrl(String userProfileImageUrl) {
         UserProfileImageUrl = userProfileImageUrl;

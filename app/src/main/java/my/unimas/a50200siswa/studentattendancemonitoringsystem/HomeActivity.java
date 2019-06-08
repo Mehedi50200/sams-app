@@ -186,7 +186,7 @@ public class HomeActivity extends AppCompatActivity {
                         day[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("Routine").child("Day").getValue(String.class);
                         time[i]=dataSnapshot.child(userID).child("Course").child(coursecode[i]).child("Routine").child("Time").getValue(String.class);
                         if(coursecode[i] != null && coursename[i] != null && day[i] != null && time[i] != null) {
-                            listCourse.add(new CourseModel(userID,userProfileImageUrl,coursecode[i],coursename[i], day[i],time[i]));
+                            listCourse.add(new CourseModel(userID, userName, userProfileImageUrl,coursecode[i],coursename[i], day[i],time[i]));
                         }
                         i++;
                     }
