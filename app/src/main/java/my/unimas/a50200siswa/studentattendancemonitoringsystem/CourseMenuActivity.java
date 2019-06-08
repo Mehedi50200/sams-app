@@ -27,6 +27,7 @@ public class CourseMenuActivity extends AppCompatActivity {
 
     Animation UpDown,DownUp,  RightToLeft, LeftToRight;
 
+    private TextView coursecode,coursename;
 
     /*------------------------------- Firebase Database stuff ------------------------------------*/
     FirebaseAuth mAuth;
@@ -77,6 +78,10 @@ public class CourseMenuActivity extends AppCompatActivity {
         HomeworkCard.setAnimation(RightToLeft);
         ExamResultCard.setAnimation(LeftToRight);
 
+
+        coursecode =  findViewById(R.id.mcoursecode);
+        coursename =  findViewById(R.id.mcoursename);
+
         /* ------------------------------ Firebase Elements --------------------------------------*/
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -93,6 +98,15 @@ public class CourseMenuActivity extends AppCompatActivity {
         CourseCode = intent.getExtras().getString("CourseCode");
         CourseName = intent.getExtras().getString("CourseName");
         UserProfileImageUrl = intent.getExtras().getString("UserProfileImageUrl");
+
+        UserName.setText(userName);
+        coursecode.setText(CourseCode);
+        coursename.setText(CourseName);
+
+        GlideApp.with(CourseMenuActivity.this)
+                .load(UserProfileImageUrl)
+                .error(R.drawable.profilepic)
+                .into(userProfileImage);
 
         btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override

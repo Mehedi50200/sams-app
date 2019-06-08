@@ -18,6 +18,34 @@
         <include layout="@layout/action_bar">
         </include>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/mcoursecode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@string/course_code"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorLightText"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/mcoursename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/colorLightText"
+                android:text="@string/course_name"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:cardview="http://schemas.android.com/apk/res-auto"
             android:id="@+id/attendancecard"
