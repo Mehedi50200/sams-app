@@ -4,12 +4,8 @@ Text Recognition is used to deect student Matric(ID), check if it match with the
 Video Demonstration: https://www.youtube.com/watch?v=U-TeZ7yczwA&t=202s
 
 
-![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_signin.png?raw=true) ![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_home.png?raw=true)
+![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_signin.png?raw=true) ![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_home.png?raw=true) ![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_student_list.png?raw=true) 
 
-
-![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_student_list.png?raw=true) ![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_takepicture.png?raw=true)
-
-
-![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_processed_data.png?raw=true)
+![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_takepicture.png?raw=true)  ![alt text](https://github.com/Mehedi50200/Attendance-Monitoring-System/blob/master/app/src/main/res/drawable/screenshot_processed_data.png?raw=true)
 
 
